@@ -1,0 +1,28 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "courseName": "Course 1",
+            "taskList": 1,
+            "taskExercise": 1,
+            "productDescription": "quite good solution",
+            "price": 100
+        },
+        {
+            "id": 2,
+            "courseName": "Course 1",
+            "taskList": 1,
+            "taskExercise": 2,
+            "productDescription": "exemplary solution",
+            "price": 200
+        },
+        {
+            "id": 3,
+            "courseName": "Course 1",
+            "taskList": 2,
+            "taskExercise": 1,
+            "productDescription": "this solution is bananas",
+            "price": 100
+        }
+    ]
+}
