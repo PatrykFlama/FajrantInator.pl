@@ -1,9 +1,7 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const path = require('path');
-
-const productsListing = require('./routes/productsListing');
-const productViewRoute = require('./routes/productView');
 
 const app = express();
 const PORT = 3000; 
@@ -14,12 +12,43 @@ app.set('views', path.join(__dirname, '/views'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));    // use qs library
 app.use(cookieParser());
+app.use(session({
+    secret: "ornotsecret",
+    resave: false,
+    saveUninitialized: false,
+}));
+app.use((req, res, next) => {
+    if (!req.session.account) {     // if there is no session, create new one with guest account
+        req.session.account = {
+            type: 'guest'
+        }
+    }
+    if (!req.session.cart) {        // if there is no cart, create new one
+        req.session.cart = [];
+    }
 
-app.use('/listing', productsListing);
-app.use('/product', productViewRoute);
+    next();
+})
+
+app.use('/listing', require('./routes/productsListing'));
+app.use('/product', require('./routes/productView'));
+app.use('/cart',    require('./routes/cart'));  // TODO
+app.use('/login',   require('./routes/login'));
 
 app.get('/', (req, res) => {
-    res.render('test');
+    const { account } = req.session;
+    const accountType = account.type;
+
+    res.render('index', { accountType });
+});
+
+app.get('/logout', (req, res) => {
+    if(req.session.account.type !== 'guest') {
+        req.session.account = {
+            type: 'guest'
+        }
+    }
+    res.redirect('/');
 });
 
 app.listen(PORT, () => {

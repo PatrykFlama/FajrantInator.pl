@@ -31,8 +31,14 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome Home!</h1>
+        <h1>Welcome Home <%= accountType %>! </h1>
         <p>Hello world! - it's a must have</p>
+        
+        <% if (accountType === 'guest') {%>
+            <button onclick="window.location.href = '/login';">Go to Login</button>
+        <% } else { %>
+            <button onclick="window.location.href = '/logout';">Logout</button>
+        <% } %>
     </div>
 </body>
 </html>
