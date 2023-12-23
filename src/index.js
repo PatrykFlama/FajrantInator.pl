@@ -2,6 +2,14 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
+var mysql = require('mysql')
+
+mysql.createConnection({
+    host:"localhost",
+    user:"root",
+    password:"",
+    database:"db_FajrantInator"
+})
 
 const app = express();
 const PORT = 3000; 
@@ -39,7 +47,22 @@ app.get('/', (req, res) => {
     const { account } = req.session;
     const accountType = account.type;
 
-    res.render('index', { accountType });
+    var con = mysql.createConnection({
+        host:"localhost",
+        user:"root",
+        pasword:"",
+        database:"db_FajrantInator"
+    })
+
+    con.query("SELECT * FROM products",(err, result)=>{
+        if (err) {
+            console.error(err);
+            return res.status(500).send('Internal Server Error');
+        }
+        res.render('index',{accountType, result:result});
+    })
+
+    //res.render('index', { accountType });
 });
 
 app.get('/logout', (req, res) => {

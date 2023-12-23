@@ -36,6 +36,11 @@
         
         <% if (accountType === 'guest') {%>
             <button onclick="window.location.href = '/login';">Go to Login</button>
+            <% result.forEach(function(item) { %>
+                <li>
+                  <%- include('includes/product-item', { product: item }) %>
+                </li>
+            <% }) %>
         <% } else { %>
             <button onclick="window.location.href = '/logout';">Logout</button>
         <% } %>

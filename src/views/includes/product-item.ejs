@@ -1,0 +1,16 @@
+<article class="product-item">
+    <!-- TODO: product image -->
+    <div class="product-details">
+        <p class="product-name"><%= product.name %></p>
+        <p class="product-price">£<%= product.price.toFixed(2) %></p>
+        <div class="product-actions">
+            <% if (locals.isAdmin) { %> 
+                <!-- TODO: Admin actions -->
+            <% } else { %> 
+                <a class="btn btn-view" href="/products/<%= product.id %>">View Product</a>
+            <% } %> 
+        </div>
+    </div>
+</article>
+
+  
