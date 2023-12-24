@@ -2,17 +2,20 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
-var mysql = require('mysql')
+const mysql = require('mysql')
+require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 
-mysql.createConnection({
-    host:"localhost",
-    user:"root",
-    password:"",
-    database:"db_FajrantInator"
-})
+
+// TODO - fix/switch to mongodb
+// const database = mysql.createConnection({
+//     host: process.env.DB_HOST,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASS,
+//     database: 'db_FajrantInator'
+// })
+
 
 const app = express();
-const PORT = 3000; 
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -25,7 +28,7 @@ app.use(session({
     resave: false,
     saveUninitialized: false,
 }));
-app.use((req, res, next) => {
+app.use((req, res, next) => {       // TODO integrate with database
     if (!req.session.account) {     // if there is no session, create new one with guest account
         req.session.account = {
             type: 'guest'
@@ -44,25 +47,10 @@ app.use('/cart',    require('./routes/cart'));  // TODO
 app.use('/login',   require('./routes/login'));
 
 app.get('/', (req, res) => {
-    const { account } = req.session;
+    const { account } = req.session; 
     const accountType = account.type;
 
-    var con = mysql.createConnection({
-        host:"localhost",
-        user:"root",
-        pasword:"",
-        database:"db_FajrantInator"
-    })
-
-    con.query("SELECT * FROM products",(err, result)=>{
-        if (err) {
-            console.error(err);
-            return res.status(500).send('Internal Server Error');
-        }
-        res.render('index',{accountType, result:result});
-    })
-
-    //res.render('index', { accountType });
+    res.render('index', { accountType });
 });
 
 app.get('/logout', (req, res) => {
@@ -74,6 +62,6 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.listen(PORT, () => {
-    console.log(`Server is running on PORT ${PORT}`);
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on PORT ${process.env.PORT}`);
 });

@@ -40,7 +40,7 @@ router.get('/', (req, res) => {
         filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-    res.send(filteredProducts);
+    res.render('productsListing', { products: filteredProducts });
 });
 
 router.get('/product/:id', (req, res) => {

@@ -7,11 +7,20 @@
 ### Installation and running
 <!-- TODO -->
 Use `npm install` to install all dependencies.  
+Create `src/.env` file:   
+* `PORT` [number] - port on which server will be running  
+* `DB_HOST` [string] - database host   
+* `DB_USER` [string] - database user
+* `DB_PASS` [string] - database password  
+
 Use `npm run start` to run the server.  
 Use `npm run start:dev` to run the server in development mode.
 
+___
 
 ## Documentation
+[**WHITEBOARD**](https://bitpaper.io/go/ProjektWEPPO/P8d3u2KTd)
+
 **Account data** is stored in _session_ and provides:  
 * `type` [string] _(guest/user/admin)_ - type of account
 
