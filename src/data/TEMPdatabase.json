@@ -5,7 +5,7 @@
             "courseName": "Course 1",
             "taskList": 1,
             "taskExercise": 1,
-            "productDescription": "quite good solution",
+            "description": "quite good solution",
             "price": 100
         },
         {
@@ -13,7 +13,7 @@
             "courseName": "Course 1",
             "taskList": 1,
             "taskExercise": 2,
-            "productDescription": "exemplary solution",
+            "description": "exemplary solution",
             "price": 200
         },
         {
@@ -21,7 +21,7 @@
             "courseName": "Course 1",
             "taskList": 2,
             "taskExercise": 1,
-            "productDescription": "this solution is bananas",
+            "description": "this solution is bananas",
             "price": 100
         }
     ]

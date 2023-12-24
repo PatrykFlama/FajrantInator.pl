@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
     }
 
     if (searchString) {
-        filteredProducts = filteredProducts.filter(product => product.productDescription.includes(searchString));
+        filteredProducts = filteredProducts.filter(product => product.description.includes(searchString));
     }
 
     if (orderPrice === 'asc') {

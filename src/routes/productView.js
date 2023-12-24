@@ -11,20 +11,20 @@ const { products } = require('../data/TEMPdatabase.json');
 
 router.get('/:productID', (req, res) => {
     const parsedID = parseInt(req.params.productID);
-    if (isNaN(parsedID)){
-        return res.status(400).send({ error: 'ID must be a number' });
-        // TODO - add error handling    
+    if (isNaN(parsedID)){  // error: 'ID must be a number' 
+        res.render('productView', { productName: `Product ${req.params.productID} not found`, productPrice: null, productDescription: null })
+        return;
     }
     const product = products.find(product => product.id === parsedID);
-
-    if (!product) {
-        return res.status(404).send({ error: `Product ${parsedID} not found` });
+    
+    if (!product) {     // error: 'Product not found'
+        res.render('productView', { productName: `Product with id ${parsedID} not found`, productPrice: null, productDescription: null })
+        return;
     }
     
     const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
-    res.render('productView', { productName, product });
+    res.render('productView', { productName, productPrice:product.price, productDescription:product.description });
 });
-
 
 
 module.exports = router;

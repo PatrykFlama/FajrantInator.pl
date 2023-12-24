@@ -31,12 +31,13 @@
 </head>
 <body>
     <div class="container">
-        <h1><%= productName %> </h1>
-
-        <% for(const [key, value] of Object.entries(product)) { %>
-            <li>
-              <%- `${key}: ${value}` %>
-            </li>
+        <h1><%= productName %></h1>
+        <% if (productPrice) { %>
+            <p>Price: <%= productPrice %></p>
+        <% } %>
+        <% if (productDescription) { %>
+            <h1>Description</h1>
+            <p><%= productDescription %></p>
         <% } %>
 
         <button onclick="history.back()">Back</button>
