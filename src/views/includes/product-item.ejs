@@ -8,8 +8,22 @@
                 <!-- TODO: Admin actions -->
             <% } else { %> 
                 <a class="btn btn-view" href="/product/<%= product.id %>">View Product</a>
+                <form id="addToCartForm" action="/add_to_cart" method="post">
+                    <input type="hidden" name="id" value="<%= product.id %>">
+                    <input type="hidden" name="courseName" value="<%= product.name %>">
+                    <input type="hidden" name="taskList" value="<%= product.taskList %>">
+                    <input type="hidden" name="taskExercise" value="<%= product.taskExercise %>">
+                    <input type="hidden" name="description" value="<%= product.description %>">
+                    <input type="hidden" name="price" value="<%= product.price %>">
+                    <button type="button" class="btn btn-view" onclick="addToCart()">Add to Cart</button>
+                </form>
             <% } %> 
         </div>
     </div>
 </article>
 
+<script>
+    function addToCart() {
+        document.getElementById("addToCartForm").submit();
+    }
+</script>
