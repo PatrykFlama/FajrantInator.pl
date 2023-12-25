@@ -5,7 +5,6 @@
 <!-- TODO -->
 
 ### Installation and running
-<!-- TODO -->
 Use `npm install` to install all dependencies.  
 Create `src/.env` file:   
 * `PORT` - port on which server will be running  
@@ -23,12 +22,40 @@ ___
 ## Documentation
 [**WHITEBOARD**](https://bitpaper.io/go/ProjektWEPPO/P8d3u2KTd)
 
-**Account data** is stored in _session_ and provides:  
-* `type` [string] _(guest/user/admin)_ - type of account
+### Database
+Database is hosted on MongoDB and operated with Mongoose ORM.  
+<details open=True>
+    <summary><b>/</b> Following schemas are defined in [/src/database/schemas] </summary>
+
+* `Users` - stores users data
+  * `username` [string]
+  * `password` [string]
+  * `email` [string]
+  * `type` [string] _('user'/'admin')_
+  * `orders` [ArrayOf(number?)] - array of orders (ids)       <!-- TODO integrate it -->
+  * `products` [ArrayOf(number?)] - array of owned products (ids)       <!-- TODO integrate it -->
+
+* `Products` - stores products data
+  * `name` [string]
+  * `description` [string]
+  * `price` [number]
+  * `image` [string] - path?       <!-- TODO or path not -->
+  * `courseName` [string]
+  * `listNumber` [number]
+  * `taskNumber` [number]
+  * `solution` [string] - path/code?       <!-- TODO -->
+
+* `Orders` - **TODO** stores orders data
+  * `username` [string]
+  * `products` [array] - array of product ids
+  * `date` [date]
+
+</details>
 
 ___
 
-<details open=True>
+<!--------------------------- INDEX ------------------------------>
+<details open=True>         
     <summary><b>/</b> - index site</summary>
 
 Homepage, passes account type to _index.ejs_  
@@ -36,34 +63,34 @@ allows to go to login website or to logout, if already logged in
 
 </details>
 
-
+<!--------------------------- LISTING ------------------------------>
 <details open=True>
     <summary><b>/listing</b> - products site</summary>
 
 Listing site returns all available products with applied search and order filters.  
--> GET query parameters:  
-* `taskList` [number] - display only tasks from given list
-* `taskExercise` [number] - display only tasks from given exercise
-* `courseName` [string] - display only tasks from given course
-* `orderPrice` [string] _('asc'/'desc')_ - order tasks by price
-* `searchString` [string] - search thru tasks description
+* GET query parameters:  
+  * `taskList` [number] - display only tasks from given list
+  * `taskExercise` [number] - display only tasks from given exercise
+  * `courseName` [string] - display only tasks from given course
+  * `orderPrice` [string] _('asc'/'desc')_ - order tasks by price
+  * `searchString` [string] - search thru tasks description
 
--> GET route parameters:
-* `/product/id` [number] - redirect to product site with given id
+* GET route parameters:
+  * `/product/id` [number] - redirect to product site with given id
 
 </details>
 
-
+<!--------------------------- PRODUCT ------------------------------>
 <details open=True>
     <summary><b>/product</b> - product site</summary>
 
 Product site shows one product with given id  
--> GET route parameters:
-* `/id` [number] - display task with given id
+* GET route parameters:
+  * `/id` [number] - display task with given id
 
 </details>
 
-
+<!--------------------------- CART ------------------------------>
 <details open=True>
     <summary><b>/cart</b> - cart site</summary>
 
@@ -72,14 +99,38 @@ returns list of products in cart
 
 </details>
 
-
+<!--------------------------- LOGIN ------------------------------>
 <details open=True>
     <summary><b>/login</b> - login site</summary>
 
 Login site allows to login to account, redirects logged in users to homepage  
 for now it only allows to login as admin (using admin admin) or username (using any credentials)  
--> POST body parameters:
-* `username` [string] - username of account
-* `password` [string] - password of account
+* POST body parameters:
+  * `username` [string]
+  * `password` [string]
+
+</details>
+
+<!--------------------------- ADMIN ------------------------------>
+<details open=True>
+    <summary><b>/admin</b> - admin management panel</summary>
+
+Allows to manage and display databases 
+* GET `/` - display adding forms
+* GET `/displayUsers` - display all users
+* POST `/addProduct` body parameters:
+  * `name` [string]
+  * `description` [string]
+  * `price` [number]
+  * `image` [string]
+  * `courseName` [string]
+  * `listNumber` [number]
+  * `taskNumber` [number]
+  * `solution` [string]
+* POST `/addUser` body parameters:
+  * `username` [string]
+  * `password` [string]
+  * `email` [string]
+  * `type` [string] _('user'/'admin')_
 
 </details>
