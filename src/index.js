@@ -45,6 +45,7 @@ app.use('/listing', require('./routes/productsListing'));
 app.use('/product', require('./routes/productView'));
 app.use('/cart',    require('./routes/cart'));  // TODO
 app.use('/login',   require('./routes/login'));
+app.use('/admin',   require('./routes/adminPanel'));  // TODO
 
 app.get('/', (req, res) => {
     const { account } = req.session; 
