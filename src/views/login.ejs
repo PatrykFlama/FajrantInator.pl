@@ -44,6 +44,31 @@
         .container form input[type="submit"]:hover {
             background-color: #45a049;
         }
+
+        .container form .register-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .container form .register-link a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .container .back-button {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .container .back-button a {
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .container .back-button a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -54,6 +79,15 @@
             <input type="password" name="password" placeholder="Password" required>
             <input type="submit" value="Login">
         </form>
+        <div class="register-link">
+            <a href="/login/register">Don't have an account? Register here</a>
+        </div>
+
+        <div class="back-button"></div>
+            <a href="/">Back to home</a>
+        </div>
     </div>
+    
+    
 </body>
 </html>
