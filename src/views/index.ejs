@@ -36,6 +36,9 @@
         
         <% if (accountType === 'guest') {%>
             <button onclick="window.location.href = '/login';">Go to Login</button>
+        <% } else if (accountType === 'admin') { %>
+            <button onclick="window.location.href = '/admin';">Go to Admin</button>
+            <button onclick="window.location.href = '/logout';">Logout</button>
         <% } else { %>
             <button onclick="window.location.href = '/logout';">Logout</button>
         <% } %>

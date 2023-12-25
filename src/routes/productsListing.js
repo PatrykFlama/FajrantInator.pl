@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-
-const { products } = require('../data/TEMPdatabase.json');
+const Products = require('../database/schemas/Products');
 
 function filterProductByString(product, searchString) {
     return product.courseName.toLowerCase().includes(searchString.toLowerCase()) ||
@@ -10,25 +9,26 @@ function filterProductByString(product, searchString) {
           (searchString.toLowerCase().includes('price') && searchString.includes(toString(product.price)));
 }
 
-router.get('/', (req, res) => {
-    const { taskList, taskExercise, courseName } = req.query;
-    const { orderPrice } = req.query;
-    const { searchString } = req.query;
+
+router.get('/', async (req, res) => {
+    const { taskList, taskExercise, courseName, orderPrice, searchString } = req.query;
     
     const parsedTaskList = parseInt(taskList);
     const parsedTaskExercise = parseInt(taskExercise);
 
-    let filteredProducts = products;
-    
+    let query = {};
+
     if (courseName) {
-        filteredProducts = filteredProducts.filter(product => product.courseName === courseName);
+        query.courseName = courseName;
     }
     if (!isNaN(parsedTaskList)) {
-        filteredProducts = filteredProducts.filter(product => product.taskList == parsedTaskList);
+        query.taskList = parsedTaskList;
     }
     if (!isNaN(parsedTaskExercise)) {
-        filteredProducts = filteredProducts.filter(product => product.taskExercise == parsedTaskExercise);
+        query.taskExercise = parsedTaskExercise;
     }
+
+    let filteredProducts = await Products.find(query);
 
     if (searchString) {
         filteredProducts = filteredProducts.filter(product => product.description.includes(searchString));

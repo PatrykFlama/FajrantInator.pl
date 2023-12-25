@@ -2,17 +2,8 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const path = require('path');
-const mysql = require('mysql')
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
-
-
-// TODO - fix/switch to mongodb
-// const database = mysql.createConnection({
-//     host: process.env.DB_HOST,
-//     user: process.env.DB_USER,
-//     password: process.env.DB_PASS,
-//     database: 'db_FajrantInator'
-// })
+require('./database');
 
 
 const app = express();
@@ -64,5 +55,5 @@ app.get('/logout', (req, res) => {
 });
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server is running on PORT ${process.env.PORT}`);
+    console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });

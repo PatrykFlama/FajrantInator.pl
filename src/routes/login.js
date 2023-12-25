@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const router = Router();
 
-const { products } = require('../data/TEMPdatabase.json');
 
 router.get('/', (req, res) => {
     const accountType = req.session.account.type;
@@ -16,7 +15,7 @@ router.post('/', (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
-        return res.status(400).send({ error: 'Username and password are required' });
+        return res.sendStatus(400);
     }
 
     // TODO - check if username and password are correct
@@ -31,7 +30,9 @@ router.post('/', (req, res) => {
     }
 
     res.redirect('/');
-    res.send(200);
 });
+
+// TODO register
+
 
 module.exports = router;
