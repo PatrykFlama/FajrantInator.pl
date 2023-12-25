@@ -27,10 +27,6 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user',
     },
-    cart: {
-        type: [String],
-        default: [],
-    },
     orders: {
         type: [String],
         default: [],
