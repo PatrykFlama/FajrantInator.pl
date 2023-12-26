@@ -8,7 +8,7 @@
                 <!-- TODO: Admin actions -->
             <% } else { %> 
                 <a class="btn btn-view" href="/product/<%= product.id %>">View Product</a>
-                <form id="addToCartForm" action="/add_to_cart" method="post">
+                <form id="addToCartForm" action="cart/addToCart" method="post">
                     <input type="hidden" name="id" value="<%= product.id %>">
                     <input type="hidden" name="courseName" value="<%= product.name %>">
                     <input type="hidden" name="taskList" value="<%= product.taskList %>">
