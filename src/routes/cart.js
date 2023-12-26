@@ -58,7 +58,8 @@ router.post('/removeProduct', (req,res)=>{
     const cart = req.session.cart;
     for(let i=0; i<cart.length; i++){
         if(cart[i].id==id){
-            cart.splice(cart.indexof(i), 1);
+            cart.splice(i, 1);
+            break;
         }
     }
     calculateTotal(cart,req);

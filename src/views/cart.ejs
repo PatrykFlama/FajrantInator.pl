@@ -36,31 +36,32 @@
 <body>
     <div class="container">
         <h1>Your Shopping Cart</h1>
-
+    
         <% if (cart && cart.length > 0) { %>
             <ul>
-                <% cart.forEach(product => { %>
+                <% cart.forEach(item => { %>
                     <li>
-                        <p><%= product.name %></p>
-                        <p>Price: £<%= product.price %></p>
+                        <p><%= item.name %></p>
+                        <p>Price: £<%= item.price %></p>
                         <!-- Add more product details as needed -->
+    
+                        <form method="post" action="/cart/removeProduct">
+                            <input type="hidden" name="id" value="<%= item.id %>">
+                            <input type="submit" name="remove_btn" class="remove-btn" value="remove">
+                        </form>
                     </li>
                 <% }) %>
             </ul>
-
+    
             <p>Total: £<%= total %></p>
-
+    
             <!-- Add checkout or continue shopping buttons as needed -->
-
+    
         <% } else { %>
             <p>Your cart is empty.</p>
         <% } %>
-        <form method="post" action="/cart/removeProduct">
-            <input type="hidden" name="id" value="product.id">
-            <input type="submit" name="remove_btn" class="remove-btn" value="remove">
-        </form>
         <button onclick="window.location.href = '/listing';">Add another product to cart</button>
         <button onclick="window.location.href = '/';">Go to Homepage</button>
-    </div>
+    </div>    
 </body>
 </html>
