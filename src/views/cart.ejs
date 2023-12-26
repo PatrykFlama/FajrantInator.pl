@@ -55,6 +55,10 @@
         <% } else { %>
             <p>Your cart is empty.</p>
         <% } %>
+        <form method="post" action="/cart/removeProduct">
+            <input type="hidden" name="id" value="product.id">
+            <input type="submit" name="remove_btn" class="remove-btn" value="remove">
+        </form>
         <button onclick="window.location.href = '/listing';">Add another product to cart</button>
         <button onclick="window.location.href = '/';">Go to Homepage</button>
     </div>

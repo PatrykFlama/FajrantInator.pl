@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const User = require('../database/schemas/Users');
-// TODO integrate with database
+//TODO fix problems with total and price, remove from the cart, add another product to cart
 
 function isProductInCart(cart,id){
     for(let i=0; i<cart.length; i++){
@@ -28,6 +28,7 @@ router.get('/', (req, res) => {
     res.render('cart',{cart:cart, total:total});
 });
 
+
 router.post('/addToCart',(req,res)=>{
     const id = req.body.id;
     const name = req.body.name;
@@ -52,5 +53,16 @@ router.post('/addToCart',(req,res)=>{
     res.redirect('/cart');
 })
 
+router.post('/removeProduct', (req,res)=>{
+    const id = req.body.id;
+    const cart = req.session.cart;
+    for(let i=0; i<cart.length; i++){
+        if(cart[i].id==id){
+            cart.splice(cart.indexof(i), 1);
+        }
+    }
+    calculateTotal(cart,req);
+    res.redirect('/cart');
+})
 
 module.exports = router;
