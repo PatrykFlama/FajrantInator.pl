@@ -12,19 +12,19 @@ function isProductInCart(cart,id){
     return false;
 }
 
-function calculateTotal(cart,req){
+function calculateTotal(cart){
     total = 0;
     for(let i=0; i<cart.length; i++){
         total = total + (cart[i].price);
     }
-    req.session.total = total;
     return total;
 }
 
 
 router.get('/', (req, res) => {
     const cart = req.session.cart;
-    const total = req.session.total;
+    const total = calculateTotal(cart);
+    req.session.total = total;
     res.render('cart',{cart:cart, total:total});
 });
 
@@ -35,7 +35,7 @@ router.post('/addToCart',(req,res)=>{
     const description = req.body.description;
     const tasklist = req.body.tasklist;
     const taskexercise = req.body.taskexercise;
-    const price = req.body.price;
+    const price = parseFloat(req.body.price);
     const product = {id:id, name:name, tasklist:tasklist, taskexercise:taskexercise, description:description, price:price}
     
     if(req.session.cart){
@@ -48,7 +48,8 @@ router.post('/addToCart',(req,res)=>{
         req.session.cart = [product];
     }
 
-    calculateTotal(req.session.cart,req);
+    const total = calculateTotal(req.session.cart,req);
+    req.session.total = total;
 
     res.redirect('/listing');
 })
@@ -62,7 +63,8 @@ router.post('/removeProduct', (req,res)=>{
             break;
         }
     }
-    calculateTotal(cart,req);
+    const total = calculateTotal(cart,req);
+    req.session.total = total;
     res.redirect('/cart');
 })
 
