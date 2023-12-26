@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const User = require('../database/schemas/Users');
-//TODO fix problems with total and price, remove from the cart, add another product to cart
+//TODO fix problems with total, add feature: adding multiple same products
 
 function isProductInCart(cart,id){
     for(let i=0; i<cart.length; i++){
@@ -50,7 +50,7 @@ router.post('/addToCart',(req,res)=>{
 
     calculateTotal(req.session.cart,req);
 
-    res.redirect('/cart');
+    res.redirect('/listing');
 })
 
 router.post('/removeProduct', (req,res)=>{
