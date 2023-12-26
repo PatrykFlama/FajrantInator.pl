@@ -1,5 +1,6 @@
 const { Router } = require('express');
 const router = Router();
+const { hashPassword } = require('../utils/password');
 const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users');
 
@@ -13,7 +14,7 @@ router.use((req, res, next) => {
 })
 
 router.get('/', (req, res) => {
-    res.render('admin/adminPanel');
+    res.render('admin/adminPanel', { messageUser: null, messageProduct: null });
 });
 
 router.get('/displayUsers', async (req, res) => {
@@ -35,10 +36,9 @@ router.post('/addProduct', async (req, res) => {
             solution
         });
         await product.save();
-        res.status(201).json({ message: 'Product added successfully' });
+        res.render('admin/adminPanel', { messageProduct: 'Product added successfully', messageUser: null });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({ message: 'Failed to add product' });
+        res.render('admin/adminPanel', { messageProduct: 'Failed to add product', messageUser: null });
     }
 });
 
@@ -47,14 +47,14 @@ router.post('/addUser', async (req, res) => {
         const { username, password, email, type } = req.body;
         const user = new Users({
             username,
-            password,
+            password: hashPassword(password),
             email,
             type
         });
         await user.save();
-        res.status(201).json({ message: 'User added successfully' });
+        res.render('admin/adminPanel', { messageUser: 'User added successfully', messageProduct: null });
     } catch (error) {
-        res.status(500).json({ message: 'Failed to add user' });
+        res.render('admin/adminPanel', { messageUser: 'Failed to add user', messageProduct: null });
     }
 });
 

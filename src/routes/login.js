@@ -1,18 +1,18 @@
 const { Router } = require('express');
 const router = Router();
 const Users = require('../database/schemas/Users');
-
+const { hashPassword, comparePasswords } = require('../utils/password');
 
 router.get('/', (req, res) => {
     const accountType = req.session.account.type;
     if (accountType === 'guest') {
-        res.render('login');
+        res.render('login', { error: null });
     } else {
         res.redirect('/');
     }
 });
 
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const { username, password } = req.body;
 
     if (!username || !password) {
@@ -25,15 +25,29 @@ router.post('/', (req, res) => {
             type: 'admin'
         }
     } else {
+        // check if user exists in DB and if password matches
+        const user = await Users.findOne({ username: username });
+        if (!user) {
+            res.render('login', { error: 'User not found' });
+            return;
+        }
+
+        if (comparePasswords(user.password, password)) {
+            res.render('login', { error: 'Incorrect password' });
+            return;
+        }
+
         req.session.account = {
-            type: 'user'
+            type: 'user',
+            username: username,
+            email: user.email,
         }
     }
 
     res.redirect('/');
 });
 
-// TODO register
+
 router.get('/register', (req, res) => {
     res.render('register', {error: null});
 });
@@ -53,7 +67,7 @@ router.post('/register', async (req, res) => {
 
     const newUser = new Users({
         username: username,
-        password: password,
+        password: hashPassword(password),
         email: email,
     });
 

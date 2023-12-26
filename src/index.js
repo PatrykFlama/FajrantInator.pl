@@ -41,8 +41,9 @@ app.use('/admin',   require('./routes/adminPanel'));  // TODO
 app.get('/', (req, res) => {
     const { account } = req.session; 
     const accountType = account.type;
+    const { username, email } = account;
 
-    res.render('index', { accountType });
+    res.render('index', { accountType, username, email });
 });
 
 app.get('/logout', (req, res) => {

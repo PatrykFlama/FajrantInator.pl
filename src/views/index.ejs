@@ -31,7 +31,12 @@
 </head>
 <body>
     <div class="container">
-        <h1>Welcome Home <%= accountType %>! </h1>
+        <% if (username) {%>
+            <h1>Welcome Home <%= username %>! </h1>
+        <%} else {%>
+            <h1>Welcome Home <%= accountType %>! </h1>
+        <% } %>
+        
         <p>Hello world! - it's a must have</p>
         
         <% if (accountType === 'guest') {%>
