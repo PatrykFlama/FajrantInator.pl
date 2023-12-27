@@ -27,10 +27,11 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user',
     },
-    orders: {
-        type: [String],
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'products',
         default: [],
-    },
+    }],
 });
 
 module.exports = mongoose.model('users', UserSchema);

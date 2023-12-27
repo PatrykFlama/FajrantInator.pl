@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const Order = require('../database/schemas/Orders');
 const Product = require('../database/schemas/Products');
+const User = require('../database/schemas/Users');
 const { calculateProductsTotal } = require('../utils/helpers');
 //TODO: fix duplicate key error in MONGO
 
@@ -33,7 +34,12 @@ router.post('/createOrder', async (req, res)=>{
 
     try {
         await newOrder.save();
-        req.session.cart = []; 
+        req.session.cart = [];
+
+        // add order to user's orders
+        const user = await User.findOne({ username: username });
+        user.orders.push(newOrder);
+        await user.save();
 
         let boughtProducts = [];
         for (let i = 0; i < newOrder.products.length; i++){
