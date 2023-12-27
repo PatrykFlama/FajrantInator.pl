@@ -16,7 +16,7 @@ async function calculateProductsTotal(cart){
         const productPrice = await Product.findById(cart[i]);
         total += productPrice.price;
     }
-    return total;
+    return total.toFixed(2);
 }
 
 module.exports = {
