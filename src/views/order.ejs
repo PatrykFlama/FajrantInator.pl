@@ -35,24 +35,29 @@
 </head>
 <body>
     <div class="container">
-        <h1>Your Order Confirmation</h1>
+        <% if (error) { %>
+            <h1>Oops! Something went wrong.</h1>
+            <p><%= error %></p>
+        <% } else { %>
+            <h1>Your Order Confirmation</h1>
 
-        <p>Thank you for your purchase, <%= order.username %>!</p>
-        
-        <p>Order Details:</p>
-        <ul>
-            <% order.products.forEach(product => { %>
-                <li>
-                    <p><strong><%= product.name %></strong></p>
-                    <p>Price: £<%= product.price %></p>
-                    <!-- Add more product details as needed -->
-                </li>
-            <% }) %>
-        </ul>
+            <p>Thank you for your purchase, <%= order.username %>!</p>
+            
+            <p>Order Details:</p>
+            <ul>
+                <% products.forEach(product => { %>
+                    <li>
+                        <p><strong><%= product.name %></strong></p>
+                        <p>Price: £<%= product.price %></p>
+                        <!-- Add more product details as needed -->
+                    </li>
+                <% }) %>
+            </ul>
 
-        <p>Total Cost: £<%= order.cost %></p>
+            <p>Total Cost: £<%= order.cost %></p>
 
-        <p>Your order has been placed successfully.</p>
+            <p>Your order has been placed successfully.</p>
+        <% } %>
 
         <button onclick="window.location.href = '/';">Go to Homepage</button>
     </div>

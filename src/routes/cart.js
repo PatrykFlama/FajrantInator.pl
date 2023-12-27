@@ -1,58 +1,31 @@
 const { Router } = require('express');
 const router = Router();
 const User = require('../database/schemas/Users');
+const Product = require('../database/schemas/Products');
+const { calculateProductsTotal } = require('../utils/helpers');
 
-function isProductInCart(cart,id){
-    for(let i=0; i<cart.length; i++){
-        if(cart[i].id == id){
-            return true;
-        }
+
+router.get('/', async (req, res) => {
+    let cart = [];
+    for (let i = 0; i < req.session.cart.length; i++){
+        cart[i] = await Product.findById(req.session.cart[i]);
     }
-    return false;
-}
-
-function calculateTotal(cart){
-    total = 0;
-    for(let i=0; i<cart.length; i++){
-        total = total + (cart[i].price);
-    }
-    return total;
-}
-
-
-router.get('/', (req, res) => {
-    const cart = req.session.cart;
-    const total = calculateTotal(cart);
-    req.session.total = total;
-    res.render('cart',{cart: cart, total: total });
+    const total = await calculateProductsTotal(req.session.cart);
+    res.render('cart', {cart: cart, total: total });
 });
 
-
-router.post('/addToCart',(req,res)=>{
-    const id = req.body.id;
-    const name = req.body.name;
-    const description = req.body.description;
-    const price = parseFloat(req.body.price);
-    const image = req.body.image;
-    const courseName = req.body.courseName;
-    const listNumber = req.body.listNumber;
-    const taskNumber = req.body.taskNumber;
-    const solution = req.body.solution;
-    const product = {id:id, name:name, description:description, price:price, image:image, courseName:courseName, 
-        listNumber:listNumber, taskNumber:taskNumber, solution:solution }
+router.post('/addToCart', (req,res)=>{
+    const productID = req.body.id;
     
     if(req.session.cart){
         const cart = req.session.cart;
-        if(!isProductInCart(cart, id)){
-            cart.push(product);
+        if(!cart.includes(productID)){    // we can buy only one product of each type
+            cart.push(productID);
         }
     }
     else{
-        req.session.cart = [product];
+        req.session.cart = [productID];
     }
-
-    const total = calculateTotal(req.session.cart,req);
-    req.session.total = total;
 
     res.redirect('/listing');
 })
@@ -60,14 +33,13 @@ router.post('/addToCart',(req,res)=>{
 router.post('/removeProduct', (req,res)=>{
     const id = req.body.id;
     const cart = req.session.cart;
-    for(let i=0; i<cart.length; i++){
-        if(cart[i].id==id){
+    for(let i = 0; i < cart.length; i++){
+        if(cart[i] == id){
             cart.splice(i, 1);
             break;
         }
     }
-    const total = calculateTotal(cart,req);
-    req.session.total = total;
+
     res.redirect('/cart');
 })
 

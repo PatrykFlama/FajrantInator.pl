@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const Users = require('../database/schemas/Users');
-const { hashPassword, comparePasswords } = require('../utils/password');
+const { hashPassword, comparePasswords } = require('../utils/helpers');
 
 router.get('/', (req, res) => {
     const accountType = req.session.account.type;
@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
     // TODO - check if username and password are correct
     if (username === 'admin' && password === 'admin') {
         req.session.account = {
-            type: 'admin'
+            type: 'admin',
         }
     } else {
         // check if user exists in DB and if password matches

@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const { hashPassword } = require('../utils/password');
+const { hashPassword } = require('../utils/helpers');
 const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users');
 

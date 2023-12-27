@@ -22,7 +22,7 @@ app.use(session({
 app.use((req, res, next) => {       // TODO integrate with database
     if (!req.session.account) {     // if there is no session, create new one with guest account
         req.session.account = {
-            type: 'guest'
+            type: 'guest',
         }
     }
     if (!req.session.cart) {        // if there is no cart, create new one
