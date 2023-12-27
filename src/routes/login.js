@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
             return;
         }
 
-        if (comparePasswords(user.password, password)) {
+        if (!comparePasswords(password, user.password)) {
             res.render('login', { error: 'Incorrect password' });
             return;
         }
