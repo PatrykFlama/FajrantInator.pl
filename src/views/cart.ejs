@@ -55,13 +55,17 @@
     
             <p>Total: £<%= total %></p>
     
-            <!-- Add checkout or continue shopping buttons as needed -->
+            <div class="checkout-container">
+                <form method="get" action="/checkout">
+                    <input type="submit" class="btn checkout-btn" value="Buy" name="">
+                </form>
+            </div>
     
         <% } else { %>
             <p>Your cart is empty.</p>
         <% } %>
         <button onclick="window.location.href = '/listing';">Add another product to cart</button>
         <button onclick="window.location.href = '/';">Go to Homepage</button>
-    </div>    
+    </div> 
 </body>
 </html>

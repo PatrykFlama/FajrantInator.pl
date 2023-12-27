@@ -35,6 +35,7 @@ app.use((req, res, next) => {       // TODO integrate with database
 app.use('/listing', require('./routes/productsListing'));
 app.use('/product', require('./routes/productView'));
 app.use('/cart',    require('./routes/cart'));
+app.use('/checkout', require('./routes/checkout')); 
 app.use('/order', require('./routes/order')); //TODO
 app.use('/login',   require('./routes/login'));
 app.use('/admin',   require('./routes/adminPanel'));  // TODO
