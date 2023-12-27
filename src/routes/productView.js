@@ -18,11 +18,13 @@ router.get('/:productID', async (req, res) => {
         res.render('productView', { productName: `Product with id ${parsedID} not found`, productPrice: null, productDescription: null })
         return;
     }
-    // if(req.session.account.type !== 'guest'){
-    //     const user = await Users.findOne({ username: req.session.account.username });
-    //     if(product._id in user.orders){
+
+    // if (req.session.account.type !== 'guest') {
+    //     const user = await Users.findOne({ username: req.session.account.username});
+
+    //     if (user.orders.includes(product.id)) {
     //         const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
-    //         res.render('productView_B', { productName, productPrice:product.price, productDescription:product.description, 
+    //         res.render('productView_B', { id:product.id, productName, productPrice:product.price, productDescription:product.description, 
     //         productSolution:product.solution });
     //     }
     // }
