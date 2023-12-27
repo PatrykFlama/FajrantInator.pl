@@ -35,9 +35,8 @@ router.post('/createOrder', async (req, res)=>{
         await newOrder.save();
         req.session.cart = [];
 
-        // add order to user's orders
         const user = await User.findOne({ username: username });
-        user.orders.push(newOrder);
+        user.orders.push(newOrder.products);
         await user.save();
 
         let boughtProducts = [];

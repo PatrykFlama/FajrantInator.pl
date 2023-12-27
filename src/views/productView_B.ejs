@@ -32,18 +32,14 @@
 <body>
     <div class="container">
         <h1><%= productName %></h1>
-        <% if (productPrice) { %>
-            <p>Price: <%= productPrice %></p>
-        <% } %>
         <% if (productDescription) { %>
             <h1>Description</h1>
             <p><%= productDescription %></p>
         <% } %>
-        <form id="addToCartForm" action="/product/addToCart" method="post">
-            <input type="hidden" name="id" value="<%= id %>">
-            <button type="submit">Add to Cart</button>
-        </form>
-        <button onclick="window.location.href = '/cart';">Go to Cart</button>
+        <% if (productSolution) { %>
+            <p>Solution: <%= productSolution %></p>
+        <% } %>
+
         <button onclick="history.back()">Back</button>
         <button onclick="window.location.href = '/';">Go to Homepage</button>
     </div>
