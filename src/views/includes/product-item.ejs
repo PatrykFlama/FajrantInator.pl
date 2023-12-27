@@ -4,20 +4,19 @@
         <p class="product-name"><%= product.name %></p>
         <p class="product-price">£<%= product.price.toFixed(2) %></p>
         <div class="product-actions">
-            <% if (locals.isAdmin) { %> 
-                <!-- TODO: Admin actions -->
-            <% } else { %> 
-                <a class="btn btn-view" href="/product/<%= product.id %>">View Product</a>
-                <form id="addToCartForm" action="cart/addToCart" method="post">
-                    <input type="hidden" name="id" value="<%= product.id %>">
-                    <input type="hidden" name="courseName" value="<%= product.name %>">
-                    <input type="hidden" name="taskList" value="<%= product.taskList %>">
-                    <input type="hidden" name="taskExercise" value="<%= product.taskExercise %>">
-                    <input type="hidden" name="description" value="<%= product.description %>">
-                    <input type="hidden" name="price" value="<%= product.price %>">
-                    <button type="submit">Add to Cart</button>
-                </form>
-            <% } %> 
+            <a class="btn btn-view" href="/product/<%= product.id %>">View Product</a>
+            <form id="addToCartForm" action="cart/addToCart" method="post">
+                <input type="hidden" name="id" value="<%= product.id %>">
+                <input type="hidden" name="name" value="<%= product.name %>">
+                <input type="hidden" name="description" value="<%= product.description %>">
+                <input type="hidden" name="price" value="<%= product.price %>">
+                <input type="hidden" name="image" value="<%= product.image %>">
+                <input type="hidden" name="courseName" value="<%= product.courseName %>">
+                <input type="hidden" name="listNumber" value="<%= product.listNumber %>">
+                <input type="hidden" name="taskNumber" value="<%= product.taskNumber %>">
+                <input type="hidden" name="solution" value="<%= product.solution %>">
+                <button type="submit">Add to Cart</button>
+            </form>
         </div>
     </div>
 </article>
