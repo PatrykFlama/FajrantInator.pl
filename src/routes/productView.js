@@ -4,7 +4,6 @@ const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users')
 
 /* //TODO
-* check if user already bought this product
 * POST allow for rating product
 */
 
@@ -19,15 +18,16 @@ router.get('/:productID', async (req, res) => {
         return;
     }
 
-    // if (req.session.account.type !== 'guest') {
-    //     const user = await Users.findOne({ username: req.session.account.username});
+    if (req.session.account.type !== 'guest') {
+        const user = await Users.findOne({ username: req.session.account.username});
 
-    //     if (user.orders.includes(product.id)) {
-    //         const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
-    //         res.render('productView_B', { id:product.id, productName, productPrice:product.price, productDescription:product.description, 
-    //         productSolution:product.solution });
-    //     }
-    // }
+        if (user.orders.includes(product.id)) {
+            const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
+            res.render('productView_B', { id:product.id, productName, productPrice:product.price, productDescription:product.description, 
+            productSolution:product.solution });
+            return;
+        }
+    }
     const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
     res.render('productView', { id:product.id, productName, productPrice:product.price, productDescription:product.description });
 });
