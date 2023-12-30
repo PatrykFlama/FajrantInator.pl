@@ -14,6 +14,22 @@
         <% if (productSolution) { %>
             <p>Solution: <%= productSolution %></p>
         <% } %>
+
+        <h2>Product Ratings</h2>
+        <div>
+        <% if (ratings.length > 0) { %>
+            <p>Average Rating: <%= averageRating %></p>
+        <% } else { %>
+            <p>No ratings yet. Be the first to rate!</p>
+        <% } %>
+        </div>
+
+        <form method="post" action="/product/rateProduct">
+            <input type="hidden" name="productID" value="<%= id %>">
+            <label for="rating">Rate this product (1-5):</label>
+            <input type="number" name="rating" min="1" max="5" required>
+            <button type="submit">Submit Rating</button>
+        </form>
         <button onclick="history.back()">Back</button>
         <button onclick="window.location.href = '/';">Go to Homepage</button>
     </div>
