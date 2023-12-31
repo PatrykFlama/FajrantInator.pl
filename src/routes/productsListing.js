@@ -2,14 +2,6 @@ const { Router } = require('express');
 const router = Router();
 const Products = require('../database/schemas/Products');
 
-function filterProductByString(product, searchString) {
-    return product.courseName.toLowerCase().includes(searchString.toLowerCase()) ||
-          (searchString.toLowerCase().includes('task') && searchString.includes(toString(product.taskList))) ||
-          (searchString.toLowerCase().includes('exercise') && searchString.includes(toString(product.taskExercise))) ||
-          (searchString.toLowerCase().includes('price') && searchString.includes(toString(product.price)));
-}
-
-
 router.get('/', async (req, res) => {
     const { taskList, taskExercise, courseName, orderPrice, searchString } = req.query;
     
@@ -40,7 +32,7 @@ router.get('/', async (req, res) => {
         filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-    res.render('productsListing', { products: filteredProducts });
+    res.render('productsListing', { products: filteredProducts, accountType: req.session.account.type });
 });
 
 router.get('/product/:id', (req, res) => {

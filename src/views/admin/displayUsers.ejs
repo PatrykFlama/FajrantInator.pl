@@ -14,7 +14,16 @@
                 <%= user.type %>
                 <%= user.orders %>
             </li>
+            
+            <form action="/admin/removeUser" method="post">
+                <input type="hidden" name="id" value="<%= user._id %>">
+                <button type="submit">Remove</button>
+            </form>
         <% }) %>
     </ul>
+
+    <div class="button-container">
+        <button onclick="window.location.href = '/admin';">Back</button>
+    </div>
 </body>
 </html>

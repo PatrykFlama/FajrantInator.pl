@@ -42,6 +42,15 @@ router.post('/addProduct', async (req, res) => {
     }
 });
 
+router.post('/removeProduct', async (req, res) => {
+    try {
+        const { id } = req.body;
+        await Products.findByIdAndDelete(id);
+    } catch (error) {}
+
+    res.redirect('listing');
+});
+
 router.post('/addUser', async (req, res) => {
     try {
         const { username, password, email, type } = req.body;
@@ -56,6 +65,15 @@ router.post('/addUser', async (req, res) => {
     } catch (error) {
         res.render('admin/adminPanel', { messageUser: 'Failed to add user', messageProduct: null });
     }
+});
+
+router.post('/removeUser', async (req, res) => {
+    try {
+        const { id } = req.body;
+        await Users.findByIdAndDelete(id);
+    } catch (error) {}
+
+    res.redirect('/admin/displayUsers')
 });
 
 module.exports = router;
