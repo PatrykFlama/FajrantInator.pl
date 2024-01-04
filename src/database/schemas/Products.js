@@ -7,21 +7,11 @@ const ProductSchema = new mongoose.Schema({
         minlength: 3,      
         maxlength: 20,
     },
-    description: {
-        type: String,
-        required: true,
-        minlength: 0,      //TODO change to 10
-        maxlength: 100,
-    },
     price: {
         type: Number,
         required: true,
         min: 0,
         max: 100000,
-    },
-    image: {
-        type: String,
-        //required:true,
     },
     courseName: {
         type: String,
@@ -39,9 +29,19 @@ const ProductSchema = new mongoose.Schema({
         min: 1,
         max: 100,
     },
-    solution: {     //TODO idk whats that for now
+    solutionDescription: {
         type: String,
         required: true,
+        minlength: 0,      //TODO change to 10
+        maxlength: 100,
+    },
+    solutionFileName: {        // TODO monad here?
+        type: String,
+        default: "",
+    },
+    soulutionCode: {
+        type: String,
+        default: ""
     },
     ratings: [
         {

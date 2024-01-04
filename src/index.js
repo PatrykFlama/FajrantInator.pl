@@ -1,13 +1,11 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const multer = require('multer');       // file upload thru POST
 const path = require('path');
 require('dotenv').config({ path: path.resolve(__dirname, '.env') });
 require('./database');
 
 const app = express();
-const upload = multer({ dest: path.join(__dirname, '/database/uploads') })
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '/views'));
@@ -40,6 +38,7 @@ app.use('/cart',    require('./routes/cart'));
 app.use('/checkout', require('./routes/checkout')); 
 app.use('/login',   require('./routes/login'));
 app.use('/admin',   require('./routes/adminPanel'));
+app.use('/account', require('./routes/userAccount/userAccount'))
 
 app.get('/', (req, res) => {
     const { account } = req.session; 

@@ -24,7 +24,7 @@ router.get('/displayUsers', async (req, res) => {
 
 router.post('/addProduct', async (req, res) => {
     try {
-        const { name, description, price, image, courseName, listNumber, taskNumber, solution } = req.body;
+        const { name, description, price, image, courseName, listNumber, taskNumber, solutionDescription } = req.body;
         const product = new Products({
             name,
             description,
@@ -33,7 +33,7 @@ router.post('/addProduct', async (req, res) => {
             courseName,
             listNumber,
             taskNumber,
-            solution
+            solutionDescription,
         });
         await product.save();
         res.render('admin/adminPanel', { messageProduct: 'Product added successfully', messageUser: null });
