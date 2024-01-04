@@ -29,7 +29,7 @@ const ProductSchema = new mongoose.Schema({
         min: 1,
         max: 100,
     },
-    solutionDescription: {
+    description: {
         type: String,
         required: true,
         minlength: 0,      //TODO change to 10

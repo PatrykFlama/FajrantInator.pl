@@ -12,7 +12,7 @@ router.get('/', (req, res) => {
 router.post('/', upload.single('file'), async (req, res) => {
     try {
         // Save the product fields and uploaded file path to the database
-        const filename = (req.file) ? req.file.filename : "";
+        const filename = (req.file) ? req.file.path : "";
         const product = new Products({  
             name: req.body.name, 
             description: req.body.description,
@@ -20,8 +20,8 @@ router.post('/', upload.single('file'), async (req, res) => {
             courseName: req.body.course,
             listNumber: req.body.listNumber,
             taskNumber: req.body.taskNumber,
-            solutionDescription: req.body.solutionDescription,
-            solutionFileName: req.file.filename,
+            description: req.body.description,
+            solutionFileName: filename,
             solutionCode: req.body.code,
         });
         await product.save();

@@ -22,8 +22,9 @@ router.get('/:productID', async (req, res) => {
 
         if (user.orders.includes(product.id)) {
             const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
-            res.render('productView_B', { id:product.id, productName, productPrice:product.price, productDescription:product.description, 
-                productSolution:product.solution, ratings: product.ratings, averageRating});
+            res.render('productView_B', { id:product.id, productName, productPrice:product.price, productDescription:product.description,
+                productSolutionFileName:product.solutionFileName, productSolutionCode:product.solutionCode, 
+                ratings: product.ratings, averageRating});
             return;
         }
     }

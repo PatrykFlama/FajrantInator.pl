@@ -11,10 +11,12 @@
             <h1>Description</h1>
             <p><%= productDescription %></p>
         <% } %>
-        <% if (productSolution) { %>
-            <p>Solution: <%= productSolution %></p>
+        <% if (productSolutionFileName) { %>
+            <p>Solution: <%= productSolutionFileName %></p>
         <% } %>
-
+        <% if (productSolutionCode) { %>
+            <p>Solution: <%= productSolutionCode %></p>
+        <% } %>
         <h2>Product Ratings</h2>
         <div>
         <% if (ratings.length > 0) { %>
