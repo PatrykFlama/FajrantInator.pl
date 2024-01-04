@@ -1,0 +1,13 @@
+<!-- TODO: if accountType is admin add post button for removing products thru /admin/removeProduct and id parameter -->
+<article class="product-item">
+    <!-- TODO: product image -->
+    <div class="product-details">
+        <p class="product-name"><%= product.name %></p>
+        <p class="product-price">£<%= product.price.toFixed(2) %></p>
+        <div class="product-actions">
+            <a class="btn btn-view" href="/product/<%= product.id %>">View Product</a>
+        </div>
+    </div>
+</article>
+
+

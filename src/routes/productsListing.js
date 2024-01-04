@@ -1,6 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const Products = require('../database/schemas/Products');
+const Users = require('../database/schemas/Users')
 
 router.get('/', async (req, res) => {
     const { taskList, taskExercise, courseName, orderPrice, searchString } = req.query;
@@ -32,7 +33,11 @@ router.get('/', async (req, res) => {
         filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
     }
 
-    res.render('productsListing', { products: filteredProducts, accountType: req.session.account.type });
+    let user = 'guest';
+    if(req.session.account.type !== 'guest'){
+        user = await Users.findOne({ username: req.session.account.username});
+    }
+    res.render('productsListing', { products: filteredProducts, user: user });
 });
 
 router.get('/product/:id', (req, res) => {
