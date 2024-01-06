@@ -5,7 +5,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 3,      
-        maxlength: 20,
+        maxlength: 60,
     },
     price: {
         type: Number,
@@ -29,13 +29,13 @@ const ProductSchema = new mongoose.Schema({
         min: 1,
         max: 100,
     },
-    description: {
+    description: {      //TODO whats that for?
         type: String,
         required: true,
-        minlength: 0,      //TODO change to 10
+        minlength: 0,      
         maxlength: 100,
     },
-    solutionFileName: {        // TODO monad here?
+    solutionFileName: {
         type: String,
         default: "",
     },
@@ -47,6 +47,7 @@ const ProductSchema = new mongoose.Schema({
         {
           user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
           rating: { type: Number, required: true, min: 1, max: 5 },
+          comment: { type: String, default: "" },
         },
     ],
 });

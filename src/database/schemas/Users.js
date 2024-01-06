@@ -11,8 +11,6 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minlength: 8,
-        maxlength: 100,
     },
     email: {
         type: String,
@@ -28,6 +26,11 @@ const UserSchema = new mongoose.Schema({
         default: 'user',
     },
     orders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'products',
+        default: [],
+    }],
+    addedProducts: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'products',
         default: [],
