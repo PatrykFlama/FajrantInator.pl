@@ -36,6 +36,9 @@ router.get('/', async (req, res) => {
     let user = 'guest';
     if(req.session.account.type !== 'guest'){
         user = await Users.findOne({ username: req.session.account.username});
+        if(req.session.account.type === 'admin'){
+            user = 'admin'; 
+        }
     }
     res.render('productsListing', { products: filteredProducts, user: user });
 });
