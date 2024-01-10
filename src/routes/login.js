@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
     }
 
     req.session.account = {
-        type: 'user',
+        type: user.type,
         username: username,
         email: user.email,
     }
