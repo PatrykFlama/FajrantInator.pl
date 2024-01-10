@@ -121,6 +121,12 @@ users.insertMany([
         type: 'admin',
     },
     {
+        username: 'krzys',
+        password: hashPassword('dupa'),
+        email: 'sex@sex.sex',
+        type: 'user',
+    },
+    {
         username: 'user1',
         password: hashPassword('user1'),
         email: 'em@i.l',
