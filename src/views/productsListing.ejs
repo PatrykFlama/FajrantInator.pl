@@ -10,10 +10,10 @@
 
         <% products.forEach(function(item) { %>
             <li>
-                <% if (user === 'guest' || !(user.orders.includes(item.id))) { %>
-                    <%- include('includes/product-item', { product: item }) %>
-                <% } else { %>
+                <% if (user === 'admin' || ( user !== 'guest' && (user.orders.includes(item.id)))) { %>
                     <%- include('includes/product-item_B', { product: item }) %>
+                <% } else { %>
+                    <%- include('includes/product-item', { product: item }) %>
                 <% } %>
             </li>
         <% }) %>
