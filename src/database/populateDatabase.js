@@ -116,7 +116,7 @@ products.insertMany([
 users.insertMany([
     {
         username: 'admin',
-        password: 'admin',
+        password: hashPassword('admin'),
         email: 'em@i.l',
         type: 'admin',
     },

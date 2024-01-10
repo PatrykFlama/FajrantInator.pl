@@ -18,31 +18,25 @@ router.post('/', async (req, res) => {
     if (!username || !password) {
         return res.sendStatus(400);
     }
-
-    // TODO - check if username and password are correct
-    if (username === 'admin' && password === 'admin') {
-        req.session.account = {
-            type: 'admin',
-        }
-    } else {
-        // check if user exists in DB and if password matches
-        const user = await Users.findOne({ username: username });
-        if (!user) {
-            res.render('login', { error: 'User not found' });
-            return;
-        }
-
-        if (!comparePasswords(password, user.password)) {
-            res.render('login', { error: 'Incorrect password' });
-            return;
-        }
-
-        req.session.account = {
-            type: 'user',
-            username: username,
-            email: user.email,
-        }
+  
+    // check if user exists in DB and if password matches
+    const user = await Users.findOne({ username: username });
+    if (!user) {
+        res.render('login', { error: 'User not found' });
+        return;
     }
+
+    if (!comparePasswords(password, user.password)) {
+        res.render('login', { error: 'Incorrect password' });
+        return;
+    }
+
+    req.session.account = {
+        type: 'user',
+        username: username,
+        email: user.email,
+    }
+
 
     res.redirect('/');
 });
