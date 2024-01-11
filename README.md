@@ -2,6 +2,7 @@
 <!-- TODO some initial description -->
 ## TODO
 * dodawanie do koszyka nie powinno odświeżać strony
+* wyświetlanie koszyka na głównej stronie
 
 ### Table of contents
 <!-- TODO -->
