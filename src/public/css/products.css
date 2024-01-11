@@ -3,13 +3,14 @@
 }
 
 .container {
-    margin: 80px 40px 160px;
+    margin: 80px 40px;
 }
 
 .cart-div {
     display: flex;
     align-items: center;
     gap: 20px;
+    font-size: 20px;
 }
 
 .beat {
