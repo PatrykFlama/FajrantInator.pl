@@ -5,15 +5,21 @@ const { hashPassword, comparePasswords, checkCart } = require('../utils/helpers'
 
 router.get('/', (req, res) => {
     const accountType = req.session.account.type;
+    const redirectURL = req.query.redirect;
+
     if (accountType === 'guest') {
-        res.render('login', { error: null });
+        if (redirectURL) {
+            res.render('login', { error: null, redirectURL });
+        } else {
+            res.render('login', { error: null, redirectURL: '/' });
+        }
     } else {
         res.redirect('/');
     }
 });
 
 router.post('/', async (req, res) => {
-    const { username, password } = req.body;
+    const { username, password, redirectURL } = req.body;
 
     if (!username || !password) {
         return res.sendStatus(400);
@@ -22,12 +28,12 @@ router.post('/', async (req, res) => {
     // check if user exists in DB and if password matches
     const user = await Users.findOne({ username: username });
     if (!user) {
-        res.render('login', { error: 'User not found' });
+        res.render('login', { error: 'User not found', redirectURL: redirectURL });
         return;
     }
 
     if (!comparePasswords(password, user.password)) {
-        res.render('login', { error: 'Incorrect password' });
+        res.render('login', { error: 'Incorrect password' , redirectURL: redirectURL });
         return;
     }
 
@@ -39,7 +45,7 @@ router.post('/', async (req, res) => {
 
     req.session.cart = await checkCart(req.session.cart);
 
-    res.redirect('/');
+    res.redirect(redirectURL);
 });
 
 
