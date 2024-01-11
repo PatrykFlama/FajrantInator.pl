@@ -1,5 +1,6 @@
 const bcrypt = require('bcryptjs');
 const Product = require('../database/schemas/Products');
+const User = require('../database/schemas/Users');
 
 function hashPassword(password) {
     const salt = bcrypt.genSaltSync();
@@ -19,8 +20,20 @@ async function calculateProductsTotal(cart){
     return total.toFixed(2);
 }
 
+async function checkCart(cart){
+    for (let i = 0; i < cart.length; i++) {
+        const user = await User.findOne({ owned: cart[i] });
+        if (!user) {
+            cart.splice(i, 1);
+            i--;
+        }
+    }
+    return cart;
+}
+
 module.exports = {
     hashPassword,
     comparePasswords,
     calculateProductsTotal,
+    checkCart,
 };

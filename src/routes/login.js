@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const Users = require('../database/schemas/Users');
-const { hashPassword, comparePasswords } = require('../utils/helpers');
+const { hashPassword, comparePasswords, checkCart } = require('../utils/helpers');
 
 router.get('/', (req, res) => {
     const accountType = req.session.account.type;
@@ -37,6 +37,7 @@ router.post('/', async (req, res) => {
         email: user.email,
     }
 
+    req.session.cart = await checkCart(req.session.cart);
 
     res.redirect('/');
 });

@@ -1,5 +1,7 @@
 # FajrantInator.pl
 <!-- TODO some initial description -->
+## TODO
+* dodawanie do koszyka nie powinno odświeżać strony
 
 ### Table of contents
 <!-- TODO -->
