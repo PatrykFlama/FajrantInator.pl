@@ -1,7 +1,6 @@
 const { Router } = require('express');
 const router = Router();
 const multer = require('multer')
-// const vm = require('vm');
 const Products = require('../../database/schemas/Products');
 const upload = multer({ dest: __dirname+'../../../database/uploads' });       // TODO: declare multer globally or smth
 
@@ -25,17 +24,6 @@ router.post('/', upload.single('file'), async (req, res) => {
             solutionCode: req.body.code,
         });
         await product.save();
-
-        // // Create a context for the vm
-        // const sandbox = { 
-        //     console: { log: (value) => { sandbox.result += value; } }, 
-        //     result: [] 
-        // };
-        // const context = new vm.createContext(sandbox);
-        // // Run the code snippet in the vm
-        // const script = new vm.Script(code);
-        // script.runInContext(context, { timeout: 5000 }); // timeout after 5 seconds
-        // output: sandbox.result
 
         res.render('userAccount/addProduct', { error: null, success: "Product added successfully" });
     } catch (error) {

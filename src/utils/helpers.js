@@ -23,7 +23,7 @@ async function calculateProductsTotal(cart){
 async function checkCart(cart){
     for (let i = 0; i < cart.length; i++) {
         const user = await User.findOne({ orders: cart[i] });
-        if (!user) {
+        if (user) {
             cart.splice(i, 1);
             i--;
         }

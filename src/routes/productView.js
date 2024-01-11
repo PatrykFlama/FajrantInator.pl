@@ -3,11 +3,7 @@ const router = Router();
 const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users')
 
-
 router.get('/:productID', async (req, res) => {
-    // const product = await Products.findOne({ $and: [{ courseName: req.params.courseName }, 
-    //                                                 { taskList: req.params.listNumber }, 
-    //                                                 { taskExercise: req.params.taskNumber }] });
     const product = await Products.findOne({ _id: req.params.productID });
     const ratings = product.ratings.map((rating) => rating.rating);
     const averageRating = ratings.length > 0 ? ratings.reduce((a, b) => a + b) / ratings.length : null;
@@ -48,21 +44,20 @@ router.post('/addToCart', (req,res)=>{
 
     const productURL = `/product/${productID}`;
     res.redirect(productURL);
-})
+});
 
 router.post('/rateProduct', async (req,res)=>{
     try {
         const { productID, rating } = req.body;
         const user = await Users.findOne({ username: req.session.account.username });
-    
         const product = await Products.findOne({ _id: productID });
     
-        if (product.ratings.some((ratingObj) => ratingObj.user.equals(user._id))) {
+        if (product.ratings.some((ratingObj) => ratingObj.user.equals(user.id))) {
           res.status(400).send('You have already rated this product');
           return;
         }
-    
-        product.ratings.push({ user: user._id, rating });
+        
+        product.ratings.push({ user: user.id, rating });
         await product.save();
     
         res.redirect(`/product/${productID}`);
@@ -71,7 +66,7 @@ router.post('/rateProduct', async (req,res)=>{
         console.error(error);
         res.status(500).send('Internal Server Error');
     }
-})
+});
 
 
 module.exports = router;
