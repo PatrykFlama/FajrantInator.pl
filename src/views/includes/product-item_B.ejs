@@ -1,13 +1,15 @@
-<!-- TODO: if accountType is admin add post button for removing products thru /admin/removeProduct and id parameter -->
-<article class="product-item">
-    <!-- TODO: product image -->
-    <div class="product-details">
-        <p class="product-name"><%= product.name %></p>
-        <p class="product-price">£<%= product.price.toFixed(2) %></p>
-        <div class="product-actions">
-            <a class="btn btn-view" href="/product/<%= product.id %>">View Product</a>
+<%# TODO: if accountType is admin add post button for removing products thru /admin/removeProduct and id parameter %>
+<div class="product-item">
+    <%# TODO: product image %>
+        <div class="product-splash">Posiadane</div>
+        <div class="product-name"><%= product.name %></div>
+        <img src="/css/media/item.jpg"/>
+        <div class="product-details">
+            <div class="product-price">£<%= product.price.toFixed(2) %></div>
+            <div class="product-actions">
+                <a class="button secondary" href="/product/<%= product.id %>">Szczegóły</a>
+            </div>
         </div>
-    </div>
-</article>
+</div>
 
 

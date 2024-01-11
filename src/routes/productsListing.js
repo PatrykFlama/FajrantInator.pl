@@ -37,7 +37,10 @@ router.get('/', async (req, res) => {
     if(req.session.account.type !== 'guest'){
         user = await Users.findOne({ username: req.session.account.username});
     }
-    res.render('productsListing', { products: filteredProducts, user: user });
+
+    let cart = req.session.cart;
+
+    res.render('productsListing', { products: filteredProducts, user: user, cart: cart });
 });
 
 router.get('/product/:id', (req, res) => {

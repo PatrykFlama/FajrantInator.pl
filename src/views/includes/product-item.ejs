@@ -1,18 +1,23 @@
-<!-- TODO: if accountType is admin add post button for removing products thru /admin/removeProduct and id parameter -->
-<article class="product-item">
-    <!-- TODO: product image -->
-    <div class="product-details">
-        <p class="product-name"><%= product.name %></p>
-        <p class="product-price">£<%= product.price.toFixed(2) %></p>
-        <div class="product-actions">
-            <a class="btn btn-view" href="/product/<%= product.id %>">View Product</a>
-            <form id="addToCartForm" action="cart/addToCart" method="post">
-                <input type="hidden" name="id" value="<%= product.id %>">
-                <button type="submit">Add to Cart</button>
-            </form>
+<%# TODO: if accountType is admin add post button for removing products thru /admin/removeProduct and id parameter %>
+<div class="product-item">
+    <%# TODO: product image %>
+        <div class="product-name"><%= product.name %></div>
+        <img src="/css/media/item.jpg"/>
+        <div class="product-details">
+            <div class="product-price">£<%= product.price.toFixed(2) %></div>
+            <div class="product-actions">
+                <a class="button secondary" href="/product/<%= product.id %>">Szczegóły</a>
+                <form id="addToCartForm" action="cart/addToCart" method="post">
+                    <input type="hidden" name="id" value="<%= product.id %>">
+                    <% if (cart.includes(product.id)) {%>
+                        <input type="button" class="button primary" value="W koszyku" disabled/>
+                    <% } else {%>
+                        <input type="submit" class="button primary" value="Dodaj do koszyka"/>
+                    <% } %>
+                </form>
+            </div>
         </div>
-    </div>
-</article>
+</div>
 
 <script>
     function addToCart() {

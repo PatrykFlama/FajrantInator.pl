@@ -1,29 +1,40 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Homepage</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <title>Fajrant!</title>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/defaults.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
 </head>
 <body>
+    <div class="header">
+        <div class="logo">FajrantInator.pl</div>
+        <a href="<%= (accountType === 'guest') ? 'login' : 'logout' %> "><div class="button primary"><%= (accountType === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
+    </div>
     <div class="container">
-        <% if (username) {%>
-            <h1>Welcome Home <%= username %>! </h1>
-        <%} else {%>
-            <h1>Welcome Home <%= accountType %>! </h1>
-        <% } %>
-        
-        <p>Hello world! - it's a must have</p>
-        
-        <% if (accountType === 'guest') {%>
-            <button onclick="window.location.href = '/login';">Go to Login</button>
-        <% } else if (accountType === 'admin') { %>
-            <button onclick="window.location.href = '/admin';">Go to Admin</button>
-            <button onclick="window.location.href = '/logout';">Logout</button>
-        <% } else { %>
-            <button onclick="window.location.href = '/logout';">Logout</button>
-        <% } %>
+        <div class="mainPanel">
+            <% if (username) {%>
+                <h1>Witaj <%= username %>! </h1>
+            <%} else {%>
+                <!-- <h1>Witaj <%= accountType %>! </h1> -->
+                <h1>Witaj Nieznajomy! </h1>
+            <% } %>
+            
+            <h2>Poczuj fajrant. Zdamy to razem!</h2>
 
-        <button onclick="window.location.href = '/listing';">Go to Products</button>
+            <div class="nav">
+                <% if (accountType === 'admin') { %>
+                    <a href="admin"><div class="button secondary">Panel administratora</div></a>
+                <% }%>
+    
+                <a href="listing"><div class="button secondary">Przeglądaj produkty</div></a>
+            </div>
+            
+        </div>
     </div>
 </body>
 </html>
