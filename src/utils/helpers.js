@@ -21,13 +21,16 @@ async function calculateProductsTotal(cart){
 }
 
 async function checkCart(cart){
+    console.log(cart);
     for (let i = 0; i < cart.length; i++) {
-        const user = await User.findOne({ owned: cart[i] });
+        const user = await User.findOne({ orders: cart[i] });
+        console.log(user);
         if (!user) {
             cart.splice(i, 1);
             i--;
         }
     }
+    console.log(cart);
     return cart;
 }
 
