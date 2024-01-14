@@ -1,7 +1,6 @@
 # FajrantInator.pl
 <!-- TODO some initial description -->
 ## TODO
-* wyświetlanie przekierowania do konta użytkownika
 * w przekierowaniach do strony logowania używać referencji do strony powrotnej
 
 ### Table of contents

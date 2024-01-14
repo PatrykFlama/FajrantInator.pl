@@ -15,6 +15,11 @@ router.use('/addedProducts', require('./addedProducts'));
 router.use('/editProduct', require('./editProduct'));
 
 router.get('/', (req, res) => {
+    let check = req.session.account.check;
+    if(check === false){
+        res.render('userAccount/quiz');
+        return;
+    }
     res.render('userAccount/userAccount');
 });
 

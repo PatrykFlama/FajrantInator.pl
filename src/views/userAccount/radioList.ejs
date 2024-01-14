@@ -1,0 +1,9 @@
+<fieldset>
+    <legend><%= label %>:</legend>
+    <% options.forEach(function(option) { %>
+      <label>
+        <input type="radio" name="<%= name %>" value="<%= option.value %>">
+        <%= option.label %>
+      </label>
+    <% }); %>
+</fieldset>

@@ -145,5 +145,15 @@ users.insertMany([
         type: 'user',
     }
 ]);
-
+// -------------- QUIZ ---------------
+quiz.insertMany([
+    {
+       question: "Ile jest 4*5",
+       answer:["20", "15", "30"],
+    },
+    {
+        question: "Ile jest 8*3",
+        answer:["24", "18", "37"],
+    }
+]);
 // process.exit(0);
