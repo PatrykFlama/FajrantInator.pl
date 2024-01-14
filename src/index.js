@@ -44,8 +44,9 @@ app.get('/', (req, res) => {
     const { account } = req.session; 
     const accountType = account.type;
     const { username, email } = account;
+    let cart = req.session.cart;
 
-    res.render('index', { accountType, username, email });
+    res.render('index', { accountType, username, email , cart});
 });
 
 app.get('/logout', (req, res) => {
