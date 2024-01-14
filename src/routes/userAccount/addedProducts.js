@@ -20,14 +20,20 @@ router.post('/deleteProduct', async (req, res) => {
     if (index === -1) {     // product not found in user's addedProducts
         return res.sendStatus(400);
     }
-    
-    const product = await Products.findOne({ _id: productID });
-    product.remove();
-    
+
+    await Products.deleteOne({ _id: productID });
+
     user.addedProducts.splice(index, 1);
     await user.save();
 
-    res.redirect('/userAccount/addedProducts');
+    
+    // const product = await Products.findOne({ _id: productID });
+    // product.remove();
+    
+    // user.addedProducts.splice(index, 1);
+    // await user.save();
+
+    res.redirect('/account/addedProducts');
 });
 
 module.exports = router;

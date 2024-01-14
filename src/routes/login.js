@@ -45,7 +45,7 @@ router.post('/', async (req, res) => {
     }
 
     req.session.cart = await checkCart(req.session.cart);
-
+    
     res.redirect(redirectURL);
 });
 
