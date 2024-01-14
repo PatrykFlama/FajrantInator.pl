@@ -3,6 +3,7 @@
 ## TODO
 * dodawanie do koszyka nie powinno odświeżać strony
 * wyświetlanie koszyka na głównej stronie
+* wyświetlanie przekierowania do konta użytkownika
 
 ### Table of contents
 <!-- TODO -->

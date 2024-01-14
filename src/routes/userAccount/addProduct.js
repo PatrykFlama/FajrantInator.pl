@@ -2,6 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const multer = require('multer')
 const Products = require('../../database/schemas/Products');
+const Users = require('../../database/schemas/Users');
 const upload = multer({ dest: __dirname+'../../../database/uploads' });       // TODO: declare multer globally or smth
 
 router.get('/', (req, res) => {
@@ -24,6 +25,10 @@ router.post('/', upload.single('file'), async (req, res) => {
             solutionCode: req.body.code,
         });
         await product.save();
+
+        const user = await Users.findOne({ username: req.session.account.username });
+        user.addedProducts.push(product._id);
+        await user.save();
 
         res.render('userAccount/addProduct', { error: null, success: "Product added successfully" });
     } catch (error) {
