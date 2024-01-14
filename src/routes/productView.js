@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const router = Router();
 const Products = require('../database/schemas/Products');
-const Users = require('../database/schemas/Users')
+const Users = require('../database/schemas/Users');
 
 router.get('/:productID', async (req, res) => {
     const product = await Products.findOne({ _id: req.params.productID });
@@ -17,14 +17,14 @@ router.get('/:productID', async (req, res) => {
         const user = await Users.findOne({ username: req.session.account.username});
 
         if (user.orders.includes(product.id)) {
-            const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
+            const productName = product.courseName + ', List ' + product.listNumber + ', Task ' + product.taskNumber;
             res.render('productView_B', { id:product.id, productName, productPrice:product.price, productDescription:product.description,
                 productSolutionFileName:product.solutionFileName, productSolutionCode:product.solutionCode, 
                 ratings: product.ratings, averageRating});
             return;
         }
     }
-    const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
+    const productName = product.courseName + ', List ' + product.listNumber + ', Task ' + product.taskNumber;
     res.render('productView', { id:product.id, productName, productPrice:product.price, productDescription:product.description,
         ratings: product.ratings, averageRating });
 });
