@@ -1,9 +1,7 @@
 <!-- products: <%= products %> -->
 <!-- TODO:
-* you are given list 'products' which contains all the products added by the user
-* list them and allow user to:
-    * delete product thru /account/addedProducts/deleteProduct POST with [productID]
     * redirect to product editing page thru /account/editProduct POST with [productID]
+    //fix the problems with editing
 -->
 <!-- views/userAccount/addedProducts.ejs -->
 
@@ -36,6 +34,7 @@
                             <input type="hidden" name="productID" value="<%= product.id %>">
                             <button type="submit">Delete Product</button>
                         </form>
+                        <li><a href="/account/editProduct/<%= product.id %>">Edit Product</a></li>
                     </li>
                 <% }); %>
             </ul>
