@@ -12,25 +12,66 @@ router.get('/:productID', async (req, res) => {
     const ratings = product.ratings.map((rating) => rating.rating);
     const averageRating = ratings.length > 0 ? ratings.reduce((a, b) => a + b) / ratings.length : null;
 
+    let cart = req.session.cart;
+    let user = req.session.account.type;
+
     if (!product) {     // error: 'Product not found'
-        res.render('productView', { productName: `Product with id ${parsedID} not found`, productPrice: null, productDescription: null })
+        res.render('productView', { productName: `Product with id ${parsedID} not found`, productPrice: null, productDescription: null , cart: cart, user: user})
         return;
     }
 
     if (req.session.account.type !== 'guest') {
         const user = await Users.findOne({ username: req.session.account.username});
+        let ratingObject = product.ratings.filter((ratingObj) => ratingObj.user.equals(user._id))[0];
+        let yourRate = -1;
+        
+        if(ratingObject){
+            yourRate = ratingObject.rating;
+        }
 
         if (user.orders.includes(product.id)) {
-            const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
-            res.render('productView_B', { id:product.id, productName, productPrice:product.price, productDescription:product.description,
-                productSolutionFileName:product.solutionFileName, productSolutionCode:product.solutionCode, 
-                ratings: product.ratings, averageRating});
+            const productName = product.name;
+            const productCourseName = product.courseName;
+            const productTask = product.taskNumber;
+            const productExercise = product.listNumber;
+
+            res.render('productView_B', { 
+                id:product.id, 
+                productName, 
+                productCourseName, 
+                productTask, 
+                productExercise, 
+                productPrice: product.price, 
+                productDescription: product.description,
+                productSolutionFileName: product.solutionFileName, 
+                productSolutionCode: product.solutionCode,
+                ratings: product.ratings, 
+                averageRating, 
+                cart: cart, 
+                user: user,
+                yourRate
+            });
             return;
         }
     }
-    const productName = product.courseName + ', Task ' + product.taskList + ', Exercise ' + product.taskExercise;
-    res.render('productView', { id:product.id, productName, productPrice:product.price, productDescription:product.description,
-        ratings: product.ratings, averageRating });
+
+    
+
+    const productName = product.name;
+    const productCourseName = product.courseName;
+    const productTask = product.taskNumber;
+    const productExercise = product.listNumber;
+
+    res.render('productView', { 
+        id:product.id,
+        productName, productCourseName, productTask, productExercise, 
+        productPrice:product.price, 
+        productDescription:product.description,
+        ratings: product.ratings, 
+        averageRating, 
+        cart: cart, 
+        user: user
+    });
 });
 
 router.post('/addToCart', (req,res)=>{
