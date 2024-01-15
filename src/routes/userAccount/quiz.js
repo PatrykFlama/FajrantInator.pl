@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const router = Router();
 const Quiz = require('../../database/schemas/Quiz');
-//TODO: add fuctions to helper, fix error with radioParams, check the true option
+//TODO: add fuctions to helper, check the true option, do the truth_nr parameter
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
 }
@@ -18,9 +18,10 @@ router.get('/', async (req, res) => {
     try{
         let check = req.session.account.check;
         const total = await Quiz.countDocuments();
-        const randomNumber = getRandomNumber(1, total);
-        const selected = await Quiz.findOne().skip(randomNumber - 1).exec();
-        const [x, y, z] = getDistinctRandomNumbers(0, 2, 3);
+        const question_nr = getRandomNumber(1, total);
+        const selected = await Quiz.findOne().skip(question_nr - 1).exec();
+        const total_ans = selected.answer.f.length + 1;
+        const truth_nr = getRandomNumber(1, total);
        
         
         if(check === false){

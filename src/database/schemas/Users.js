@@ -30,6 +30,11 @@ const UserSchema = new mongoose.Schema({
         required: true,
         default: false,
     },
+    seller:{
+        type: String,
+        required: true,
+        default: "",
+    },
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'products',

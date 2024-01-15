@@ -18,7 +18,7 @@ router.use('/quiz', require('./quiz'));
 router.get('/', (req, res) => {
     let check = req.session.account.check;
     if(check === false){
-        res.redirect('/userAccount/quiz');
+        res.redirect('account/quiz');
         return;
     }
     res.render('userAccount/userAccount');

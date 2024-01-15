@@ -149,11 +149,21 @@ users.insertMany([
 quiz.insertMany([
     {
        question: "Ile jest 4*5",
-       answer:["20", "15", "30"],
+       answer:[
+        {
+          t: '20',
+          f: ['18', '15'],
+        },
+      ],
     },
     {
         question: "Ile jest 8*3",
-        answer:["24", "18", "37"],
+        answer:[
+            {
+              t: '24',
+              f: ['18', '20'],
+            },
+        ],
     }
 ]);
 // process.exit(0);
