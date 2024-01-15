@@ -22,16 +22,16 @@ router.get('/', async (req, res) => {
         const selected = await Quiz.findOne().skip(randomNumber - 1).exec();
         const [x, y, z] = getDistinctRandomNumbers(0, 2, 3);
        
-
+        
         if(check === false){
             res.render('userAccount/quiz', {
                 radioParams: {
                     name: selected.question,
                     label: 'Quiz',
                     options: [
-                    { value: selected.answer[x], label: 'Radio Option 1' },
-                    { value: selected.answer[y], label: 'Radio Option 2' },
-                    { value: selected.answer[z], label: 'Radio Option 3' },
+                        { value: selected.answer[x], label: 'Radio Option 1' },
+                        { value: selected.answer[y], label: 'Radio Option 2' },
+                        { value: selected.answer[z], label: 'Radio Option 3' },
                     ],
                 },
             });

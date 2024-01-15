@@ -1,11 +1,25 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Radio List Example</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
 </head>
 <body>
-    <%- include('radioList', radioParams) %>
+    <h1><%= radioParams.label %></h1>
+    <form action="/submit-quiz" method="post"> 
+        <fieldset>
+            <legend><%= radioParams.name %></legend>
+            <% for (let option of radioParams.options) { %>
+                <label>
+                    <input type="radio" name="<%= radioParams.name %>" value="<%= option.value %>">
+                    <%= option.label %>
+                </label>
+                <br>
+            <% } %>
+        </fieldset>
+        <button type="submit">Submit</button>
+    </form>
 </body>
 </html>
