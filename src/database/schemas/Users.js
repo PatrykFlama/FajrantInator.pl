@@ -31,9 +31,9 @@ const UserSchema = new mongoose.Schema({
         default: false,
     },
     seller:{
-        type: String,
+        type: Boolean,
         required: true,
-        default: "",
+        default: false,
     },
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
