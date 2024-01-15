@@ -1,0 +1,46 @@
+<!-- products: <%= products %> -->
+<!-- TODO:
+    * redirect to product editing page thru /account/editProduct POST with [productID]
+    //fix the problems with editing
+-->
+<!-- views/userAccount/addedProducts.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="/account">User Account</a></li>
+        </ul>
+    </nav>
+    
+    <header>
+        <h1>Your Added Products</h1>
+    </header>
+    
+    <section>
+
+        <% if (products.length > 0) { %>
+            <ul>
+                <% products.forEach(product => { %>
+                    <li>
+                        <strong><%= product.name %></strong> - <%= product.description %>
+                        <form method="post" action="addedProducts/deleteProduct">
+                            <input type="hidden" name="productID" value="<%= product.id %>">
+                            <button type="submit">Delete Product</button>
+                        </form>
+                        <li><a href="/account/editProduct/<%= product.id %>">Edit Product</a></li>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No products added yet.</p>
+        <% } %>
+    </section>
+</body>
+</html>

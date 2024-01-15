@@ -1,3 +1,19 @@
+.material-symbols-outlined {
+    font-size: 32px !important;
+}
+
+.cart-div {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    font-size: 20px;
+}
+
+.beat {
+    color: rgb(38, 139, 5);
+    animation: 0.3s ease 0s beat;
+}
+
 html, body {
     height: 100vh;
 }
@@ -56,4 +72,10 @@ h1, h2 {
 .mainPanel .button {
     height: 1.6vw;
     font-size: 1vw;
+}
+
+@keyframes beat {
+    0% { transform: scale(0.9, 0.9); }
+    80% { transform: scale(1.4, 1.4); }
+    100% { transform: scale(1, 1); }
 }

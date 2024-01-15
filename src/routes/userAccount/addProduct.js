@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const router = Router();
 const multer = require('multer')
-// const vm = require('vm');
 const Products = require('../../database/schemas/Products');
+const Users = require('../../database/schemas/Users');
 const upload = multer({ dest: __dirname+'../../../database/uploads' });       // TODO: declare multer globally or smth
 
 router.get('/', (req, res) => {
-    res.render('userAccount/addProduct', { error: null });
+    res.render('userAccount/addProduct', { error: null, success: null });
 });
 
 router.post('/', upload.single('file'), async (req, res) => {
@@ -26,21 +26,14 @@ router.post('/', upload.single('file'), async (req, res) => {
         });
         await product.save();
 
-        // // Create a context for the vm
-        // const sandbox = { 
-        //     console: { log: (value) => { sandbox.result += value; } }, 
-        //     result: [] 
-        // };
-        // const context = new vm.createContext(sandbox);
-        // // Run the code snippet in the vm
-        // const script = new vm.Script(code);
-        // script.runInContext(context, { timeout: 5000 }); // timeout after 5 seconds
-        // output: sandbox.result
+        const user = await Users.findOne({ username: req.session.account.username });
+        user.addedProducts.push(product._id);
+        await user.save();
 
-        res.status(200).json({ message: 'Product added successfully' });
+        res.render('userAccount/addProduct', { error: null, success: "Product added successfully" });
     } catch (error) {
         console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+        res.render('userAccount/addProduct', { error: "Internal server error", success: null });
     }
 });
 

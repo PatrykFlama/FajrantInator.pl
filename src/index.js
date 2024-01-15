@@ -44,8 +44,9 @@ app.get('/', (req, res) => {
     const { account } = req.session; 
     const accountType = account.type;
     const { username, email } = account;
+    let cart = req.session.cart;
 
-    res.render('index', { accountType, username, email });
+    res.render('index', { accountType, username, email , cart});
 });
 
 app.get('/logout', (req, res) => {
@@ -57,6 +58,6 @@ app.get('/logout', (req, res) => {
     res.redirect('/');
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server is running on http://localhost:${process.env.PORT}`);
+app.listen(process.env.PORT || 3000, () => {
+    console.log(`Server is running on http://localhost:${process.env.PORT || 3000}`);
 });

@@ -4,7 +4,7 @@ const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users')
 
 router.get('/', async (req, res) => {
-    const { taskList, taskExercise, courseName, orderPrice, searchString } = req.query;
+    const { taskList, taskExercise, courseName, orderPrice, searchString, owned } = req.query;
     
     const parsedTaskList = parseInt(taskList);
     const parsedTaskExercise = parseInt(taskExercise);
@@ -36,6 +36,13 @@ router.get('/', async (req, res) => {
     let user = 'guest';
     if(req.session.account.type !== 'guest'){
         user = await Users.findOne({ username: req.session.account.username});
+    }
+
+    if(user !== 'guest'){
+        filteredProducts = filteredProducts.filter(product => !user.addedProducts.includes(product._id));
+        if(owned === 'true'){
+            filteredProducts = filteredProducts.filter(product => user.orders.includes(product._id));
+        }
     }
 
     let cart = req.session.cart;

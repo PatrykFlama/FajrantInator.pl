@@ -7,6 +7,12 @@
     <h1>Add Product</h1>
     
     <form action="/account/addProduct" method="POST" enctype="multipart/form-data">
+        <% if (error) { %>
+            <p class="error"><%= error %></p>
+        <% } %>
+        <% if (success) { %>
+            <p class="success"><%= success %></p>   
+        <% } %>
 
         <label for="name">Product name:</label>
         <input type="text" name="name" required><br><br>

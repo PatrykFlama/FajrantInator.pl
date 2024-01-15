@@ -1,6 +1,7 @@
 const orders = require('./schemas/Orders');
 const products = require('./schemas/Products');
 const users = require('./schemas/Users');
+const quizzes = require('./schemas/Quizzes')
 const { hashPassword } = require('../utils/helpers');
 
 const path = require('path');
@@ -129,21 +130,41 @@ users.insertMany([
     {
         username: 'user1',
         password: hashPassword('user1'),
-        email: 'em@i.l',
+        email: 'ema@i.l',
         type: 'user',
     },
     {
         username: 'user2',
         password: hashPassword('user2'),
-        email: 'em@i.l',
+        email: 'emb@i.l',
         type: 'user',
     },
     {
         username: 'user3',
         password: hashPassword('user3'),
-        email: 'em@i.l',
+        email: 'emc@i.l',
         type: 'user',
     }
 ]);
-
+// -------------- QUIZ ---------------
+quizzes.insertMany([
+    {
+       question: "Ile jest 4*5",
+       answer:[
+        {
+          t: '20',
+          f: ['18', '15'],
+        },
+      ],
+    },
+    {
+        question: "Ile jest 8*3",
+        answer:[
+            {
+              t: '24',
+              f: ['18', '20'],
+            },
+        ],
+    }
+]);
 // process.exit(0);

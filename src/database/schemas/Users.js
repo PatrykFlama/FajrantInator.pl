@@ -25,6 +25,16 @@ const UserSchema = new mongoose.Schema({
         enum: ['user', 'admin'],
         default: 'user',
     },
+    check:{
+        type: Boolean,
+        required: true,
+        default: false,
+    },
+    seller:{
+        type: Boolean,
+        required: true,
+        default: false,
+    },
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'products',
