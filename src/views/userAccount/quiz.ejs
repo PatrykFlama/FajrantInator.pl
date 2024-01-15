@@ -1,4 +1,4 @@
-
+<!-- TODO: fix radioparamsoptions-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,11 +11,18 @@
     <form action="/submit-quiz" method="post"> 
         <fieldset>
             <legend><%= radioParams.name %></legend>
-            <% for (let option of radioParams.options) { %>
+            <% for (let i = 0; i < radioParams.f_option + 1; i++) { 
+                if (i === radioParams.nr) { %>
                 <label>
-                    <input type="radio" name="<%= radioParams.name %>" value="<%= option.value %>">
+                    <input type="radio" name="Option <%= i %>" value="<%= radioParams.t_option %>">
                     <%= option.label %>
                 </label>
+                <% } else { %>
+                    <label>
+                        <input type="radio" name="Option <%= i %>" value="<%= radioParams.f_option[i] %>">
+                        <%= option.label %>
+                    </label>
+                <% } %>
                 <br>
             <% } %>
         </fieldset>

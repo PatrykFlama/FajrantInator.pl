@@ -21,19 +21,17 @@ router.get('/', async (req, res) => {
         const question_nr = getRandomNumber(1, total);
         const selected = await Quiz.findOne().skip(question_nr - 1).exec();
         const total_ans = selected.answer.f.length + 1;
-        const truth_nr = getRandomNumber(1, total);
+        const truth_nr = getRandomNumber(1, total_ans);
        
         
         if(check === false){
             res.render('userAccount/quiz', {
                 radioParams: {
                     name: selected.question,
-                    label: 'Quiz',
-                    options: [
-                        { value: selected.answer[x], label: 'Radio Option 1' },
-                        { value: selected.answer[y], label: 'Radio Option 2' },
-                        { value: selected.answer[z], label: 'Radio Option 3' },
-                    ],
+                    label: 'Are you smart enough to be a seller?',
+                    nr: truth_nr,
+                    t_option: selected.answer.t,
+                    f_option: selected.answer.f,
                 },
             });
             return;
