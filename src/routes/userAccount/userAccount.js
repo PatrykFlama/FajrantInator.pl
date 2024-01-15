@@ -13,11 +13,12 @@ const router = Router();
 router.use('/addProduct', require('./addProduct'));
 router.use('/addedProducts', require('./addedProducts'));
 router.use('/editProduct', require('./editProduct'));
+router.use('/quiz', require('./quiz'));
 
 router.get('/', (req, res) => {
     let check = req.session.account.check;
     if(check === false){
-        res.render('userAccount/quiz');
+        res.redirect('/userAccount/quiz');
         return;
     }
     res.render('userAccount/userAccount');
