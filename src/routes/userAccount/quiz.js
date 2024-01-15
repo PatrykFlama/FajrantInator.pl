@@ -2,18 +2,29 @@ const { Router } = require('express')
 const router = Router();
 const Quiz = require('../../database/schemas/Quizzes');
 const User = require('../../database/schemas/Users');
+const { getRandomNumber } = require('../utils/helpers');
 //TODO: add fuctions to helper, fix submit-quiz, add result-page
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
 
-// function getDistinctRandomNumbers(min, max, count) {
-//     const result = new Set();
-//     while (result.size < count) {
-//         result.add(getRandomNumber(min, max));
-//     }
-//     return Array.from(result);
-// }
+router.post('/submit-quiz', async (req, res) => {
+    try {
+        const selectedOption = req.body.Option; 
+        const correctOption = req.body.t_option; 
+        const user = await User.findOne({ username: req.session.account.username});
+       
+
+        if (selectedOption === correctOption) {
+            user.seller = true;
+            await user.save();
+            console.log('Correct answer! You are a seller now.');
+        } else {
+            console.log('Incorrect answer! You are not ready to be a seller.');
+        }
+        // res.render('userAccount/userAccount');
+    } catch (error) {
+        console.error('Error handling quiz submission:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
 
 router.get('/', async (req, res) => {
     try{
@@ -24,7 +35,6 @@ router.get('/', async (req, res) => {
         const total_ans = selected.answer[0].f.length + 1;
         const truth_nr = getRandomNumber(1, total_ans);
        
-        console.log(check);
         if(check === false){
             res.render('userAccount/quiz', {
                 radioParams: {
@@ -39,31 +49,10 @@ router.get('/', async (req, res) => {
         const user = await User.findOne({ username: req.session.account.username});
         user.check = true;
         await user.save();
-        res.render('userAccount/userAccount');
+        // res.render('userAccount/userAccount');
         return;
     } catch (error) {
         console.error('Error counting quiz elements:', error);
-        res.status(500).send('Internal Server Error');
-    }
-});
-
-router.post('/submit-quiz', async (req, res) => {
-    try {
-        const selectedOption = req.body.Option; 
-        const correctOption = radioParams.t_option; 
-        const user = await User.findOne({ username: req.session.account.username});
-       
-
-        if (selectedOption === correctOption) {
-            user.seller = true;
-            await user.save();
-            console.log('Correct answer! You are a seller now.');
-        } else {
-            console.log('Incorrect answer! You are not ready to be a seller.');
-        }
-        //res.redirect('/result-page');
-    } catch (error) {
-        console.error('Error handling quiz submission:', error);
         res.status(500).send('Internal Server Error');
     }
 });

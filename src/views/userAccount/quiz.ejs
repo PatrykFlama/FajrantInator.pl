@@ -13,17 +13,17 @@
             <% for (let i = 0; i < radioParams.f_option.length + 1; i++) { 
                 if (i === radioParams.nr - 1) { %>
                 <label>
-                    <input type="radio" name="Option <%= i %>" value="<%= radioParams.t_option %>">
+                    <input type="radio" name="Option" value="<%= radioParams.t_option %>">
                     <%= radioParams.t_option %>
                 </label>
                 <% } else if (i < radioParams.nr - 1){ %>
                     <label>
-                        <input type="radio" name="Option <%= i %>" value="<%= radioParams.f_option[i] %>">
+                        <input type="radio" name="Option" value="<%= radioParams.f_option[i] %>">
                         <%= radioParams.f_option[i] %>
                     </label>
                 <% } else { %>
                     <label>
-                        <input type="radio" name="Option <%= i %>" value="<%= radioParams.f_option[i-1] %>">
+                        <input type="radio" name="Option" value="<%= radioParams.f_option[i-1] %>">
                         <%= radioParams.f_option[i-1] %>
                     </label>
                 <% } %>
