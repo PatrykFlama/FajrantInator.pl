@@ -11,9 +11,6 @@ function comparePasswords(password, hash) {
     return bcrypt.compareSync(password, hash);
 }
 
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
 
 async function calculateProductsTotal(cart){
     total = 0;
@@ -40,5 +37,4 @@ module.exports = {
     comparePasswords,
     calculateProductsTotal,
     checkCart,
-    getRandomNumber,
 };
