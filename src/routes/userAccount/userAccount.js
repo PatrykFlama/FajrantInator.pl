@@ -8,7 +8,8 @@ router.use('/quiz', require('./quiz'));
 
 router.get('/', (req, res) => {
     let check = req.session.account.check;
-    let seller = req.session.account.seller
+    let seller = req.session.account.seller;
+    
     if(check === false){
         res.redirect('/account/quiz');
         return;

@@ -2,7 +2,7 @@ const { Router } = require('express')
 const router = Router();
 const Quiz = require('../../database/schemas/Quizzes');
 const User = require('../../database/schemas/Users');
-//TODO: add fuctions to helper, fix correct option
+//TODO: add fuctions to helper
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
@@ -15,8 +15,10 @@ router.post('/submit-quiz', async (req, res) => {
         const user = await User.findOne({ username: req.session.account.username});
         user.check = true;
         await user.save();
+        req.session.account.check = true;
         
         if (selectedOption === correctOption) {
+            req.session.account.seller = true;
             user.seller = true;
             await user.save();
             res.redirect('/account');
