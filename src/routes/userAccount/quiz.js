@@ -2,11 +2,7 @@ const { Router } = require('express')
 const router = Router();
 const Quiz = require('../../database/schemas/Quizzes');
 const User = require('../../database/schemas/Users');
-//TODO: add fuctions to helper
-
-function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min) + min);
-}
+const { getRandomNumber } = require('../../utils/helpers');
 
 router.post('/submit-quiz', async (req, res) => {
     try {
