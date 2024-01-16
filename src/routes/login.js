@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { username, password, redirectURL } = req.body;
+    const { username, password} = req.body;
+    
 
     if (!username || !password) {
         return res.sendStatus(400);
