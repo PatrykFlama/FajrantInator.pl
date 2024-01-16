@@ -35,7 +35,7 @@ router.get('/', async (req, res) => {
     try{
         let check = req.session.account.check;
         const total = await Quiz.countDocuments();
-        const question_nr = getRandomNumber(1, total);
+        const question_nr = getRandomNumber(1, total+1);
         const selected = await Quiz.findOne().skip(question_nr - 1).exec();
         const total_ans = selected.answer[0].f.length + 1;
         const truth_nr = getRandomNumber(1, total_ans);
