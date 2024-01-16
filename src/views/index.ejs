@@ -38,8 +38,9 @@
             <div class="nav">
                 <% if (accountType === 'admin') { %>
                     <a href="admin"><div class="button secondary">Panel administratora</div></a>
-                <% } else if (accountType === 'user') {%>
-                    <a href="account"><div class="button secondary">Moje konto</div></a>
+                <% }
+                    if (accountType !== 'guest') {%>
+                    <a href="account"><div class="button secondary">Sprzedaż</div></a>
                 <% } %>    
                 <a href="listing"><div class="button secondary">Przeglądaj produkty</div></a>
             </div>
