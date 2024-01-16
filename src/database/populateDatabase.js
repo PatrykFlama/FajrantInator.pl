@@ -149,22 +149,100 @@ users.insertMany([
 // -------------- QUIZ ---------------
 quizzes.insertMany([
     {
-       question: "Ile jest 4*5",
+       question: "Jaka flaga odpowiada za globalne zainstalowanie modułu?",
        answer:[
         {
-          t: '20',
-          f: ['18', '15'],
+          t: "-g",
+          f: [
+            "--save", 
+            "-wszendzie"
+        ],
         },
       ],
     },
     {
-        question: "Ile jest 8*3",
-        answer:[
-            {
-              t: '24',
-              f: ['18', '20'],
-            },
+       question: "Który z języków jest typowany?",
+       answer:[
+        {
+          t: "TypeScript",
+          f: [
+            "JavaScript",
+            "HTML"
         ],
-    }
+        },
+      ],
+    },
+    {
+       question: "Która z pętli przyjmuje instrukcje początkową?",
+       answer:[
+        {
+          t: "for",
+          f: [
+            "while", 
+            "switch"
+        ],
+        },
+      ],
+    },
+    {
+       question: "Który z modułów służy do stworzenia servera?",
+       answer:[
+        {
+          t: "express",
+          f: [
+            "pośpieszny", 
+            "osobowy"
+        ],
+        },
+      ],
+    },
+    {
+       question: "Czy javascript obsługuje zdarzenia asynchroniczne?",
+       answer:[
+        {
+          t: "Tak",
+          f: [
+            "Nie", 
+            "Tylko w dawnych czasach za pomocą piekła callbacków, więc usunięto"
+        ],
+        },
+      ],
+    },
+    {
+       question: "Co wypisze podany kod? : (console.print('debug'))",
+       answer:[
+        {
+          t: "Wywoła błąd",
+          f: [
+            "Wypisze tekst \"debug\"", 
+            "Wypisze tekst \"debug\", ale  tylko wtedy gdy konsola jest w trybie debugowania."
+        ],
+        },
+      ],
+    },
+    {
+       question: "Jak długo będzie działała pętla while(true)?",
+       answer:[
+        {
+          t: "Tak długo jak nasze dni są policzone",
+          f: [
+            "20 sekund, ale można zmienić w konfiguracji projektu", 
+            "Pętla zapyta nas o to przed rozpoczęciem działania"
+        ],
+        },
+      ],
+    },
+    {
+       question: "Czy wszystkie obiekty w javascript mają ten sam prototyp?",
+       answer:[
+        {
+          t: "Tak",
+          f: [
+            "Nie", 
+            "Kiedyś miały, ale prowadziło to do wycieków pamięci"
+        ],
+        },
+      ],
+    },
 ]);
 // process.exit(0);
