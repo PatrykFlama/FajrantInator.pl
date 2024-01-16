@@ -7,7 +7,7 @@ mongoose
                  (process.env.DB_HOST ? `${process.env.DB_HOST}:${process.env.DB_PORT}` : 'localhost:27017'))) +
              `/db_FajrantInator`)
     .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error(err));
+    .catch((err) => console.error(err));
 
 // if there is no 'admin' account create one with default password
 
