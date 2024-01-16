@@ -3,11 +3,6 @@ const router = Router();
 const Quiz = require('../../database/schemas/Quizzes');
 const User = require('../../database/schemas/Users');
 const { getRandomNumber } = require('../../utils/helpers');
-// //TODO: add fuctions to helper
-
-// function getRandomNumber(min, max) {
-//     return Math.floor(Math.random() * (max - min) + min);
-// }
 
 router.post('/submit-quiz', async (req, res) => {
     try {
