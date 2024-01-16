@@ -8,7 +8,7 @@ const { calculateProductsTotal } = require('../utils/helpers');
 router.post('/createOrder', async (req, res)=>{
     const accountType = req.session.account.type;
     if (accountType === 'guest') {
-        res.render('login', { error: null });
+        res.render('login', { error: null , redirectURL: '/cart' });
         return;
     }
 
