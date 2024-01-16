@@ -35,6 +35,15 @@
     </form>
     <script src="account/quiz" ></script>
     <script>
+        window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted ||
+                ( typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                alert("This page cannot be restored from the cache. Please use the navigation buttons provided.");
+                window.location.reload();
+            }
+        });
         function validateForm() {
             const radioButtons = document.querySelectorAll('input[name="Option"]');
             let selectedOption = null;
