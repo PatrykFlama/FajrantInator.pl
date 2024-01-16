@@ -17,7 +17,9 @@ router.get('/', (req, res) => {
         res.render('userAccount/userAccount_D');
         return;
     }
-    res.render('userAccount/userAccount');
+    else{
+        res.render('userAccount/userAccount');
+    }
 });
 
 module.exports = router;

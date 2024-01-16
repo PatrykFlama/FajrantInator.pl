@@ -16,13 +16,10 @@ router.post('/submit-quiz', async (req, res) => {
         user.check = true;
         await user.save();
         
-        if (typeof selectedOption === 'undefined'){
-            res.render('userAccount/quiz');
-        }
         if (selectedOption === correctOption) {
             user.seller = true;
             await user.save();
-            res.render('userAccount/userAccount');
+            res.redirect('/account');
         } else {
             res.render('userAccount/userAccount_D');
         }
@@ -52,7 +49,6 @@ router.get('/', async (req, res) => {
                 },
             });
         }
-        // res.render('userAccount/userAccount');
         return;
     } catch (error) {
         console.error('Error counting quiz elements:', error);
