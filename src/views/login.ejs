@@ -21,7 +21,7 @@
     </div>
     <div class="container">
         <a class="backButton" href="/"><span class="material-symbols-outlined">arrow_back_ios</span></a>
-        <form class="loginForm" action="/login" method="POST">
+        <form class="loginForm" action="" method="POST">
         <h1>Logowanie</h1>
             <input type="hidden" name="previousURL" id="previousURL">
             <input type="text" name="username" placeholder="Nazwa użytkownika" required>
@@ -42,7 +42,11 @@
     </form>
     </div>
 <script>
-    document.getElementById(`previousURL`).value = document.referrer;
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get('redirect');
+    if(myParam === null){
+        window.location.href = `${window.location.href}?redirect=${encodeURIComponent(document.referrer)}`
+    }
 </script> 
     
 </body>
