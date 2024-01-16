@@ -43,6 +43,7 @@ router.post('/', async (req, res) => {
         email: user.email,
         userID: user._id,
         check: user.check,
+        seller: user.seller,
     }
 
     req.session.cart = await checkCart(req.session.cart);

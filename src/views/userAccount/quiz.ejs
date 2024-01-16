@@ -7,13 +7,14 @@
 </head>
 <body>
     <h1><%= radioParams.label %></h1>
-    <form action="/submit-quiz" method="post"> 
+    <form action="/account/quiz/submit-quiz" method="post" onsubmit="return validateForm()"> 
         <fieldset>
             <legend><%= radioParams.name %></legend>
             <% for (let i = 0; i < radioParams.f_option.length + 1; i++) { 
                 if (i === radioParams.nr - 1) { %>
                 <label>
                     <input type="radio" name="Option" value="<%= radioParams.t_option %>">
+                    <input type="hidden" name="tOption" value="<%= radioParams.t_option %>">
                     <%= radioParams.t_option %>
                 </label>
                 <% } else if (i < radioParams.nr - 1){ %>
@@ -30,7 +31,28 @@
                 <br>
             <% } %>
         </fieldset>
-        <button type="submit">Submit</button>
+        <button id="btn" type="submit">Submit</button>
     </form>
+    <script src="account/quiz" ></script>
+    <script>
+        function validateForm() {
+            const radioButtons = document.querySelectorAll('input[name="Option"]');
+            let selectedOption = null;
+            
+            for (const radioButton of radioButtons) {
+                if (radioButton.checked) {
+                    selectedOption = radioButton.value;
+                    break;
+                }
+            }
+            
+            if (!selectedOption) {
+                alert("You haven't selected any option");
+                return false; 
+            }
+
+            return true;
+        }
+    </script>
 </body>
 </html>

@@ -2,7 +2,7 @@ const { Router } = require('express')
 const router = Router();
 const Quiz = require('../../database/schemas/Quizzes');
 const User = require('../../database/schemas/Users');
-//TODO: add fuctions to helper, fix submit-quiz, add result-page
+//TODO: add fuctions to helper, fix correct option
 
 function getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min) + min);
@@ -11,18 +11,21 @@ function getRandomNumber(min, max) {
 router.post('/submit-quiz', async (req, res) => {
     try {
         const selectedOption = req.body.Option; 
-        const correctOption = req.body.t_option; 
+        const correctOption = req.body.tOption; 
         const user = await User.findOne({ username: req.session.account.username});
-       
-
+        user.check = true;
+        await user.save();
+        
+        if (typeof selectedOption === 'undefined'){
+            res.render('userAccount/quiz');
+        }
         if (selectedOption === correctOption) {
             user.seller = true;
             await user.save();
-            console.log('Correct answer! You are a seller now.');
+            res.render('userAccount/userAccount');
         } else {
-            console.log('Incorrect answer! You are not ready to be a seller.');
+            res.render('userAccount/userAccount_D');
         }
-        // res.render('userAccount/userAccount');
     } catch (error) {
         console.error('Error handling quiz submission:', error);
         res.status(500).send('Internal Server Error');
@@ -49,9 +52,6 @@ router.get('/', async (req, res) => {
                 },
             });
         }
-        const user = await User.findOne({ username: req.session.account.username});
-        user.check = true;
-        await user.save();
         // res.render('userAccount/userAccount');
         return;
     } catch (error) {
