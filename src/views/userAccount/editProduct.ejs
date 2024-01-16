@@ -26,15 +26,29 @@
     <section>
         <h2>Edit Product</h2>
 
-        <form method="post" action="/userAccount/editProduct/saveProduct">
-            <input type="hidden" name="productID" value="<%= product._id %>">
-            
+        <form method="post" action="/account/editProduct/saveProduct">
+            <input type="hidden" id="productID" name="productID" value="<%= product._id %>">
+
             <label for="name">Product Name:</label>
             <input type="text" id="name" name="name" value="<%= product.name %>" required>
 
             <label for="description">Product Description:</label>
-            <textarea id="description" name="description" required><%= product.description %></textarea>
+            <input type="text" id="description" name="description" value="<%= product.description %>" required>
 
+            <label for="price">Product price:</label>
+            <input type="text" id="price" name="price" value="<%= product.price %>" required>
+
+            <label for="courseName">Product courseName:</label>
+            <input type="text" id="courseName" name="courseName" value="<%= product.courseName %>" required>
+
+            <label for="listNumber">Product listNumber:</label>
+            <input type="text" id="listNumber" name="listNumber" value="<%= product.listNumber %>" required>
+
+            <label for="taskNumber">Product taskNumber:</label>
+            <input type="text" id="taskNumber" name="taskNumber" value="<%= product.taskNumber %>" required>
+
+            <label for="code">Product Code:</label>
+            <input type="text" id="code" name="code" value="<%= product.solutionCode %>" required>
 
             <button type="submit">Save Changes</button>
         </form>

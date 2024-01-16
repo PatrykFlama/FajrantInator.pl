@@ -47,11 +47,11 @@ router.post('/saveProduct', async (req, res) => {
     product.courseName = courseName;
     product.listNumber = parsedListNumber;
     product.taskNumber = parsedTaskNumber;
-    product.code = code;
+    product.solutionCode = code;
 
     await product.save();
 
-    res.redirect('/userAccount/addedProducts');
+    res.redirect('/account/addedProducts');
 });
 
 module.exports = router;

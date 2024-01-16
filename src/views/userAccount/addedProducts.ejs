@@ -1,8 +1,3 @@
-<!-- products: <%= products %> -->
-<!-- TODO:
-    * redirect to product editing page thru /account/editProduct POST with [productID]
-    //fix the problems with editing
--->
 <!-- views/userAccount/addedProducts.ejs -->
 
 <!DOCTYPE html>
@@ -34,7 +29,10 @@
                             <input type="hidden" name="productID" value="<%= product.id %>">
                             <button type="submit">Delete Product</button>
                         </form>
-                        <li><a href="/account/editProduct/<%= product.id %>">Edit Product</a></li>
+                        <form method="post" action="/account/editProduct">
+                            <input type="hidden" name="productID" value="<%= product.id %>">
+                            <button type="submit">Edit</button>
+                        </form>
                     </li>
                 <% }); %>
             </ul>
