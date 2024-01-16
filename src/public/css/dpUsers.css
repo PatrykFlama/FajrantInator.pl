@@ -1,0 +1,42 @@
+.container {
+    margin: 80px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+h1 {
+    font-size: 7vw;
+}
+
+.backButton {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+}
+
+  input[type=submit]{
+    border: none;
+}
+
+.button.primary:disabled {
+    background-color: #666769;
+    color: #011627;
+    cursor: not-allowed;
+    border: none;
+}
+
+.field {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    width: fit-content;
+    padding: 14px 0px;
+    border-radius: 40px;
+}
