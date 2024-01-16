@@ -53,7 +53,10 @@ router.get('/', async (req, res) => {
                 },
             });
         }
-        res.render('userAccount/userAccount');
+        res.render('userAccount/userAccount' , { user: req.session.account.type, 
+            check: req.session.account.check, 
+            seller: req.session.account.seller,
+        });
         return;
     } catch (error) {
         console.error('Error counting quiz elements:', error);
