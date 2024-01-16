@@ -40,7 +40,7 @@
                 ( typeof window.performance != "undefined" &&
                     window.performance.navigation.type === 2 );
             if ( historyTraversal ) {
-                alert("This page cannot be restored from the cache. Please use the navigation buttons provided.");
+                alert("This page cannot be restored from the cache.");
                 window.location.reload();
             }
         });
