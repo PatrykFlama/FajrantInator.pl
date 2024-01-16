@@ -11,7 +11,7 @@ router.use((req, res, next) => {
     else {
         next();
     }
-})
+});
 
 router.get('/', (req, res) => {
     res.render('admin/adminPanel', { messageUser: null, messageProduct: null });
@@ -72,6 +72,17 @@ router.post('/removeUser', async (req, res) => {
     } catch (error) {}
 
     res.redirect('/admin/displayUsers')
+});
+
+router.post('/toggleAccountType', async (req, res) => {
+    try {
+        const { id } = req.body;
+        const user = await Users.findById(id);
+        user.type = user.type === 'user' ? 'admin' : 'user';
+        await user.save();
+    } catch (error) {}
+
+    res.redirect('/admin/displayUsers');
 });
 
 module.exports = router;
