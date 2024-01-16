@@ -44,8 +44,13 @@
 <script>
     const urlParams = new URLSearchParams(window.location.search);
     const myParam = urlParams.get('redirect');
+    const redirect = !document.referrer ? encodeURIComponent(`/`) : encodeURIComponent(document.referrer);
     if(myParam === null){
-        window.location.href = `${window.location.href}?redirect=${encodeURIComponent(document.referrer)}`
+        if(urlParams.size === 0) {
+            window.location.href = `${window.location.href}?redirect=${redirect}`;
+        } else {
+            window.location.href = `${window.location.href}&redirect=${redirect}}`;
+        }
     }
 </script> 
     
