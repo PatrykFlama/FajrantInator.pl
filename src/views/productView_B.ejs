@@ -24,6 +24,7 @@
         </div>
     </div>
     <div class="container">
+        <a class="backButton" href="/listing"><span class="material-symbols-outlined">arrow_back_ios</span></a>
         <h1><%= productName %></h1>
         <div class="panel">
             <img class="productImage" src="/css/media/item.jpg">
@@ -59,10 +60,16 @@
 
                 <%# TODO %>
                 <% if (productSolutionFileName) { %>
-                    <p>Solution: <%= productSolutionFileName %></p>
+                    <div class="field plain">
+                        <h2>Plik z rozwiązaniem:</h2>
+                    <%= productSolutionFileName %>
+                    </div>
                 <% } %>
                 <% if (productSolutionCode) { %>
-                    <p>Solution: <%= productSolutionCode %></p>
+                    <div class="field plain">
+                        <h2>Rozwiązanie:</h2>
+                    <%= productSolutionCode %>
+                    </div>
                 <% } %>
                 <div class="field plain">
                     <h2>Opinie:</h2>
@@ -72,25 +79,38 @@
                         <h3>Brak</h3>
                     <% } %>
                 </div>
-                <%= yourRate %>
             </div>
 
-            <form id="ratingForm" method="post" action="/product/rateProduct">
-                <input type="hidden" name="productID" value="<%= id %>">
-                <h2>Wystaw ocenę:</h2>
-                <input id="hiddenRating" type="hidden" name="rating">
-                <span id="star-0" class="material-symbols-outlined star">star</span>
-                <span id="star-1" class="material-symbols-outlined star">star</span>
-                <span id="star-2" class="material-symbols-outlined star">star</span>
-                <span id="star-3" class="material-symbols-outlined star">star</span>
-                <span id="star-4" class="material-symbols-outlined star">star</span>
-
-
+            
+                <% if(yourRate !== -1){%>
+                    <h2>Twoja ocena:</h2>
+                    <div class="field stars">
+                        <% for(let i = 0 ; i < 5 ; i++){
+                            if((yourRate-1) - i == -0.5){
+                                %><span id="star-4" class="material-symbols-outlined star noclick">star_half</span><%
+                            } else if ((yourRate-1) < i){
+                                %><span id="star-4" class="material-symbols-outlined star noclick">star</span><%
+                            } else {
+                                %><span id="star-4" class="material-symbols-outlined star filled noclick">star</span><%
+                            }
+                        } %>
+                    </div>
+                <%} else {  %>
+                    <h2>Wystaw ocenę:</h2>
+                    <form id="ratingForm" method="post" action="/product/rateProduct">
+                        <input type="hidden" name="productID" value="<%= id %>">
+                    <input id="hiddenRating" type="hidden" name="rating">
+                    <span id="star-0" class="material-symbols-outlined star">star</span>
+                    <span id="star-1" class="material-symbols-outlined star">star</span>
+                    <span id="star-2" class="material-symbols-outlined star">star</span>
+                    <span id="star-3" class="material-symbols-outlined star">star</span>
+                    <span id="star-4" class="material-symbols-outlined star">star</span>
+                </form>
+                <%}%>
                 <!-- <button type="submit">Submit Rating</button> -->
-            </form>
+            
         </div>
-        <button onclick="history.back()">Back</button>
-        <button onclick="window.location.href = '/';">Go to Homepage</button>
+        <!-- <button onclick="window.location.href = '/';">Go to Homepage</button> -->
     </div>
     <script src="/scripts/ratingManager.js" type='text/javascript'></script>
 </body>
