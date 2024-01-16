@@ -28,12 +28,12 @@ router.post('/', async (req, res) => {
     // check if user exists in DB and if password matches
     const user = await Users.findOne({ username: username });
     if (!user) {
-        res.render('login', { error: 'User not found', redirectURL: redirectURL });
+        res.render('login', { error: 'Nie znaleziono użytkownika', redirectURL: redirectURL });
         return;
     }
 
     if (!comparePasswords(password, user.password)) {
-        res.render('login', { error: 'Incorrect password' , redirectURL: redirectURL });
+        res.render('login', { error: 'Błędne hasło' , redirectURL: redirectURL });
         return;
     }
 

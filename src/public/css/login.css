@@ -1,0 +1,58 @@
+.container {
+    margin: 80px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+}
+
+h1, h2, h3 {
+    margin: 0;
+}
+
+.loginForm{
+    background-color: #E2E1E0;
+    padding: 40px 80px;
+    border-radius: 20px;
+    margin: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    position: relativ
+}
+
+h1 {
+    font-size: 5vw;
+}
+
+input[type=submit]{
+    border: none;
+}
+
+input[type=text], input[type=password], input[type=email]{
+    border: none;
+    padding: 10px 30px;
+    font-family: 'Lato', sans-serif;
+    font-size: 20px;
+    border-radius: 20px;
+}
+
+.button.primary:disabled {
+    background-color: #666769;
+    color: #011627;
+    cursor: not-allowed;
+    border: none;
+}
+
+.register {
+    color: #666769;
+    text-decoration: underline;
+}
+
+.backButton {
+    position: absolute;
+    top: 0px;
+    left: 20px;
+  }
