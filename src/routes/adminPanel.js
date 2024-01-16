@@ -18,8 +18,9 @@ router.get('/', (req, res) => {
 });
 
 router.get('/displayUsers', async (req, res) => {
-    const users = await Users.find({ type: 'user' });
-    res.render('admin/displayUsers', { users });
+    const users = await Users.find();
+    const me = req.session.account.userID;
+    res.render('admin/displayUsers', { users, me });
 });
 
 router.post('/addProduct', async (req, res) => {

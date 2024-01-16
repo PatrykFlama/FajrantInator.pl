@@ -22,21 +22,31 @@
     <div class="container">
         <a class="backButton" href="/"><span class="material-symbols-outlined">arrow_back_ios</span></a>
     <h1>Users</h1>
-    <ul>
-        <% users.forEach(user => { %>
-            <li>
-                <h3><%= user.username %></h3>
-                <%= user.email %>
-                <%= user.type %>
-                <%= user.orders %>
-            </li>
+        <% users.forEach(user => { 
+            if(user.id === me) { return; }%>
+
+            <div class="field">
+                <div class="userDetails">
+                    <span class="material-symbols-outlined">person</span><h3><%= user.username %></h3>
+                    <span class="material-symbols-outlined">mail</span><%= user.email %>
+                    <span class="material-symbols-outlined">admin_panel_settings</span><%= user.type %>
+                <%# user.orders %>
+                </div>
+
             
-            <form action="/admin/removeUser" method="post">
-                <input type="hidden" name="id" value="<%= user._id %>">
-                <button type="submit">Remove</button>
-            </form>
+                <div class="userActionsForm">
+                    <form action="/admin/removeUser" method="post">
+                        <input type="hidden" name="id" value="<%= user._id %>">
+                        <button type="submit" class="button secondary">Usuń</button>
+                    </form>
+                    <form action="/admin/toggleAccountType" method="post">
+                        <input type="hidden" name="id" value="<%= user._id %>">
+                        <button type="submit" class="button secondary">Zmień uprawnienia</button>
+                    </form>
+                </div>
+        </div>
         <% }) %>
-    </ul>
+
 </div>
 </body>
 </html>
