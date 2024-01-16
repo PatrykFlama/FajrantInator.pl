@@ -1,5 +1,4 @@
 <!-- views/userAccount.ejs -->
-<!-- TODO: fix href -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +13,15 @@
 
     <nav>
         <ul>
-            <li><a href="account/addProduct">Add Product</a></li>
-            <li><a href="account/addedProducts">Added Products</a></li>
+            <% if( check === false && user !== 'admin'){ %>
+            <form method="get" action="account/quiz">
+                <button type="submit">Verify</button>
+            </form>
+            <% } %>
+            <% if(user === 'admin' || seller === true) { %>
+            <li><a href="/account/addProduct">Add Product</a></li>
+            <li><a href="/account/addedProducts">Added Products</a></li>
+            <% } %>
         </ul>
     </nav>
 </body>

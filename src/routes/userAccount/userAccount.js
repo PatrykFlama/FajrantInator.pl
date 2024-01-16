@@ -1,26 +1,17 @@
 const { Router } = require('express')
 const router = Router();
 
+
 router.use('/addProduct', require('./addProduct'));
 router.use('/addedProducts', require('./addedProducts'));
 router.use('/editProduct', require('./editProduct'));
 router.use('/quiz', require('./quiz'));
 
 router.get('/', (req, res) => {
-    let check = req.session.account.check;
-    let seller = req.session.account.seller;
-    
-    if(check === false){
-        res.redirect('/account/quiz');
-        return;
-    }
-    else if(check === true && seller === false){
-        res.render('userAccount/userAccount_D');
-        return;
-    }
-    else{
-        res.render('userAccount/userAccount');
-    }
+    res.render('userAccount/userAccount', { user: req.session.account.type, 
+        check: req.session.account.check, 
+        seller: req.session.account.seller,
+    });
 });
 
 module.exports = router;

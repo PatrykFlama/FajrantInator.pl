@@ -21,9 +21,15 @@ router.post('/submit-quiz', async (req, res) => {
             req.session.account.seller = true;
             user.seller = true;
             await user.save();
-            res.redirect('/account');
+            res.render('userAccount/userAccount' , { user: req.session.account.type, 
+                check: req.session.account.check, 
+                seller: req.session.account.seller,
+            });
         } else {
-            res.render('userAccount/userAccount_D');
+            res.render('userAccount/userAccount', { user: req.session.account.type, 
+                check: req.session.account.check, 
+                seller: req.session.account.seller,
+            });
         }
     } catch (error) {
         console.error('Error handling quiz submission:', error);
@@ -51,6 +57,7 @@ router.get('/', async (req, res) => {
                 },
             });
         }
+        res.render('userAccount/userAccount');
         return;
     } catch (error) {
         console.error('Error counting quiz elements:', error);
