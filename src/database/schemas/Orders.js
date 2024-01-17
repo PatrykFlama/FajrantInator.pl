@@ -4,22 +4,16 @@ const OrderSchema = new mongoose.Schema({
     cost: {
         type: Number,
         required: true,
-        min: 0,
-        max: 100000,
     },
     username: {
         type: String,
         required: true,
-        minlength: 3,
-        maxlength: 20,
-        default: 'defaultUsername',
+        default: 'guest',
     },
     email: {
         type: String,
         required: true,
-        minlength: 5,
-        maxlength: 50,
-        default: 'defaultEmail@example.com',
+        default: '',
     },
     accountType: {
         type: String,

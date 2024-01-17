@@ -4,14 +4,10 @@ const ProductSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
-        minlength: 3,      
-        maxlength: 60,
     },
     price: {
         type: Number,
         required: true,
-        min: 0,
-        max: 100000,
     },
     courseName: {
         type: String,
@@ -20,20 +16,14 @@ const ProductSchema = new mongoose.Schema({
     listNumber: {
         type: Number,
         required: true,
-        min: 1,
-        max: 100,
     },
     taskNumber: {
         type: Number,
         required: true,
-        min: 1,
-        max: 100,
     },
     description: {      //TODO whats that for?
         type: String,
         required: true,
-        minlength: 0,      
-        maxlength: 100,
     },
     solutionFileName: {
         type: String,
