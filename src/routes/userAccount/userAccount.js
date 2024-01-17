@@ -1,6 +1,14 @@
 const { Router } = require('express')
 const router = Router();
 
+router.use((req, res, next) => {
+    if (req.session.account.type === 'guest') {
+        res.redirect('/');
+    }
+    else {
+        next();
+    }
+});
 
 router.use('/addProduct', require('./addProduct'));
 router.use('/addedProducts', require('./addedProducts'));
