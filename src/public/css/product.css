@@ -61,6 +61,7 @@ h3 {
 }
 
 .material-symbols-outlined.star {
+    FONT-WEIGHT: 120;
     cursor: pointer;
     font-size: 80px !important;
     color: #ac9800 !important;
@@ -76,12 +77,13 @@ h3 {
 }
 
 .material-symbols-outlined.star.filled {
+    FONT-WEIGHT: 120;
     font-variation-settings:
     'FILL' 1,
     'wght' 150,
     'GRAD' 0,
     'opsz' 24
-  }
+}
 
   .field.stars{
     margin-top: 20px;
