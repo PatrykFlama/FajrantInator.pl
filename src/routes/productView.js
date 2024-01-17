@@ -108,7 +108,7 @@ router.post('/rateProduct', async (req,res)=>{
     }
 });
 
-rotuer.post('/deleteProduct', async (req,res)=>{
+router.post('/deleteProduct', async (req,res)=>{
     if(req.session.account.type !== 'admin'){
         res.status(403).send('Forbidden');
         return;
@@ -130,7 +130,7 @@ router.post('/deleteRating', async (req,res)=>{
         res.status(403).send('Forbidden');
         return;
     }
-    
+
     try {
         const { productID, userID } = req.body;
         const product = await Products.findOne({ _id: productID });
