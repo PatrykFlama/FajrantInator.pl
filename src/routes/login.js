@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.post('/', async (req, res) => {
     const { username, password} = req.body;
 
-    const redirectURL = req.query.redirect;
+    //const redirectURL = req.query.redirect;
     
 
     if (!username || !password) {
@@ -51,7 +51,8 @@ router.post('/', async (req, res) => {
 
     req.session.cart = await checkCart(req.session.cart);
     
-    res.redirect(redirectURL);
+    //res.redirect(redirectURL);
+    res.redirect('/');
 });
 
 

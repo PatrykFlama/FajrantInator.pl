@@ -67,7 +67,7 @@
                 </div>
             </div>
             
-            <% if(user !== 'admin'){%>
+            
             <form class="cartForm" id="addToCartForm" action="/product/addToCart" method="post">
                 <input type="hidden" name="id" value="<%= id %>">
                 <% if (cart.includes(id)) {%>
@@ -77,7 +77,7 @@
                 <% } %>
                 <a class="button secondary" href="/cart">Idź do koszyka</a>
             </form>
-            <% } %>
+            
             
 
             

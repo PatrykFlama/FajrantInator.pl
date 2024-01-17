@@ -80,8 +80,8 @@
                     <% } %>
                 </div>
             </div>
-
-            
+            <%# user %>
+            <% if(user.type !== 'admin'){%>
                 <% if(yourRate !== -1){%>
                     <h2>Twoja ocena:</h2>
                     <div class="field stars">
@@ -99,19 +99,22 @@
                     <h2>Wystaw ocenę:</h2>
                     <form id="ratingForm" method="post" action="/product/rateProduct">
                         <input type="hidden" name="productID" value="<%= id %>">
-                    <input id="hiddenRating" type="hidden" name="rating">
-                    <span id="star-0" class="material-symbols-outlined star">star</span>
-                    <span id="star-1" class="material-symbols-outlined star">star</span>
-                    <span id="star-2" class="material-symbols-outlined star">star</span>
-                    <span id="star-3" class="material-symbols-outlined star">star</span>
-                    <span id="star-4" class="material-symbols-outlined star">star</span>
-                </form>
+                        <input id="hiddenRating" type="hidden" name="rating">
+                        <span id="star-0" class="material-symbols-outlined star">star</span>
+                        <span id="star-1" class="material-symbols-outlined star">star</span>
+                        <span id="star-2" class="material-symbols-outlined star">star</span>
+                        <span id="star-3" class="material-symbols-outlined star">star</span>
+                        <span id="star-4" class="material-symbols-outlined star">star</span>
+                    </form>
                 <%}%>
-                <!-- <button type="submit">Submit Rating</button> -->
+            <% } else {%>
+                <form id="ratingForm" method="post" action="/product/deleteProduct">
+                    <input type="hidden" name="productID" value="<%= id %>">
+                    <input type="submit" class="button secondary" value="Usuń sprodukt"/>
+                </form>
+            <%}%>
             
         </div>
-        <!-- <button onclick="window.location.href = '/';">Go to Homepage</button> -->
-    </div>
     <script src="/scripts/ratingManager.js" type='text/javascript'></script>
 </body>
 </html>

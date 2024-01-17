@@ -25,7 +25,7 @@ router.get('/:productID', async (req, res) => {
             yourRate = ratingObject.rating;
         }
 
-        if (user.orders.includes(product.id)) {
+        if (user.orders.includes(product.id) || req.session.account.type === 'admin') {
             const productName = product.name;
             const productCourseName = product.courseName;
             const productTask = product.taskNumber;
@@ -117,7 +117,7 @@ router.post('/deleteProduct', async (req,res)=>{
     try {
         const { productID } = req.body;
         await Products.deleteOne({ _id: productID });
-        res.redirect('/products');
+        res.redirect('/listing');
     } 
     catch (error) {
         console.error(error);
