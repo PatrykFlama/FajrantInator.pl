@@ -52,6 +52,7 @@ router.get('/', async (req, res) => {
                     f_option: selected.answer[0].f,
                 },
             });
+            return;
         }
         res.render('userAccount/userAccount' , { user: req.session.account.type, 
             check: req.session.account.check, 
