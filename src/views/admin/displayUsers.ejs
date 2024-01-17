@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
     <title>Display Users</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="/css/defaults.css">
     <link rel="stylesheet" type="text/css" href="/css/dpUsers.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,6 +32,7 @@
                     <span class="material-symbols-outlined">person</span><h3><%= user.username %></h3>
                     <span class="material-symbols-outlined">mail</span><%= user.email %>
                     <span class="material-symbols-outlined">admin_panel_settings</span><%= user.type %>
+                    <span class="material-symbols-outlined">vpn_key</span><%= status[user.id] %>
                 <%# user.orders %>
                 </div>
 
@@ -37,12 +40,27 @@
                 <div class="userActionsForm">
                     <form action="/admin/removeUser" method="post">
                         <input type="hidden" name="id" value="<%= user._id %>">
-                        <button type="submit" class="button secondary">Usuń</button>
+                        <input type="submit" class="button secondary" value="Usuń">
                     </form>
                     <form action="/admin/toggleAccountType" method="post">
                         <input type="hidden" name="id" value="<%= user._id %>">
-                        <button type="submit" class="button secondary">Zmień uprawnienia</button>
+                        <input type="submit" class="button secondary" value="Zmień uprawnienia">
                     </form>
+                    <% if(status[user.id] === 'zweryfikowany'){ %>
+                    <form action="/admin/toggleVerification" method="post">
+                        <input type="hidden" name="id" value="<%= user._id %>">
+                        <input type="submit" class="button secondary" value="Cofnij weryfikację">
+                    </form>
+                    <% } else if (user.type === 'admin') { %>
+                        <input type="submit" class="button" value="Admin" disabled>
+                    <% } else { %>
+                        <form action="/admin/toggleVerification" method="post">
+                            <input type="hidden" name="id" value="<%= user._id %>">
+                            <input type="submit" class="button secondary" value="Nadaj weryfikację">
+                        </form>
+                    <% }%>
+
+                    
                 </div>
         </div>
         <% }) %>

@@ -24,8 +24,8 @@
         <form class="loginForm" action="" method="POST">
         <h1>Logowanie</h1>
             <input type="hidden" name="previousURL" id="previousURL">
-            <input type="text" name="username" placeholder="Nazwa użytkownika" required>
-            <input type="password" name="password" placeholder="Hasło" required>
+            <input type="text" name="username" placeholder="Nazwa użytkownika" tabindex="1" required>
+            <input type="password" name="password" placeholder="Hasło" tabindex="2" required>
             <% if(typeof redirectURL != 'undefined') { %>
                 <input type="hidden" name="redirectURL" value="<%= redirectURL %>">
             <% } else { %>
@@ -34,7 +34,7 @@
             <% if (error) { %>
                 <p style="color: red;"><%= error %></p>
             <% } %>
-            <input type="submit" class="button primary" value="Zaloguj się">
+            <input type="submit" class="button primary" value="Zaloguj się" tabindex="3">
         
         <div class="register">
             <a href="/login/register">Nie posiadasz konta? Zarejestruj się tutaj</a>

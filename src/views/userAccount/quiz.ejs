@@ -4,43 +4,60 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz</title>
+    <link rel="stylesheet" type="text/css" href="/css/defaults.css">
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <h1><%= radioParams.label %></h1>
-    <form action="/account/quiz/submit-quiz" method="post" onsubmit="return validateForm()"> 
-        <fieldset>
-            <legend><%= radioParams.name %></legend>
-            <% for (let i = 0; i < radioParams.f_option.length + 1; i++) { 
-                if (i === radioParams.nr - 1) { %>
-                <label>
-                    <input type="radio" name="Option" value="<%= radioParams.t_option %>">
-                    <input type="hidden" name="tOption" value="<%= radioParams.t_option %>">
-                    <%= radioParams.t_option %>
-                </label>
-                <% } else if (i < radioParams.nr - 1){ %>
+    <div class="header">
+        <a href="/"><div class="logo">FajrantInator.pl</div></a>
+        
+        <div class="cart-div">
+            
+        </div>
+    </div>
+    <div class="container">
+        <h1><%= radioParams.label %></h1>
+        <form action="/account/quiz/submit-quiz" method="post" onsubmit="return validateForm()"> 
+            <fieldset>
+                <legend align="center"><%= radioParams.name %></legend>
+                <% for (let i = 0; i < radioParams.f_option.length + 1; i++) { 
+                    if (i === radioParams.nr - 1) { %>
                     <label>
-                        <input type="radio" name="Option" value="<%= radioParams.f_option[i] %>">
-                        <%= radioParams.f_option[i] %>
+                        <input type="radio" name="Option" value="<%= radioParams.t_option %>">
+                        <input type="hidden" name="tOption" value="<%= radioParams.t_option %>">
+                        <%= radioParams.t_option %>
                     </label>
-                <% } else { %>
-                    <label>
-                        <input type="radio" name="Option" value="<%= radioParams.f_option[i-1] %>">
-                        <%= radioParams.f_option[i-1] %>
-                    </label>
+                    <% } else if (i < radioParams.nr - 1){ %>
+                        <label>
+                            <input type="radio" name="Option" value="<%= radioParams.f_option[i] %>">
+                            <%= radioParams.f_option[i] %>
+                        </label>
+                    <% } else { %>
+                        <label>
+                            <input type="radio" name="Option" value="<%= radioParams.f_option[i-1] %>">
+                            <%= radioParams.f_option[i-1] %>
+                        </label>
+                    <% } %>
+                    <br>
                 <% } %>
-                <br>
-            <% } %>
-        </fieldset>
-        <button id="btn" type="submit">Submit</button>
-    </form>
-    <script src="account/quiz" ></script>
+                <input class="button primary" id="btn" type="submit" value="Prześlij odpowiedź">
+            </fieldset>
+        </form>
+    </div>
+    <!-- <script src="account/quiz"></script>  ?? To było potrzebne?-->
     <script>
         window.addEventListener( "pageshow", function ( event ) {
             var historyTraversal = event.persisted ||
                 ( typeof window.performance != "undefined" &&
                     window.performance.navigation.type === 2 );
             if ( historyTraversal ) {
-                alert("This page cannot be restored from the cache.");
+                alert("Ty niegrzeczny oszuście!");
                 window.location.reload();
             }
         });
@@ -56,7 +73,7 @@
             }
             
             if (!selectedOption) {
-                alert("You haven't selected any option");
+                alert("Nie wybrano żadnej odpowiedzi.");
                 return false; 
             }
 

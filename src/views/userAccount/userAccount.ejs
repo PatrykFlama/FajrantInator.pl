@@ -1,28 +1,53 @@
 <!-- views/userAccount.ejs -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Account</title>
+    <link rel="stylesheet" type="text/css" href="/css/defaults.css">
+    <link rel="stylesheet" type="text/css" href="/css/account.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body>
-    <header>
-        <h1>Welcome to Your Account</h1>
-    </header>
+    <div class="header">
+        <a href="/"><div class="logo">FajrantInator.pl</div></a>
+        
+        <div class="cart-div">
+            
+        </div>
+    </div>
+    <div class="container">
+        <a class="backButton" href="/"><span class="material-symbols-outlined">arrow_back_ios</span></a>
+</head>
+<body>
+        <h1>Panel sprzedającego</h1>
+        <div class="field">
+            Status twojego konta:
+            <% if(user === 'admin'){ %>
+                <b>administrator</b>
+            <% } else if(check === false ) {%>
+                <i>niezweryfikowano</i>
+            <% } else if(seller === false) {%>
+                <span style="color: red;">weryfikacja nieudana</span>
+            <% } else {%>
+                <span style="color: green;">zweryfikowano jako sprzedający</span>
+            <% }%>
+        </div>
 
-    <nav>
-        <ul>
             <% if( check === false && user !== 'admin'){ %>
             <form method="get" action="account/quiz">
-                <button type="submit">Verify</button>
+                <input type="submit" class="button primary" value="Podejdź do weryfikacji">
             </form>
             <% } %>
             <% if(user === 'admin' || seller === true) { %>
-            <li><a href="/account/addProduct">Add Product</a></li>
-            <li><a href="/account/addedProducts">Added Products</a></li>
+            <a href="/account/addProduct"><div class="button secondary">Dodaj produkt</div></a>
+            <a href="/account/addedProducts"><div class="button secondary">Dodane produkty</div></a>
             <% } %>
-        </ul>
-    </nav>
 </body>
 </html>

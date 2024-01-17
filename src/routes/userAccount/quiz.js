@@ -46,7 +46,7 @@ router.get('/', async (req, res) => {
             res.render('userAccount/quiz', {
                 radioParams: {
                     name: selected.question,
-                    label: 'Are you smart enough to be a seller?',
+                    label: 'Czy jesteś wystarczająco mądry, aby zostać sprzedawcą?',
                     nr: truth_nr,
                     t_option: selected.answer[0].t,
                     f_option: selected.answer[0].f,

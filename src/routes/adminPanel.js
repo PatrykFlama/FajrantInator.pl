@@ -19,8 +19,20 @@ router.get('/', (req, res) => {
 
 router.get('/displayUsers', async (req, res) => {
     const users = await Users.find();
+    let status = {};
+    for(let user of users){
+        if(user.type === 'admin'){
+            status[user.id] = "admin"
+        } else if(user.check === false){
+            status[user.id] = "niezweryfikowany"
+        } else if(user.seller === false){
+            status[user.id] = "nieudana weryfikacja"
+        } else {
+            status[user.id] = "zweryfikowany"
+        }
+    }
     const me = req.session.account.userID;
-    res.render('admin/displayUsers', { users, me });
+    res.render('admin/displayUsers', { users, me, status });
 });
 
 router.post('/addProduct', async (req, res) => {
@@ -80,6 +92,26 @@ router.post('/toggleAccountType', async (req, res) => {
         const { id } = req.body;
         const user = await Users.findById(id);
         user.type = user.type === 'user' ? 'admin' : 'user';
+        await user.save();
+    } catch (error) {}
+
+    res.redirect('/admin/displayUsers');
+});
+
+router.post('/toggleVerification', async (req, res) => {
+    try {
+        const { id } = req.body;
+        const user = await Users.findById(id);
+        if(user.type === 'admin'){
+            res.redirect('/admin/displayUsers');
+            return;
+        }
+        if(user.seller === true){
+            user.seller = false;
+        } else {
+            user.seller = true;
+            user.check = true;
+        }
         await user.save();
     } catch (error) {}
 
