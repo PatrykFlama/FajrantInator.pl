@@ -75,8 +75,8 @@ allows to go to login website or to logout, if already logged in
 
 Listing site returns all available products with applied search and order filters.  
 * GET query parameters:  
-  * `taskList` [number] - display only tasks from given list
-  * `taskExercise` [number] - display only tasks from given exercise
+  * `listNumber` [number] - display only tasks from given list
+  * `taskNumber` [number] - display only tasks from given exercise
   * `courseName` [string] - display only tasks from given course
   * `orderPrice` [string] _('asc'/'desc')_ - order tasks by price
   * `searchString` [string] - search thru tasks description

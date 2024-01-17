@@ -4,21 +4,21 @@ const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users')
 
 router.get('/', async (req, res) => {
-    const { taskList, taskExercise, courseName, orderPrice, searchString, owned } = req.query;
+    const { listNumber, taskNumber, courseName, orderPrice, searchString, owned } = req.query;
     
-    const parsedTaskList = parseInt(taskList);
-    const parsedTaskExercise = parseInt(taskExercise);
+    const parsedListNumber = parseInt(listNumber);
+    const parsedTaskNumber = parseInt(taskNumber);
 
     let query = {};
 
     if (courseName) {
         query.courseName = courseName;
     }
-    if (!isNaN(parsedTaskList)) {
-        query.taskList = parsedTaskList;
+    if (!isNaN(parsedListNumber)) {
+        query.listNumber = parsedListNumber;
     }
-    if (!isNaN(parsedTaskExercise)) {
-        query.taskExercise = parsedTaskExercise;
+    if (!isNaN(parsedTaskNumber)) {
+        query.taskNumber = parsedTaskNumber;
     }
 
     let filteredProducts = await Products.find(query);
