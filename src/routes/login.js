@@ -56,6 +56,9 @@ router.post('/', async (req, res) => {
 
 
 router.get('/register', (req, res) => {
+    if (req.session.account.type !== 'guest') {
+        return res.redirect('/');
+    }
     res.render('register', {error: null});
 });
 
