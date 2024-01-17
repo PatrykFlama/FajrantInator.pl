@@ -4,6 +4,16 @@ const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users')
 
 router.get('/', async (req, res) => {
+    let products = await Products.find();
+    let courseNames = [];
+    let listNumbers = [];
+    let taskNumbers = [];
+    for(let product in products){
+        courseNames.push(product.courseName);
+        listNumbers.push(product.listNumber);
+        taskNumbers.push(product.taskNumber);
+    }
+
     const { listNumber, taskNumber, courseName, orderPrice, searchString, owned } = req.query;
     
     const parsedListNumber = parseInt(listNumber);

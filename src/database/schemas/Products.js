@@ -40,6 +40,11 @@ const ProductSchema = new mongoose.Schema({
           comment: { type: String, default: "" },
         },
     ],
+    author: {
+        type: String,
+        required: true,
+        default: "admin",
+    },
 });
 
 module.exports = mongoose.model('products', ProductSchema);

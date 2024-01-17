@@ -23,6 +23,7 @@ router.post('/', upload.single('file'), async (req, res) => {
             description: req.body.description,
             solutionFileName: filename,
             solutionCode: req.body.code,
+            author: req.session.account.username,
         });
         await product.save();
 
