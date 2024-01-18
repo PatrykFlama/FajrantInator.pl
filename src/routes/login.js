@@ -5,7 +5,7 @@ const { hashPassword, comparePasswords, checkCart } = require('../utils/helpers'
 
 router.get('/', (req, res) => {
     const accountType = req.session.account.type;
-    const redirectURL = req.query.redirect;
+    const redirectURL = req.body.redirect;
 
     if (accountType === 'guest') {
         if (redirectURL) {
@@ -19,11 +19,8 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { username, password} = req.body;
-
-    //const redirectURL = req.query.redirect;
+    const { username, password, redirectURL } = req.body;
     
-
     if (!username || !password) {
         return res.sendStatus(400);
     }
@@ -50,9 +47,7 @@ router.post('/', async (req, res) => {
     }
 
     req.session.cart = await checkCart(req.session.cart);
-    
-    //res.redirect(redirectURL);
-    res.redirect('/');
+    res.redirect(redirectURL);
 });
 
 

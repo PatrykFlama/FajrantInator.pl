@@ -21,16 +21,11 @@
     </div>
     <div class="container">
         <a class="backButton" href="/"><span class="material-symbols-outlined">arrow_back_ios</span></a>
-        <form class="loginForm" action="" method="POST">
+        <form class="loginForm" action="/login" method="POST">
         <h1>Logowanie</h1>
-            <input type="hidden" name="previousURL" id="previousURL">
+            <input type="hidden" name="redirectURL" id="redirectURL" value="<%= redirectURL %>">
             <input type="text" name="username" placeholder="Nazwa użytkownika" tabindex="1" required>
             <input type="password" name="password" placeholder="Hasło" tabindex="2" required>
-            <% if(typeof redirectURL != 'undefined') { %>
-                <input type="hidden" name="redirectURL" value="<%= redirectURL %>">
-            <% } else { %>
-                <input type="hidden" name="redirectURL" value="/">
-            <% } %>
             <% if (error) { %>
                 <p style="color: red;"><%= error %></p>
             <% } %>
@@ -39,20 +34,7 @@
         <div class="register">
             <a href="/login/register">Nie posiadasz konta? Zarejestruj się tutaj</a>
         </div>
-    </form>
+        </form>
     </div>
-<!-- <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const myParam = urlParams.get('redirect');
-    const redirect = !document.referrer ? encodeURIComponent(`/`) : encodeURIComponent(document.referrer);
-    if(myParam === null){
-        if(urlParams.size === 0) {
-            window.location.href = `${window.location.href}?redirect=${redirect}`;
-        } else {
-            window.location.href = `${window.location.href}&redirect=${redirect}}`;
-        }
-    }
-</script>  -->
-    
 </body>
 </html>
