@@ -85,7 +85,7 @@ router.post('/addToCart', (req,res)=>{
     }
 
     const productURL = `/product/${productID}`;
-    res.redirect(productURL);
+    res.redirect(req.get('Referrer'));
 });
 
 router.post('/rateProduct', async (req,res)=>{
