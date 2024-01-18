@@ -11,7 +11,7 @@ router.get('/', async (req, res) => {
         cart[i] = await Product.findById(req.session.cart[i]);
     }
     const total = await calculateProductsTotal(req.session.cart);
-    res.render('cart', {cart: cart, total: total });
+    res.render('cart', {cart: cart, total: total, accountType: req.session.account.type });
 });
 
 router.post('/addToCart', (req,res)=>{
