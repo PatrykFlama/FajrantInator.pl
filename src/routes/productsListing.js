@@ -59,6 +59,8 @@ router.get('/', async (req, res) => {
         filteredProducts = filteredProducts.filter(product => !user.addedProducts.includes(product._id));
         if(owned === 'true'){
             filteredProducts = filteredProducts.filter(product => user.orders.includes(product._id));
+        } else if(owned === 'false'){
+            filteredProducts = filteredProducts.filter(product => !user.orders.includes(product._id));
         }
     }
 
