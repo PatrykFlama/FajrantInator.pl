@@ -17,6 +17,12 @@ router.get('/', (req, res) => {
     res.render('admin/adminPanel', { messageUser: null, messageProduct: null });
 });
 
+router.get('/populateDatabase', async (req, res) => {
+    const { populateDatabase } = require('../database/populateDatabase');
+    await populateDatabase();
+    res.redirect('/');
+});
+
 router.get('/displayUsers', async (req, res) => {
     const users = await Users.find();
     let status = {};
