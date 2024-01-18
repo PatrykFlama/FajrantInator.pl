@@ -26,12 +26,12 @@
         <div class="products">
             <h1> <a href="/" class="a-center"><span class="material-symbols-outlined">arrow_back_ios</span></a> Produkty:</h1>
             <div class="filters" onclick="(ToggleFilters())"> 
-                Filtry <span class="material-symbols-outlined">arrow_drop_up</span>
+                Filtry <span class="material-symbols-outlined" id="filterArrow">arrow_drop_up</span>
             </div>
             <div class="filtersFields" style="display: none;"  id="filtersFields"> 
                 <form method="get" action="" class="filtersForm">
                     <label>
-                        Nazwa przdmiotu:
+                        Nazwa kursu:
                         <select name="courseName" id="courseName" onchange="this.form.submit()">
                             <option value="">Dowolne</option>
                         <% for(let name of courseNames){ %>
@@ -66,6 +66,15 @@
                         <option value="">Dowolne</option>
                         <option value="asc">Rosnąco</option>
                         <option value="desc">Malejąco</option>
+                    </select>
+                    </label>
+
+                    <label>
+                        Stan:
+                    <select name="owned" id="owned" onchange="this.form.submit()">
+                        <option value="">Dowolne</option>
+                        <option value="true">Posiadane</option>
+                        <option value="false">Jeszcze nie kupione</option>
                     </select>
                     </label>
 
