@@ -23,10 +23,30 @@
         </div>
     </div>
     <div class="container">
-        
+        <% for(let )
 
         <div class="products">
             <h1> <a href="/" class="a-center"><span class="material-symbols-outlined">arrow_back_ios</span></a> Produkty:</h1>
+            <div class="filters"> 
+                Filtry <span class="material-symbols-outlined">arrow_drop_down</span>
+            </div>
+            <div class="filtersFields"> 
+                <form method="get" action="">
+                    <labe>
+                        Nazwa przdmiotu:
+                    <input name="courseName">
+                    </label>
+                    <labe>
+                        Numer listy:
+                    <input type="number" name="taskList" >
+                    </label>
+                    <labe>
+                        Numer zadania:
+                    <input type="number" name="taskExercise" >
+                    </label>
+                    <input type="submit">
+                </form>
+            </div>
         <% products.forEach(function(item) { %>
                 <% if (user.type === 'admin' || (user !== 'guest' &&(user.orders.includes(item.id)))) { %>
                     <%- include('includes/product-item_B', { product: item }) %>
@@ -36,5 +56,6 @@
         <% }) %>
         </div>
     </div>
+    <script src="/scripts/filterManager.js"></script>
 </body>
 </html>

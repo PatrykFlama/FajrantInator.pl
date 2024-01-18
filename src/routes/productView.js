@@ -30,6 +30,7 @@ router.get('/:productID', async (req, res) => {
             const productCourseName = product.courseName;
             const productTask = product.taskNumber;
             const productExercise = product.listNumber;
+            const productAuthor = product.author;
 
             res.render('productView_B', { 
                 id:product.id, 
@@ -37,6 +38,7 @@ router.get('/:productID', async (req, res) => {
                 productCourseName, 
                 productTask, 
                 productExercise, 
+                productAuthor,
                 productPrice: product.price, 
                 productDescription: product.description,
                 productSolutionFileName: product.solutionFileName, 
@@ -87,6 +89,7 @@ router.post('/addToCart', (req,res)=>{
 });
 
 router.post('/rateProduct', async (req,res)=>{
+    console.log('got here') // WITHOUT THIS LINE CODE DOESNT WORK IDK WHY THE HELLss
     try {
         const { productID, rating } = req.body;
         const user = await Users.findOne({ username: req.session.account.username });

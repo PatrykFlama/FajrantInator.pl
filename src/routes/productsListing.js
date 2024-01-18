@@ -57,7 +57,7 @@ router.get('/', async (req, res) => {
 
     let cart = req.session.cart;
 
-    res.render('productsListing', { products: filteredProducts, user: user, cart: cart });
+    res.render('productsListing', { products: filteredProducts, user: user, cart: cart, courseNames, taskNumbers, listNumbers });
 });
 
 router.get('/product/:id', (req, res) => {

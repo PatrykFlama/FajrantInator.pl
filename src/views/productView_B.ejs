@@ -37,6 +37,13 @@
                     </div>
                 <% } %>
 
+                <% if (user.type === 'admin') { %>
+                    <div class="field">
+                    <h2>Autor:</h2>
+                    <h3><%= productAuthor %></h3>
+                    </div>
+                <% } %>
+
                 <% if (productCourseName) { %>
                     <div class="field">
                     <h2>Przedmiot:</h2>
@@ -110,7 +117,7 @@
             <% } else {%>
                 <form id="ratingForm" method="post" action="/product/deleteProduct">
                     <input type="hidden" name="productID" value="<%= id %>">
-                    <input type="submit" class="button secondary" value="Usuń sprodukt"/>
+                    <input type="submit" class="button secondary" value="Usuń produkt"/>
                 </form>
             <%}%>
             
