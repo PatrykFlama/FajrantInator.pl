@@ -1,5 +1,5 @@
 const searchParams = new URLSearchParams(window.location.search);
-let filtersShowed = true;
+let filtersShowed = false;
 
 if(courseName = searchParams.get(`courseName`)){
     document.getElementById(`courseName`).value = courseName;
