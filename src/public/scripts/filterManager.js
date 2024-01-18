@@ -30,6 +30,11 @@ function ToggleFilters(){
     document.getElementById(`filtersFields`).style.display = filtersShowed ? `flex` : `none`;
 }
 
+if(searchParams.size > 1){
+    filtersShowed = true;
+}
+
+
 if(filtersShowed) {
     document.getElementById(`filtersFields`).style.display = `flex`;
 }
