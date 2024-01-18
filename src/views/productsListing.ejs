@@ -23,8 +23,6 @@
         </div>
     </div>
     <div class="container">
-        <% for(let )
-
         <div class="products">
             <h1> <a href="/" class="a-center"><span class="material-symbols-outlined">arrow_back_ios</span></a> Produkty:</h1>
             <div class="filters"> 
@@ -32,19 +30,51 @@
             </div>
             <div class="filtersFields"> 
                 <form method="get" action="">
-                    <labe>
+                    <label>
                         Nazwa przdmiotu:
-                    <input name="courseName">
+                        <select name="courseName" id="courseName" onchange="this.form.submit()">
+                            <option value="">Dowolne</option>
+                        <% for(let name of courseNames){ %>
+                            <option value="<%=name%>"><%=name%></option>
+                        <% } %>
+                        </select>
                     </label>
-                    <labe>
+
+                    <label>
                         Numer listy:
-                    <input type="number" name="taskList" >
+                    <select name="listNumber" id="listNumber" onchange="this.form.submit()">
+                        <option value="">Dowolne</option>
+                    <% for(let number of listNumbers){ %>
+                        <option value="<%=number%>"><%=number%></option>
+                    <% } %>
+                    </select>
                     </label>
-                    <labe>
+
+                    <label>
                         Numer zadania:
-                    <input type="number" name="taskExercise" >
+                    <select name="taskNumber" id="taskNumber" onchange="this.form.submit()">
+                        <option value="">Dowolne</option>
+                    <% for(let number of taskNumbers){ %>
+                        <option value="<%=number%>"><%=number%></option>
+                    <% } %>
+                    </select>
+                    </label>
+
+                    <label>
+                        Sortuj po cenie:
+                    <select name="orderPrice" id="orderPrice" onchange="this.form.submit()">
+                        <option value="">Dowolne</option>
+                        <option value="asc">Rosnąco</option>
+                        <option value="desc">Malejąco</option>
+                    </select>
+                    </label>
+
+                    <label>
+                        Opis zawiera:
+                        <input name="searchString" id="searchString">
                     </label>
                     <input type="submit">
+                    <input type="button" value="Reset" onclick="resetFilters()">
                 </form>
             </div>
         <% products.forEach(function(item) { %>

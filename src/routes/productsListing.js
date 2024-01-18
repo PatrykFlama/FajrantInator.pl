@@ -5,13 +5,14 @@ const Users = require('../database/schemas/Users')
 
 router.get('/', async (req, res) => {
     let products = await Products.find();
-    let courseNames = [];
-    let listNumbers = [];
-    let taskNumbers = [];
-    for(let product in products){
-        courseNames.push(product.courseName);
-        listNumbers.push(product.listNumber);
-        taskNumbers.push(product.taskNumber);
+    let courseNames = new Set();
+    let listNumbers = new Set();
+    let taskNumbers = new Set();
+    for(let product of products){
+        // console.log(product)
+        courseNames.add(product.courseName);
+        listNumbers.add(product.listNumber);
+        taskNumbers.add(product.taskNumber);
     }
 
     const { listNumber, taskNumber, courseName, orderPrice, searchString, owned } = req.query;
@@ -33,8 +34,14 @@ router.get('/', async (req, res) => {
 
     let filteredProducts = await Products.find(query);
 
+    // if (searchString) {
+    //     filteredProducts = filteredProducts.filter(product => product.description.includes(searchString));
+    // }
+
+    // TEST OF REGEX SEARCHING (ignore letter case)
     if (searchString) {
-        filteredProducts = filteredProducts.filter(product => product.description.includes(searchString));
+        const regex = new RegExp(searchString, "i");
+        filteredProducts = filteredProducts.filter(product => regex.test(product.description));
     }
 
     if (orderPrice === 'asc') {
@@ -56,7 +63,6 @@ router.get('/', async (req, res) => {
     }
 
     let cart = req.session.cart;
-
     res.render('productsListing', { products: filteredProducts, user: user, cart: cart, courseNames, taskNumbers, listNumbers });
 });
 
