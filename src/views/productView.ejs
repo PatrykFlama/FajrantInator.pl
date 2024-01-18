@@ -24,7 +24,7 @@
         </div>
     </div>
     <div class="container">
-        <a class="backButton" href="/listing"><span class="material-symbols-outlined">arrow_back_ios</span></a>
+        <a class="backButton" onclick="window.location.href= '/listing?' + window.location.href.split('?')[1] "><span class="material-symbols-outlined">arrow_back_ios</span></a>
         <h1><%= productName %></h1>
         <div class="panel">
             <img class="productImage" src="/css/media/item.jpg">

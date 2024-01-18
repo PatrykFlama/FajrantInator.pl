@@ -1,4 +1,5 @@
 const searchParams = new URLSearchParams(window.location.search);
+let filtersShowed = false;
 
 if(courseName = searchParams.get(`courseName`)){
     document.getElementById(`courseName`).value = courseName;
@@ -20,7 +21,20 @@ if(searchString = searchParams.get(`searchString`)){
     document.getElementById(`searchString`).value = searchString;
 }
 
-
 function resetFilters() {
     window.location = window.location.href.split("?")[0];
+}
+
+function ToggleFilters(){
+    filtersShowed = !filtersShowed;
+    document.getElementById(`filtersFields`).style.display = filtersShowed ? `flex` : `none`;
+}
+
+if(searchParams.size > 1){
+    filtersShowed = true;
+}
+
+
+if(filtersShowed) {
+    document.getElementById(`filtersFields`).style.display = `flex`;
 }

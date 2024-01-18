@@ -25,11 +25,11 @@
     <div class="container">
         <div class="products">
             <h1> <a href="/" class="a-center"><span class="material-symbols-outlined">arrow_back_ios</span></a> Produkty:</h1>
-            <div class="filters"> 
-                Filtry <span class="material-symbols-outlined">arrow_drop_down</span>
+            <div class="filters" onclick="(ToggleFilters())"> 
+                Filtry <span class="material-symbols-outlined">arrow_drop_up</span>
             </div>
-            <div class="filtersFields"> 
-                <form method="get" action="">
+            <div class="filtersFields" style="display: none;"  id="filtersFields"> 
+                <form method="get" action="" class="filtersForm">
                     <label>
                         Nazwa przdmiotu:
                         <select name="courseName" id="courseName" onchange="this.form.submit()">
@@ -71,10 +71,12 @@
 
                     <label>
                         Opis zawiera:
-                        <input name="searchString" id="searchString">
+                        <input name="searchString" id="searchString" type="text">
                     </label>
-                    <input type="submit">
-                    <input type="button" value="Reset" onclick="resetFilters()">
+                    <div class="filtersActions">
+                        <input type="submit" class="button primary" value="Szukaj">
+                        <input type="button" value="Reset" onclick="resetFilters()" class="button secondary">
+                    </div>
                 </form>
             </div>
         <% products.forEach(function(item) { %>

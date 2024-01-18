@@ -27,7 +27,7 @@ router.post('/addToCart', (req,res)=>{
         req.session.cart = [productID];
     }
 
-    res.redirect('/listing');
+    res.redirect(req.get('Referrer'));
 })
 
 router.post('/removeProduct', (req,res)=>{
