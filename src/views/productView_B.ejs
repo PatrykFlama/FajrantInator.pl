@@ -90,7 +90,6 @@
                         <h3>Brak</h3>
                     <% } %>
                 </div>
-            </div>
             <% if(user.type !== 'admin'){%>
                 <% if(yourRate !== -1){%>
                     <h2>Twoja ocena:</h2>
@@ -120,7 +119,7 @@
             <% } else {%>
                 <form id="ratingForm" method="post" action="/product/deleteProduct">
                     <input type="hidden" name="productID" value="<%= id %>">
-                    <input type="submit" class="button secondary" value="Usuń produkt"/>
+                    <input type="submit" class="button secondary" style="background-color: red; color: black;" value="Usuń produkt"/>
                 </form>
             <%}%>
             

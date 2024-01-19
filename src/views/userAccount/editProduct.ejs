@@ -65,7 +65,7 @@
             
             <label for="description">
                 Opis:
-                <input type="text" id="description" name="description" value="<%= product.description %>" required>
+                <textarea id="description" name="description"> <%= product.description %> </textarea>
             </label>
 
             <label>
@@ -76,7 +76,7 @@
 
             <label for="code">
                 Product Code:
-                <input type="text" id="code" name="code" value="<%= product.solutionCode %>" required>
+                <textarea id="code" name="code"> <%= product.solutionCode %> </textarea>
             </label>
 
             <input type="submit" class="button primary" value="Zapisz zmiany">
