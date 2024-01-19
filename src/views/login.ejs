@@ -26,7 +26,7 @@
             <input type="hidden" name="redirectURL" id="redirectURL" value="<%= redirectURL %>">
             <input type="text" name="username" placeholder="Nazwa użytkownika" tabindex="1" required>
             <input type="password" name="password" placeholder="Hasło" tabindex="2" required>
-            <% if (error) { %>
+            <% if(locals.error && error) { %>
                 <p style="color: red;"><%= error %></p>
             <% } %>
             <input type="submit" class="button primary" value="Zaloguj się" tabindex="3">

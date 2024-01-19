@@ -27,8 +27,8 @@
         <a class="backButton" onclick="window.location.href= '/listing?' + window.location.href.split('?')[1] "><span class="material-symbols-outlined">arrow_back_ios</span></a>
         <h1><%= productName %></h1>
         <div class="panel">
-            <% if (locals.imageFileName) { %>
-                <img class="productImage" src="<%= imageFileName == "" ? "/css/media/item.jpg" : "/images/" + imageFileName %>">
+            <% if (locals.thumbnailFileName) { %>
+                <img class="productImage" src="<%= thumbnailFileName == "" ? "/css/media/item.jpg" : "/images/" + thumbnailFileName %>">
             <% } %>
             <div class="productFields">
 
@@ -67,11 +67,13 @@
                     </div>
                 <% } %>
 
-                <%# TODO %>
                 <% if (productSolutionFileName) { %>
                     <div class="field plain">
                         <h2>Plik z rozwiązaniem:</h2>
-                    <%= productSolutionFileName %>
+                        <form action="/product/downloadSolution" method="post">
+                            <input type="hidden" name="productID" value="<%= id %>">
+                            <button type="submit" class="button secondary">Pobierz</button>
+                        </form>
                     </div>
                 <% } %>
                 <% if (productSolutionCode) { %>

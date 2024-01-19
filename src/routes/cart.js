@@ -27,6 +27,9 @@ router.post('/addToCart', (req,res)=>{
         req.session.cart = [productID];
     }
 
+    const { checkCart } = require('../utils/helpers');
+    req.session.cart = checkCart(req.session.cart);
+
     res.redirect(req.get('Referrer'));
 })
 

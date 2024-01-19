@@ -2,7 +2,7 @@ const { Router } = require('express');
 const router = Router();
 const Products = require('../../database/schemas/Products');
 const Users = require('../../database/schemas/Users');
-const { images_upload } = require('../../utils/multer');
+const { upload } = require('../../utils/multer');
 
 router.get('/', (req, res) => {
     res.render('userAccount/addProduct', { error: null, success: null, accountType: req.session.account.type });
@@ -10,19 +10,21 @@ router.get('/', (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-        // Save the product fields and uploaded file path to the database
-        images_upload.single('file')(req, res, async (err) => {
+        upload(req, res, async (err) => {
             if (err) {
-                if (err == 'Error: Only images are allowed'){
+                if (err == 'Error: Only images are allowed') {
                     res.render('userAccount/addProduct', { error: "Only images are allowed (.jpg .jpeg .png .gif)", success: null, accountType: req.session.account.type });
+                } else if (err == 'Error: Only files are allowed') {
+                    res.render('userAccount/addProduct', { error: "Only files are allowed", success: null, accountType: req.session.account.type });
                 } else {
                     console.error(err);
                     res.render('userAccount/addProduct', { error: "Internal server error", success: null, accountType: req.session.account.type });
                 }
                 return;
             }
-            
-            const image_filename = (req.file) ? req.file.filename : "";
+
+            const thumbnailFileName = req.files.thumbnailFile ? req.files.thumbnailFile[0].filename : "";
+            const solutionFileName = req.files.solutionFile ? req.files.solutionFile[0].filename : "";
             const product = new Products({  
                 name: req.body.name, 
                 description: req.body.description,
@@ -31,7 +33,8 @@ router.post('/', async (req, res) => {
                 listNumber: req.body.listNumber,
                 taskNumber: req.body.taskNumber,
                 description: req.body.description,
-                imageFileName: image_filename,
+                thumbnailFileName,
+                solutionFileName,
                 solutionCode: req.body.solutionCode,
                 author: req.session.account.username,
             });

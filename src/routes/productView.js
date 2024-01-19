@@ -71,6 +71,8 @@ router.get('/:productID', async (req, res) => {
         imageFileName: product.imageFileName
     });
 
+
+
 router.post('/addToCart', (req,res)=>{
     const productID = req.body.id;
     
@@ -146,6 +148,44 @@ router.post('/deleteRating', async (req,res)=>{
     }
 });
 
+});
+
+router.post('/downloadSolution', async (req, res)=>{
+    try {
+        const productID = req.body.productID;
+
+        if(!productID || req.session.account.type === 'guest'){
+            res.sendStatus(403);
+            return;
+        }
+
+        res.set({
+            'Location': `/product/${productID}`,
+        });
+    
+        const user = await Users.findOne({ username: req.session.account.username });
+        
+        if(!user.orders.includes(productID)){
+            res.sendStatus(403);
+            return;
+        }
+
+        const product = await Products.findOne({ _id: productID });
+        const fileName = product.solutionFileName;
+        let fixedFileName = "";
+
+        let i=0;
+        while(fileName[i] !== '-' && i<fileName.length) i++;
+        i++;
+        for(; i<fileName.length-4; i++){
+            fixedFileName += fileName[i];
+        }
+
+        res.download(`src/database/uploads/files/${fileName}`, fixedFileName);
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500);
+    }
 });
 
 module.exports = router;

@@ -9,9 +9,9 @@ router.get('/', (req, res) => {
 
     if (accountType === 'guest') {
         if (redirectURL) {
-            res.render('login', { error: null, redirectURL });
+            res.render('login', { redirectURL });
         } else {
-            res.render('login', { error: null, redirectURL: '/' });
+            res.render('login', { redirectURL: '/' });
         }
     } else {
         res.redirect('/');

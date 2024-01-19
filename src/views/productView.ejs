@@ -27,7 +27,9 @@
         <a class="backButton" onclick="window.location.href= '/listing?' + window.location.href.split('?')[1] "><span class="material-symbols-outlined">arrow_back_ios</span></a>
         <h1><%= productName %></h1>
         <div class="panel">
-            <img class="productImage" src="<%= imageFileName == "" ? "/css/media/item.jpg" : "/images/" + imageFileName %>">
+            <% if (locals.thumbnailFileName) { %>
+                <img class="productImage" src="<%= thumbnailFileName == "" ? "/css/media/item.jpg" : "/images/" + thumbnailFileName %>">
+            <% } %>
 
             <div class="productFields">
 

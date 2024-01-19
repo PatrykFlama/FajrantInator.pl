@@ -21,13 +21,17 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: true,
     },
-    description: {      //TODO whats that for?
+    description: {
         type: String,
         required: true,
     },
-    imageFileName: {
+    thumbnailFileName: {
         type: String,
         default: "",
+    },
+    solutionFileName: {
+        type: String,
+        default: ""
     },
     solutionCode: {
         type: String,

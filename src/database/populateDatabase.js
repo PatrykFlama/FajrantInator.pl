@@ -20,7 +20,6 @@ async function populateDatabase() {
             listNumber: 1,
             taskNumber: 1,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: '#include <iostream>\n\nint main() {\n\tstd::cout << "Hello World!";\n\treturn 0;\n}',
             ratings: [],
         },
@@ -31,7 +30,6 @@ async function populateDatabase() {
             listNumber: 2,
             taskNumber: 1,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: 'print("Hello World!")',
             ratings: [],
         },
@@ -42,7 +40,6 @@ async function populateDatabase() {
             listNumber: 1,
             taskNumber: 2,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: 'class Main {\n\tpublic static void main(String[] args) {\n\t\tSystem.out.println("Hello World!");\n\t}\n}',
             ratings: [],
         },
@@ -53,7 +50,6 @@ async function populateDatabase() {
             listNumber: 1,
             taskNumber: 2,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: '#include <iostream>\n\nint main() {\n\tstd::cout << "Hello World 2!";\n\treturn 0;\n}',
             ratings: [],
         },
@@ -64,7 +60,6 @@ async function populateDatabase() {
             listNumber: 1,
             taskNumber: 1,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: 'console.log("Hello World!")',
             ratings: [],
         },
@@ -75,7 +70,6 @@ async function populateDatabase() {
             listNumber: 1,
             taskNumber: 2,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: 'console.log("Hello World 2!")',
         },
         {
@@ -85,7 +79,6 @@ async function populateDatabase() {
             listNumber: 1,
             taskNumber: 3,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: 'console.log("Hello World 3!")',
         },
         {
@@ -95,7 +88,6 @@ async function populateDatabase() {
             listNumber: 2,
             taskNumber: 1,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: 'console.log("Hello next list (2) task 1!")',
         },
         {
@@ -105,7 +97,6 @@ async function populateDatabase() {
             listNumber: 2,
             taskNumber: 2,
             description: 'What goes here?',
-            imageFileName: '',
             soulutionCode: 'console.log("Hello next list (2) task 2!")',
         }
     ]);
