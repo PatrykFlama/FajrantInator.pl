@@ -41,11 +41,11 @@ router.post('/', async (req, res) => {
             user.addedProducts.push(product._id);
             await user.save();
             
-            res.render('userAccount/addProduct', { error: null, success: "Product added successfully", accountType: req.session.account.type });
+            res.render('userAccount/addProduct', { error: null, success: "<div style=\"color: green;\">Pomyślnie dodano produkt</div>", accountType: req.session.account.type });
         });
     } catch (error) {
         console.error(error);
-        res.render('userAccount/addProduct', { error: "Internal server error", success: null, accountType: req.session.account.type });
+        res.render('userAccount/addProduct', { error: "<div style=\"color: red;\">Wewnętrzny błąd serwera</div>", success: null, accountType: req.session.account.type });
     }
 });
 

@@ -9,48 +9,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product</title>
+    <link rel="stylesheet" type="text/css" href="/css/productManagenent.css">
+    <link rel="stylesheet" type="text/css" href="/css/defaults.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
-    <header>
-        <h1>Edit Product</h1>
-    </header>
-
-    <nav>
-        <ul>
-            <li><a href="/account">User Account</a></li>
-            <li><a href="/account/addedProducts">Added Products</a></li>
-        </ul>
-    </nav>
-
-    <section>
-        <h2>Edit Product</h2>
-
-        <form method="post" action="/account/editProduct/saveProduct">
+    <div class="header">
+        <a href="/"><div class="logo">FajrantInator.pl</div></a>
+        
+        <div class="cart-div">
+            <a href="<%= (accountType === 'guest') ? '/login' : '/logout' %> "><div class="button primary"><%= (accountType === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
+        </div>
+    </div>
+    <div class="container">
+        <h1> <a href="/account/addedProducts" class="a-center"><span class="material-symbols-outlined">arrow_back_ios</span></a> Edytuj produkt (<%= product.name %>):</h1>
+    
+        <form method="post" action="/account/editProduct/saveProduct" class="inputsForm">
             <input type="hidden" id="productID" name="productID" value="<%= product._id %>">
 
-            <label for="name">Product Name:</label>
-            <input type="text" id="name" name="name" value="<%= product.name %>" required>
+            <label for="name">
+                Nazwa pdoruktu:
+                <input type="text" id="name" name="name" value="<%= product.name %>" required>
+            </label>
 
-            <label for="description">Product Description:</label>
-            <input type="text" id="description" name="description" value="<%= product.description %>" required>
+            <label>
+                Miniaturka (max 5MB): 
+                <input type="file" name="file">
+                <u>Uwaga! Przesłany plik nadpisuje ten wysłany wcześniej!</u>
+            </label>
 
-            <label for="price">Product price:</label>
-            <input type="text" id="price" name="price" value="<%= product.price %>" required>
+            <label for="courseName">
+                Nazwa przedmiotu:
+                <input type="text" id="courseName" name="courseName" value="<%= product.courseName %>" required>
+            </label>
 
-            <label for="courseName">Product courseName:</label>
-            <input type="text" id="courseName" name="courseName" value="<%= product.courseName %>" required>
+            <label for="listNumber">
+                Numer listy:
+                <input type="text" id="listNumber" name="listNumber" value="<%= product.listNumber %>" required>
+            </label>
 
-            <label for="listNumber">Product listNumber:</label>
-            <input type="text" id="listNumber" name="listNumber" value="<%= product.listNumber %>" required>
+            <label for="taskNumber">
+                Numer zadania:
+                <input type="text" id="taskNumber" name="taskNumber" value="<%= product.taskNumber %>" required>
+            </label>
 
-            <label for="taskNumber">Product taskNumber:</label>
-            <input type="text" id="taskNumber" name="taskNumber" value="<%= product.taskNumber %>" required>
+            <label for="price">
+                Cena:
+                <input type="text" id="price" name="price" value="<%= product.price %>" required>
+            </label>
 
-            <label for="code">Product Code:</label>
-            <input type="text" id="code" name="code" value="<%= product.solutionCode %>" required>
+            
+            <label for="description">
+                Opis:
+                <input type="text" id="description" name="description" value="<%= product.description %>" required>
+            </label>
 
-            <button type="submit">Save Changes</button>
+            <label>
+                Plik z rozwiązaniem (max 5MB):
+                <input type="file" name="file">
+                <u>Uwaga! Przesłany plik nadpisuje ten wysłany wcześniej!</u>
+            </label>
+
+            <label for="code">
+                Product Code:
+                <input type="text" id="code" name="code" value="<%= product.solutionCode %>" required>
+            </label>
+
+            <input type="submit" class="button primary" value="Zapisz zmiany">
         </form>
     </section>
 
