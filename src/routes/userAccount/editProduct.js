@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         return res.sendStatus(400);
     }
 
-    res.render('userAccount/editProduct', { product: product });
+    res.render('userAccount/editProduct', { product: product, accountType: req.session.account.type });
 });
 
 router.post('/saveProduct', async (req, res) => {

@@ -5,7 +5,7 @@ const Users = require('../../database/schemas/Users');
 const { images_upload } = require('../../utils/multer');
 
 router.get('/', (req, res) => {
-    res.render('userAccount/addProduct', { error: null, success: null });
+    res.render('userAccount/addProduct', { error: null, success: null, accountType: req.session.account.type });
 });
 
 router.post('/', async (req, res) => {
@@ -14,10 +14,10 @@ router.post('/', async (req, res) => {
         images_upload.single('file')(req, res, async (err) => {
             if (err) {
                 if (err == 'Error: Only images are allowed'){
-                    res.render('userAccount/addProduct', { error: "Only images are allowed (.jpg .jpeg .png .gif)", success: null });
+                    res.render('userAccount/addProduct', { error: "Only images are allowed (.jpg .jpeg .png .gif)", success: null, accountType: req.session.account.type });
                 } else {
                     console.error(err);
-                    res.render('userAccount/addProduct', { error: "Internal server error", success: null });
+                    res.render('userAccount/addProduct', { error: "Internal server error", success: null, accountType: req.session.account.type });
                 }
                 return;
             }
@@ -41,11 +41,11 @@ router.post('/', async (req, res) => {
             user.addedProducts.push(product._id);
             await user.save();
             
-            res.render('userAccount/addProduct', { error: null, success: "Product added successfully" });
+            res.render('userAccount/addProduct', { error: null, success: "Product added successfully", accountType: req.session.account.type });
         });
     } catch (error) {
         console.error(error);
-        res.render('userAccount/addProduct', { error: "Internal server error", success: null });
+        res.render('userAccount/addProduct', { error: "Internal server error", success: null, accountType: req.session.account.type });
     }
 });
 

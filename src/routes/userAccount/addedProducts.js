@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     const productIDs = user.addedProducts;
     const products = await Products.find({ _id: { $in: productIDs } });
 
-    res.render('userAccount/addedProducts', { products: products });
+    res.render('userAccount/addedProducts', { products: products, accountType: req.session.account.type });
 });
 
 router.post('/deleteProduct', async (req, res) => {
