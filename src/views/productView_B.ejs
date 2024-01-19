@@ -77,7 +77,7 @@
                 <% } %>
 
                 <% if (productSolutionFileName) { %>
-                    <form action="/product/downloadSolution" method="post"></form>
+                    <form action="/product/downloadSolution" method="post">
                         <input type="hidden" name="productID" value="<%= id %>">
                         <label>
                             <div class="field" style="background-color: green; cursor: pointer;">
