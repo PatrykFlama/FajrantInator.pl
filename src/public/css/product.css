@@ -43,7 +43,7 @@ h3 {
 .field {
     display: flex;
     gap: 15px;
-    align-items: center;
+    align-items: start;
     width: fit-content;
     padding: 14px 0px;
     border-radius: 40px;
@@ -52,6 +52,11 @@ h3 {
 .field:not(.plain) {
     background-color: #DBD0C1;
     padding: 14px 30px;
+}
+
+.field.plain.code {
+    flex-direction: column;
+    align-items: start;
 }
 
 .productFields {
@@ -110,4 +115,9 @@ h3 {
 .cartForm {
     display: flex;
     gap: 20px;
+}
+
+pre code.hljs {
+    padding: 40px !important;
+    border-radius: 20px;
 }

@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/hybrid.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -77,11 +79,19 @@
                     </div>
                 <% } %>
                 <% if (productSolutionCode) { %>
-                    <div class="field plain">
-                        <h2>Rozwiązanie:</h2>
-                    <%= productSolutionCode %>
+                    <div class="field plain code">
+                        <h2>Rozwiązanie w formie kodu:</h2>
+                        <pre><code><%= productSolutionCode %></code></pre>
+                    
                     </div>
                 <% } %>
+                <%# if (productSolutionFileName) { %>
+                    <div class="field" style="background-color: green; cursor: pointer;">
+                        <h2>Pobierz plik z rozwiązaniem <span class="material-symbols-outlined">download_2</span></h2>
+                        </div>
+                    <%= productSolutionFileName %>
+                    </div>
+                <%# } %>
                 <div class="field plain">
                     <h2>Opinie:</h2>
                     <% if (ratings.length > 0) { %>
@@ -90,8 +100,6 @@
                         <h3>Brak</h3>
                     <% } %>
                 </div>
-            </div>
-            <%# user %>
             <% if(user.type !== 'admin'){%>
                 <% if(yourRate !== -1){%>
                     <h2>Twoja ocena:</h2>
@@ -121,11 +129,12 @@
             <% } else {%>
                 <form id="ratingForm" method="post" action="/product/deleteProduct">
                     <input type="hidden" name="productID" value="<%= id %>">
-                    <input type="submit" class="button secondary" value="Usuń produkt"/>
+                    <input type="submit" class="button secondary" style="background-color: red; color: black;" value="Usuń produkt"/>
                 </form>
             <%}%>
             
         </div>
     <script src="/scripts/ratingManager.js" type='text/javascript'></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>
