@@ -68,16 +68,6 @@
                     <h3><%= productTask %></h3>
                     </div>
                 <% } %>
-
-                <% if (productSolutionFileName) { %>
-                    <div class="field plain">
-                        <h2>Plik z rozwiązaniem:</h2>
-                        <form action="/product/downloadSolution" method="post">
-                            <input type="hidden" name="productID" value="<%= id %>">
-                            <button type="submit" class="button secondary">Pobierz</button>
-                        </form>
-                    </div>
-                <% } %>
                 <% if (productSolutionCode) { %>
                     <div class="field plain code">
                         <h2>Rozwiązanie w formie kodu:</h2>
@@ -85,13 +75,18 @@
                     
                     </div>
                 <% } %>
-                <%# if (productSolutionFileName) { %>
+                <% if (productSolutionFileName) { %>
                     <div class="field" style="background-color: green; cursor: pointer;">
-                        <h2>Pobierz plik z rozwiązaniem <span class="material-symbols-outlined">download_2</span></h2>
-                        </div>
+                        <form action="/product/downloadSolution" method="post">
+                            <input type="hidden" name="productID" value="<%= id %>">
+                            <button type="submit">
+                                <h2>Pobierz plik z rozwiązaniem <span class="material-symbols-outlined">download_2</span></h2>
+                            </button>
+                        </form>
+                    </div>
                     <%= productSolutionFileName %>
                     </div>
-                <%# } %>
+                <% } %>
                 <div class="field plain">
                     <h2>Opinie:</h2>
                     <% if (ratings.length > 0) { %>
