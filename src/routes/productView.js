@@ -48,7 +48,7 @@ router.get('/:productID', async (req, res) => {
                 cart: cart, 
                 user: user,
                 yourRate,
-                imageFileName: product.imageFileName
+                thumbnailFileName: product.thumbnailFileName
             });
             return;
         }
@@ -68,7 +68,7 @@ router.get('/:productID', async (req, res) => {
         averageRating, 
         cart: cart, 
         user: user,
-        imageFileName: product.imageFileName
+        thumbnailFileName: product.thumbnailFileName,
     });
 
 
