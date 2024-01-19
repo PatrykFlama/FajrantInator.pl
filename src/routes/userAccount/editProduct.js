@@ -47,7 +47,7 @@ router.post('/saveProduct', async (req, res) => {
     product.courseName = courseName;
     product.listNumber = parsedListNumber;
     product.taskNumber = parsedTaskNumber;
-    product.solutionCode = code;
+    product.solutionCode = solutionCode;
 
     await product.save();
 
