@@ -47,13 +47,12 @@ router.get('/:productID', async (req, res) => {
                 averageRating, 
                 cart: cart, 
                 user: user,
-                yourRate
+                yourRate,
+                imageFileName: product.imageFileName
             });
             return;
         }
     }
-
-    
 
     const productName = product.name;
     const productCourseName = product.courseName;
@@ -68,7 +67,8 @@ router.get('/:productID', async (req, res) => {
         ratings: product.ratings, 
         averageRating, 
         cart: cart, 
-        user: user
+        user: user,
+        imageFileName: product.imageFileName
     });
 
 router.post('/addToCart', (req,res)=>{

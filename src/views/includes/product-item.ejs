@@ -2,7 +2,7 @@
 <div class="product-item">
     <%# TODO: product image %>
         <div class="product-name"><%= product.name %></div>
-        <img src="/css/media/item.jpg"/>
+        <img src="<%= product.imageFileName == "" ? "/css/media/item.jpg" : "/images/" + product.imageFileName %>"/>
         <div class="product-details">
             <div class="product-price">£<%= product.price.toFixed(2) %></div>
             <div class="product-actions">

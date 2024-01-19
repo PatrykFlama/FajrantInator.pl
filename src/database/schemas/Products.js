@@ -25,7 +25,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    solutionFileName: {
+    imageFileName: {
         type: String,
         default: "",
     },

@@ -14,6 +14,8 @@ router.use((req, res, next) => {
 });
 
 router.get('/', (req, res) => {
+    res.redirect('/admin/displayUsers');       // deprecated
+    return;
     res.render('admin/adminPanel', { messageUser: null, messageProduct: null });
 });
 
@@ -42,6 +44,8 @@ router.get('/displayUsers', async (req, res) => {
 });
 
 router.post('/addProduct', async (req, res) => {
+    res.redirect('/admin/displayUsers');        // deprecated
+    return;
     try {
         const product = new Products({
             name: req.body.name, 

@@ -14,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));    // use qs library
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/public')));   // serve static files
+app.use(express.static(path.join(__dirname, '/database/uploads')));   // serve uploaded images
 app.use(session({
     secret: "SECRET",
     resave: false,
