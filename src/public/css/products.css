@@ -142,3 +142,14 @@ input[type=submit]{
     border: none;
     outline: none;
 }
+
+.thumbnail {
+    max-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.thumbnail img {
+    height: 100%;
+}

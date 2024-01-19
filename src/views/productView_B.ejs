@@ -75,18 +75,19 @@
                     
                     </div>
                 <% } %>
+
                 <% if (productSolutionFileName) { %>
-                    <div class="field" style="background-color: green; cursor: pointer;">
-                        <form action="/product/downloadSolution" method="post">
-                            <input type="hidden" name="productID" value="<%= id %>">
-                            <button type="submit">
+                    <form action="/product/downloadSolution" method="post"></form>
+                        <input type="hidden" name="productID" value="<%= id %>">
+                        <label>
+                            <div class="field" style="background-color: green; cursor: pointer;">
                                 <h2>Pobierz plik z rozwiązaniem <span class="material-symbols-outlined">download_2</span></h2>
-                            </button>
-                        </form>
-                    </div>
-                    <%= productSolutionFileName %>
-                    </div>
+                            </div>
+                            <input type="submit" style="display: none;"/>
+                        </label>
+                    </form>
                 <% } %>
+
                 <div class="field plain">
                     <h2>Opinie:</h2>
                     <% if (ratings.length > 0) { %>
