@@ -32,7 +32,7 @@ router.post('/', async (req, res) => {
                 taskNumber: req.body.taskNumber,
                 description: req.body.description,
                 imageFileName: image_filename,
-                solutionCode: req.body.code,
+                solutionCode: req.body.solutionCode,
                 author: req.session.account.username,
             });
             await product.save();

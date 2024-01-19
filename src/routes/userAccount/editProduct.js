@@ -20,7 +20,7 @@ router.post('/', async (req, res) => {
 });
 
 router.post('/saveProduct', async (req, res) => {
-    const { productID, name, description, price, courseName, listNumber, taskNumber, code } = req.body;
+    const { productID, name, description, price, courseName, listNumber, taskNumber, solutionCode } = req.body;
     const parsedID = parseInt(productID);
     const parsedPrice = parseInt(price);
     const parsedListNumber = parseInt(listNumber);

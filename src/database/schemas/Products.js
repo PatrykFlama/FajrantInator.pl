@@ -29,7 +29,7 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         default: "",
     },
-    soulutionCode: {
+    solutionCode: {
         type: String,
         default: ""
     },
