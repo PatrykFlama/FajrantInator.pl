@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/hybrid.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
 </head>
 <body>
     <div class="header">
@@ -27,9 +29,7 @@
         <a class="backButton" onclick="window.location.href= '/listing?' + window.location.href.split('?')[1] "><span class="material-symbols-outlined">arrow_back_ios</span></a>
         <h1><%= productName %></h1>
         <div class="panel">
-            <% if (locals.imageFileName) { %>
-                <img class="productImage" src="<%= imageFileName == "" ? "/css/media/item.jpg" : "/images/" + imageFileName %>">
-            <% } %>
+            <img class="productImage" src="<%= imageFileName == "" ? "/css/media/item.jpg" : "/images/" + imageFileName %>">
             <div class="productFields">
 
                 <% if (productDescription) { %>
@@ -68,18 +68,20 @@
                 <% } %>
 
                 <%# TODO %>
-                <% if (productSolutionFileName) { %>
-                    <div class="field plain">
-                        <h2>Plik z rozwiązaniem:</h2>
+                <% if (productSolutionCode) { %>
+                    <div class="field plain code">
+                        <h2>Rozwiązanie w formie kodu:</h2>
+                        <pre><code><%= productSolutionCode %></code></pre>
+                    
+                    </div>
+                <% } %>
+                <%# if (productSolutionFileName) { %>
+                    <div class="button primary">
+                        <h2>Pobierz plik z rozwiązaniem <span class="material-symbols-outlined">download_2</span></h2>
+                        </div>
                     <%= productSolutionFileName %>
                     </div>
-                <% } %>
-                <% if (productSolutionCode) { %>
-                    <div class="field plain">
-                        <h2>Rozwiązanie:</h2>
-                    <%= productSolutionCode %>
-                    </div>
-                <% } %>
+                <%# } %>
                 <div class="field plain">
                     <h2>Opinie:</h2>
                     <% if (ratings.length > 0) { %>
@@ -89,7 +91,6 @@
                     <% } %>
                 </div>
             </div>
-            <%# user %>
             <% if(user.type !== 'admin'){%>
                 <% if(yourRate !== -1){%>
                     <h2>Twoja ocena:</h2>
@@ -125,5 +126,6 @@
             
         </div>
     <script src="/scripts/ratingManager.js" type='text/javascript'></script>
+    <script>hljs.highlightAll();</script>
 </body>
 </html>
