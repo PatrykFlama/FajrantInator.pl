@@ -21,6 +21,10 @@ if(searchString = searchParams.get(`searchString`)){
     document.getElementById(`searchString`).value = searchString;
 }
 
+if(owned = searchParams.get(`owned`)){
+    document.getElementById(`owned`).value = owned;
+}
+
 function resetFilters() {
     window.location = window.location.href.split("?")[0];
 }
@@ -28,6 +32,7 @@ function resetFilters() {
 function ToggleFilters(){
     filtersShowed = !filtersShowed;
     document.getElementById(`filtersFields`).style.display = filtersShowed ? `flex` : `none`;
+    document.getElementById(`filterArrow`).innerHTML = filtersShowed ? `arrow_drop_down` : `arrow_drop_up`;
 }
 
 if(searchParams.size > 1){
@@ -37,4 +42,5 @@ if(searchParams.size > 1){
 
 if(filtersShowed) {
     document.getElementById(`filtersFields`).style.display = `flex`;
+    document.getElementById(`filterArrow`).innerHTML = `arrow_drop_down`;
 }

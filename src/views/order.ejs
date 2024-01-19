@@ -6,35 +6,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Confirmation</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/cart.css">
+    <link rel="stylesheet" type="text/css" href="/css/defaults.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
-<body>
-    <div class="container">
+<body class="receiptBody">
+    <div class="receiptContainer">
         <% if (error) { %>
-            <h1>Oops! Something went wrong.</h1>
+            <h1>Coś poszlo nie tak...</h1>
             <p><%= error %></p>
         <% } else { %>
-            <h1>Your Order Confirmation</h1>
-
-            <p>Thank you for your purchase, <%= order.username %>!</p>
-            
-            <p>Order Details:</p>
-            <ul>
-                <% products.forEach(product => { %>
-                    <li>
-                        <p><strong><%= product.name %></strong></p>
-                        <p>Price: £<%= product.price %></p>
-                        <!-- Add more product details as needed -->
-                    </li>
-                <% }) %>
-            </ul>
-
-            <p>Total Cost: £<%= order.cost %></p>
-
-            <p>Your order has been placed successfully.</p>
+            <div class="receipt">
+                <h1>Twój paragon</h1>
+                <div class="receiptSection">
+                    <h3>Zakupy na fajrantinator.pl</h2>
+                        <% const now = new Date();
+                        const currentDateTime = now.toLocaleString(); %>
+                        <i><%= currentDateTime %></i>
+                </div>
+                <div class="receiptSection">
+                    <% products.forEach(product => { %>
+                            <div class="item">
+                                <div><%= product.name %></div>
+                                <div>£<%= product.price %></div>
+                            </div>
+                    <% }) %>
+                </div>
+                <div class="receiptSection">
+                    <h2>SUMA: £<%= order.cost %></h2>
+                    <u>Zapłacono eurogąbkami</u> <img src="/css/media/apple-pay.png" class="applePay">
+                </div>
+            </div>
         <% } %>
-
-        <button onclick="window.location.href = '/';">Go to Homepage</button>
+        <div class="receiptActions">
+        <div onclick="window.location.href = '/listing';" class="button primary">Produkty</div>
+        <div onclick="window.location.href = '/';" class="button secondary">Strona główna</div>
+        </div>
     </div>
 </body>
 </html>

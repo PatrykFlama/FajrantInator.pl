@@ -4,40 +4,66 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/css/cart.css">
+    <link rel="stylesheet" type="text/css" href="/css/defaults.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Rubik+Doodle+Shadow&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
+    <div class="header">
+        <a href="/"><div class="logo">FajrantInator.pl</div></a>
+        
+        <div class="cart-div">
+            <a href="<%= (accountType === 'guest') ? 'login' : 'logout' %> "><div class="button primary"><%= (accountType === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
+        </div>
+    </div>
     <div class="container">
-        <h1>Your Shopping Cart</h1>
+        <h1> Twój koszyk:</h1>
     
+        <div class="fields">
         <% if (cart && cart.length > 0) { %>
-            <ul>
                 <% cart.forEach(item => { %>
-                    <li>
-                        <p><%= item.name %></p>
-                        <p>Price: £<%= item.price %></p>
+                    <div class="field">
+                        <div class="itemDetails">
+                            <b><%= item.name %></b><br/>
+                            <i>Cena: £<%= item.price %></i>
+                        </div>
     
                         <form method="post" action="/cart/removeProduct">
                             <input type="hidden" name="id" value="<%= item.id %>">
-                            <input type="submit" name="remove_btn" class="remove-btn" value="remove">
+                            <label>
+                                <span class="material-symbols-outlined trash" onclick="this.form.submit()">delete</span>
+                                <input type="submit">
+                            </label>
                         </form>
-                    </li>
+                    </div>
                 <% }) %>
-            </ul>
-    
-            <p>Total: £<%= total %></p>
-    
-            <div class="checkout-container">
-                <form method="post" action="/checkout/createOrder">
-                    <input type="submit" class="btn checkout-btn" value="Buy" name="">
-                </form>
+                
+                <div class="panel">
+                    <h2>Podsumowanie:</h2>
+                    <p>Cena końcowa: £<%= total %></p>
+                
+                
+                    <form method="post" action="/checkout/createOrder">
+                        <label>
+                            <div class="button primary green"><span class="material-symbols-outlined">credit_card</span> Kup</div>
+                            <input type="submit">
+                        </label>
+                    </form>
+                </div>
+                
+                <% } else { %>
+                    <div class="field"><img src="/css/media/ghost.svg" class="ghost"> koszyk jest pusty.</div>
+                    <% } %>
             </div>
-    
-        <% } else { %>
-            <p>Your cart is empty.</p>
-        <% } %>
-        <button onclick="window.location.href = '/listing';">Add another product to cart</button>
-        <button onclick="window.location.href = '/';">Go to Homepage</button>
+            <div class="cartRedirects">
+                <a href="/listing"><div class="button secondary">Dodaj kolejne produkty</div></a>
+                <a href="/"><div class="button secondary">Strona główna</div></a>
+            </div>
+
     </div> 
 </body>
 </html>
