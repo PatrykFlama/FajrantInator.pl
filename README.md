@@ -38,6 +38,8 @@ services:
     restart: unless-stopped
     ports:
       - 3000:3000
+    volumes:
+      - ./uploads:/app/src/database/uploads
 ```
 
 Use `docker-compose up -d` to run the server.
