@@ -42,7 +42,7 @@ router.post('/', async (req, res) => {
             
             const user = await Users.findOne({ username: req.session.account.username });
             user.addedProducts.push(product._id);
-            user.ownedProducts.push(product._id);
+            user.orders.push(product._id);
             await user.save();
             
             res.render('userAccount/addProduct', { error: null, success: "Pomyślnie dodano produkt.", accountType: req.session.account.type });
