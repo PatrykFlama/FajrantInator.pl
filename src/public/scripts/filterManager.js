@@ -21,8 +21,8 @@ if(searchString = searchParams.get(`searchString`)){
     document.getElementById(`searchString`).value = searchString;
 }
 
-if(owned = searchParams.get(`owned`)){
-    document.getElementById(`owned`).value = owned;
+if(productState = searchParams.get(`productState`)){
+    document.getElementById(`productState`).value = productState;
 }
 
 function resetFilters() {

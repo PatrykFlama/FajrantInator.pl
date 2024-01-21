@@ -4,74 +4,56 @@ const Products = require('../database/schemas/Products');
 const Users = require('../database/schemas/Users');
 
 router.get('/:productID', async (req, res) => {
-    const product = await Products.findOne({ _id: req.params.productID });
-    const ratings = product.ratings.map((rating) => rating.rating);
-    const averageRating = ratings.length > 0 ? ratings.reduce((a, b) => a + b) / ratings.length : null;
+    try {
+        let cart = req.session.cart;
+        let user = req.session.account.type;
 
-    let cart = req.session.cart;
-    let user = req.session.account.type;
-
-    if (!product) {     // error: 'Product not found'
-        res.render('productView', { productName: `Product with id ${parsedID} not found`, productPrice: null, productDescription: null , cart: cart, user: user})
-        return;
-    }
-
-    if (req.session.account.type !== 'guest') {
-        const user = await Users.findOne({ username: req.session.account.username});
-        let ratingObject = product.ratings.filter((ratingObj) => ratingObj.user.equals(user._id))[0];
-        let yourRate = -1;
-        
-        if(ratingObject){
-            yourRate = ratingObject.rating;
-        }
-
-        if (user.orders.includes(product.id) || req.session.account.type === 'admin') {
-            const productName = product.name;
-            const productCourseName = product.courseName;
-            const productTask = product.taskNumber;
-            const productExercise = product.listNumber;
-            const productAuthor = product.author;
-
-            res.render('productView_B', { 
-                id:product.id, 
-                productName, 
-                productCourseName, 
-                productTask, 
-                productExercise, 
-                productAuthor,
-                productPrice: product.price, 
-                productDescription: product.description,
-                productSolutionFileName: product.solutionFileName, 
-                productSolutionCode: product.solutionCode,
-                ratings: product.ratings, 
-                averageRating, 
-                cart: cart, 
-                user: user,
-                yourRate,
-                thumbnailFileName: product.thumbnailFileName
-            });
+        const ObjectId = require('mongoose').Types.ObjectId;
+        if (!ObjectId.isValid(req.params.productID)) {     // error: 'Product not found'
+            res.render('productView', { error: `Product not found`, cart: cart, user: user})
             return;
         }
+
+        const product = await Products.findOne({ _id: req.params.productID });
+        if (!product) {     // error: 'Product not found'
+            res.render('productView', { error: `Product not found`, cart: cart, user: user})
+            return;
+        }
+
+        const ratings = product.ratings.map((rating) => rating.rating);
+        const averageRating = ratings.length > 0 ? ratings.reduce((a, b) => a + b) / ratings.length : null;
+
+        if (req.session.account.type !== 'guest') {
+            const user = await Users.findOne({ username: req.session.account.username});
+            let ratingObject = product.ratings.filter((ratingObj) => ratingObj.user.equals(user._id))[0];
+            let yourRate = -1;
+            
+            if(ratingObject){
+                yourRate = ratingObject.rating;
+            }
+
+            if (user.orders.includes(product.id) || req.session.account.type === 'admin') {
+                res.render('productView_B', { 
+                    product,
+                    averageRating, 
+                    cart: cart, 
+                    user: user,
+                    yourRate,
+                });
+                return;
+            }
+        }
+
+        res.render('productView', { 
+            product,
+            averageRating, 
+            cart: cart, 
+            user: user,
+        });
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500);
     }
-
-    const productName = product.name;
-    const productCourseName = product.courseName;
-    const productTask = product.taskNumber;
-    const productExercise = product.listNumber;
-
-    res.render('productView', { 
-        id:product.id,
-        productName, productCourseName, productTask, productExercise, 
-        productPrice:product.price, 
-        productDescription:product.description,
-        ratings: product.ratings, 
-        averageRating, 
-        cart: cart, 
-        user: user,
-        thumbnailFileName: product.thumbnailFileName,
-    });
-
-
 
 router.post('/addToCart', (req,res)=>{
     const productID = req.body.id;

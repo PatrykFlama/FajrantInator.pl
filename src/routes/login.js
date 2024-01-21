@@ -5,7 +5,7 @@ const { hashPassword, comparePasswords, checkCart } = require('../utils/helpers'
 
 router.get('/', (req, res) => {
     const accountType = req.session.account.type;
-    const redirectURL = req.body.redirect;
+    const redirectURL = req.query.redirect || req.query.redirectURL;
 
     if (accountType === 'guest') {
         if (redirectURL) {

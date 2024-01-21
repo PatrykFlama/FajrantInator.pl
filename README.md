@@ -1,10 +1,9 @@
 # FajrantInator.pl
-<!-- TODO some initial description -->
-## TODO
-* w przekierowaniach do strony logowania używać referencji do strony powrotnej
-
 ### Table of contents
-<!-- TODO -->
+- [FajrantInator.pl](#fajrantinatorpl)
+    - [Table of contents](#table-of-contents)
+    - [Installation and running](#installation-and-running)
+    - [Docker](#docker)
 
 ### Installation and running
 Use `npm install` to install all dependencies.  
@@ -16,8 +15,8 @@ Create `src/.env` file:
 * `DB_PORT` - database port
 
 Download **MongoDB** database  
-Use `npm run start` to run the server.  
-Use `npm run start:dev` to run the server in development mode.
+Use `npm start` to run the server.  
+Use `npm run dev` to run the server in development mode.
 
 ### Docker
 Use `docker build . -t fajrantinator` to build the image.  

@@ -19,7 +19,7 @@
             <div class="cart-number <% if(cart.length > 0){
                 %>beat<%
             } %>">(<%= cart.length %>)</div>
-            <a href="<%= (user === 'guest') ? 'login' : 'logout' %> "><div class="button primary"><%= (user === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
+            <a href="<%= (user === 'guest') ? 'login?redirectURL=listing' : 'logout' %> "><div class="button primary"><%= (user === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
         </div>
     </div>
     <div class="container">
@@ -71,10 +71,11 @@
 
                     <label>
                         Stan:
-                    <select name="owned" id="owned" onchange="this.form.submit()">
+                    <select name="productState" id="productState" onchange="this.form.submit()">
                         <option value="">Dowolne</option>
-                        <option value="true">Posiadane</option>
-                        <option value="false">Jeszcze nie kupione</option>
+                        <option value="owned">Posiadane</option>
+                        <option value="not-owned">Jeszcze nie kupione</option>
+                        <option value="sell">Sprzedawane</option>
                     </select>
                     </label>
 

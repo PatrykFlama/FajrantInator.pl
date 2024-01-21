@@ -22,82 +22,82 @@
             <div class="cart-number <% if(cart.length > 0){
                 %>beat<%
             } %>">(<%= cart.length %>)</div>
-            <a href="/<%= (user === 'guest') ? 'login' : 'logout' %> "><div class="button primary"><%= (user === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
-        </div>
+            <a href="/<%= (user === 'guest') ? (locals.product ? 'login?redirectURL=product/'+product.id : 'login') : 'logout' %> "><div class="button primary"><%= (user === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
+            </div>
     </div>
     <div class="container">
         <a class="backButton" onclick="window.location.href= '/listing?' + window.location.href.split('?')[1] "><span class="material-symbols-outlined">arrow_back_ios</span></a>
-        <h1><%= productName %></h1>
+        <% if (locals.product) { %>
+            <h1><%= product.name %></h1>
+        <% } else if (locals.error) { %>
+            <h1>Error: <%= error %></h1>
+        <% } %>
         <div class="panel">
-            <% if (locals.thumbnailFileName) { %>
-                <img class="productImage" src="<%= thumbnailFileName == "" ? "/css/media/item.jpg" : "/images/" + thumbnailFileName %>">
+            <% if (locals.product && locals.product.thumbnailFileName !== "") { %>
+                <img class="productImage" src="<%= product.thumbnailFileName == "" ? "/css/media/item.jpg" : "/images/" + product.thumbnailFileName %>">
             <% } %>
             <div class="productFields">
 
-                <% if (productDescription) { %>
+                <% if (locals.product) { %>
                     <div class="field plain">
                     <h2>Opis:</h2>
-                    <h3><%= productDescription %></h3>
+                    <h3><%= product.description %></h3>
                     </div>
-                <% } %>
 
-                <% if (user.type === 'admin') { %>
-                    <div class="field">
-                    <h2>Autor:</h2>
-                    <h3><%= productAuthor %></h3>
-                    </div>
-                <% } %>
+                    <% if (user.type === 'admin') { %>
+                        <div class="field">
+                        <h2>Autor:</h2>
+                        <h3><%= product.author %></h3>
+                        </div>
+                    <% } %>
 
-                <% if (productCourseName) { %>
                     <div class="field">
                     <h2>Przedmiot:</h2>
-                    <h3><%= productCourseName %></h3>
+                    <h3><%= product.courseName %></h3>
                     </div>
-                <% } %>
 
-                <% if (productExercise) { %>
                     <div class="field">
                     <h2>Lista:</h2>
-                    <h3><%= productExercise %></h3>
+                    <h3><%= product.listNumber %></h3>
                     </div>
-                <% } %>
 
-                <% if (productTask) { %>
                     <div class="field">
                     <h2>Zadanie:</h2>
-                    <h3><%= productTask %></h3>
+                    <h3><%= product.taskNumber %></h3>
                     </div>
-                <% } %>
-                <% if (productSolutionCode) { %>
-                    <div class="field plain code">
-                        <h2>Rozwiązanie w formie kodu:</h2>
-                        <pre><code><%= productSolutionCode %></code></pre>
-                    
-                    </div>
-                <% } %>
 
-                <% if (productSolutionFileName) { %>
-                    <form action="/product/downloadSolution" method="post">
-                        <input type="hidden" name="productID" value="<%= id %>">
-                        <label>
-                            <div class="field" style="background-color: green; cursor: pointer;">
-                                <h2>Pobierz plik z rozwiązaniem <span class="material-symbols-outlined">download_2</span></h2>
-                            </div>
-                            <input type="submit" style="display: none;"/>
-                        </label>
-                    </form>
-                <% } %>
-
-                <div class="field plain">
-                    <h2>Opinie:</h2>
-                    <% if (ratings.length > 0) { %>
-                        <h3>Średnio: <%= averageRating %> / 5</h3>
-                    <% } else { %>
-                        <h3>Brak</h3>
+                    <% if (product.solutionCode !== "") { %>
+                        <div class="field plain code">
+                            <h2>Rozwiązanie w formie kodu:</h2>
+                            <pre><code><%= product.solutionCode %></code></pre>
+                        
+                        </div>
                     <% } %>
-                </div>
-            <% if(user.type !== 'admin'){%>
-                <% if(yourRate !== -1){%>
+
+                    <% if (product.solutionFileName !== "") { %>
+                        <form action="/product/downloadSolution" method="post">
+                            <input type="hidden" name="productID" value="<%= product.id %>">
+                            <label>
+                                <div class="field" style="background-color: green; cursor: pointer;">
+                                    <h2>Pobierz plik z rozwiązaniem <span class="material-symbols-outlined">download_2</span></h2>
+                                </div>
+                                <input type="submit" style="display: none;"/>
+                            </label>
+                        </form>
+                    <% } %>
+                    
+                    <div class="field plain">
+                        <h2>Opinie:</h2>
+                        <% if (product.ratings.length > 0 && locals.averageRating) { %>
+                            <h3>Średnio: <%= averageRating %> / 5</h3>
+                        <% } else { %>
+                            <h3>Brak</h3>
+                        <% } %>
+                    </div>
+                <% } %>
+
+            <% if(locals.yourRate && user.type !== 'admin'){%>
+                <% if (yourRate !== -1) {%>
                     <h2>Twoja ocena:</h2>
                     <div class="field stars">
                         <% for(let i = 0 ; i < 5 ; i++){
@@ -110,10 +110,10 @@
                             }
                         } %>
                     </div>
-                <%} else {  %>
+                <% } else {%>
                     <h2>Wystaw ocenę:</h2>
                     <form id="ratingForm" method="post" action="/product/rateProduct">
-                        <input type="hidden" name="productID" value="<%= id %>">
+                        <input type="hidden" name="productID" value="<%= product.id %>">
                         <input id="hiddenRating" type="hidden" name="rating">
                         <span id="star-0" class="material-symbols-outlined star">star</span>
                         <span id="star-1" class="material-symbols-outlined star">star</span>
@@ -121,13 +121,13 @@
                         <span id="star-3" class="material-symbols-outlined star">star</span>
                         <span id="star-4" class="material-symbols-outlined star">star</span>
                     </form>
-                <%}%>
-            <% } else {%>
+                <% } %>
+            <% } else if (user.type === 'admin') { %>
                 <form id="ratingForm" method="post" action="/product/deleteProduct">
-                    <input type="hidden" name="productID" value="<%= id %>">
+                    <input type="hidden" name="productID" value="<%= product.id %>">
                     <input type="submit" class="button secondary" style="background-color: red; color: black;" value="Usuń produkt"/>
                 </form>
-            <%}%>
+            <% } %>
             
         </div>
     <script src="/scripts/ratingManager.js" type='text/javascript'></script>

@@ -3,6 +3,7 @@ const router = Router();
 const multer = require('multer')
 const Products = require('../../database/schemas/Products');
 const Users = require('../../database/schemas/Users');
+const fs = require('fs');
 
 router.get('/', async (req, res) => {
     const user = await Users.findOne({ username: req.session.account.username });
@@ -13,27 +14,30 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/deleteProduct', async (req, res) => {
-    const { productID } = req.body;
-    const user = await Users.findOne({ username: req.session.account.username });
-    const index = user.addedProducts.indexOf(productID);
+    try {
+        const { productID } = req.body;
+        const user = await Users.findOne({ username: req.session.account.username });
 
-    if (index === -1) {     // product not found in user's addedProducts
-        return res.sendStatus(400);
+        const index = user.addedProducts.indexOf(productID);
+        if (index === -1) {     // product not found in user's addedProducts
+            return res.sendStatus(400);
+        }
+
+        const { deleteProduct } = require('../../utils/database');
+
+        const status = await deleteProduct(productID);
+        if (status) { 
+            return res.sendStatus(400);
+        }
+
+        user.addedProducts.splice(index, 1);
+        await user.save();
+
+        res.redirect('/account/addedProducts');
+    } catch (error) {
+        console.error(error);
+        res.sendStatus(500);
     }
-
-    await Products.deleteOne({ _id: productID });
-
-    user.addedProducts.splice(index, 1);
-    await user.save();
-
-    
-    // const product = await Products.findOne({ _id: productID });
-    // product.remove();
-    
-    // user.addedProducts.splice(index, 1);
-    // await user.save();
-
-    res.redirect('/account/addedProducts');
 });
 
 module.exports = router;

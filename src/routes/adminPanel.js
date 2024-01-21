@@ -13,12 +13,6 @@ router.use((req, res, next) => {
     }
 });
 
-router.get('/', (req, res) => {
-    res.redirect('/admin/displayUsers');       // deprecated
-    return;
-    res.render('admin/adminPanel', { messageUser: null, messageProduct: null });
-});
-
 router.get('/populateDatabase', async (req, res) => {
     const { populateDatabase } = require('../database/populateDatabase');
     await populateDatabase();
@@ -43,30 +37,11 @@ router.get('/displayUsers', async (req, res) => {
     res.render('admin/displayUsers', { users, me, status });
 });
 
-router.post('/addProduct', async (req, res) => {
-    res.redirect('/admin/displayUsers');        // deprecated
-    return;
-    try {
-        const product = new Products({
-            name: req.body.name, 
-            description: req.body.description,
-            price: req.body.price, 
-            courseName: req.body.course,
-            listNumber: req.body.listNumber,
-            taskNumber: req.body.taskNumber,
-            description: req.body.description,
-        });
-        await product.save();
-        res.render('admin/adminPanel', { messageProduct: 'Product added successfully', messageUser: null });
-    } catch (error) {
-        res.render('admin/adminPanel', { messageProduct: 'Failed to add product', messageUser: null });
-    }
-});
-
 router.post('/removeProduct', async (req, res) => {
     try {
-        const { id } = req.body;
-        await Products.findByIdAndDelete(id);
+        const { productID } = req.body;
+        const { deleteProduct } = require('../utils/database');
+        await deleteProduct(productID);
     } catch (error) {}
 
     res.redirect('listing');
@@ -126,6 +101,14 @@ router.post('/toggleVerification', async (req, res) => {
     } catch (error) {}
 
     res.redirect('/admin/displayUsers');
+});
+
+router.post('/deleteProduct', async (req, res) => {
+    try {
+        const { id } = req.body;
+    } catch (error) {}
+
+    res.redirect('/listing');
 });
 
 module.exports = router;

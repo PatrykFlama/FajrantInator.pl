@@ -20,66 +20,72 @@
             <div class="cart-number <% if(cart.length > 0){
                 %>beat<%
             } %>">(<%= cart.length %>)</div>
-            <a href="/<%= (user === 'guest') ? 'login' : 'logout' %> "><div class="button primary"><%= (user === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
+            <a href="/<%= (user === 'guest') ? (locals.product ? 'login?redirectURL=product/'+product.id : 'login') : 'logout' %> "><div class="button primary"><%= (user === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
         </div>
     </div>
     <div class="container">
         <a class="backButton" onclick="window.location.href= '/listing?' + window.location.href.split('?')[1] "><span class="material-symbols-outlined">arrow_back_ios</span></a>
-        <h1><%= productName %></h1>
+        <% if (locals.product) { %>
+            <h1><%= product.name %></h1>
+        <% } else if (locals.error) { %>
+            <h1>Error: <%= error %></h1>
+        <% } %>
         <div class="panel">
-            <% if (locals.thumbnailFileName) { %>
-                <img class="productImage" src="<%= thumbnailFileName == "" ? "/css/media/item.jpg" : "/images/" + thumbnailFileName %>">
+            <% if (locals.product && locals.product.thumbnailFileName !== "") { %>
+                <img class="productImage" src="<%= product.thumbnailFileName == "" ? "/css/media/item.jpg" : "/images/" + product.thumbnailFileName %>">
             <% } %>
-
             <div class="productFields">
 
-                <% if (productDescription) { %>
+                <% if (locals.product) { %>
                     <div class="field plain">
                     <h2>Opis:</h2>
-                    <h3><%= productDescription %></h3>
+                    <h3><%= product.description %></h3>
                     </div>
-                <% } %>
 
-                <% if (productCourseName) { %>
+                    <% if (user.type === 'admin') { %>
+                        <div class="field">
+                        <h2>Autor:</h2>
+                        <h3><%= product.author %></h3>
+                        </div>
+                    <% } %>
+
                     <div class="field">
                     <h2>Przedmiot:</h2>
-                    <h3><%= productCourseName %></h3>
+                    <h3><%= product.courseName %></h3>
                     </div>
-                <% } %>
 
-                <% if (productExercise) { %>
                     <div class="field">
                     <h2>Lista:</h2>
-                    <h3><%= productExercise %></h3>
+                    <h3><%= product.listNumber %></h3>
                     </div>
-                <% } %>
 
-                <% if (productTask) { %>
                     <div class="field">
                     <h2>Zadanie:</h2>
-                    <h3><%= productTask %></h3>
+                    <h3><%= product.taskNumber %></h3>
+                    </div>
+
+                    <div class="field plain">
+                        <h2>Opinie:</h2>
+                        <% if (product.ratings.length > 0 && locals.averageRating) { %>
+                            <h3>Średnio: <%= averageRating %> / 5</h3>
+                        <% } else { %>
+                            <h3>Brak</h3>
+                        <% } %>
                     </div>
                 <% } %>
-                <div class="field plain">
-                    <h2>Opinie:</h2>
-                    <% if (ratings.length > 0) { %>
-                        <h3>Średnio: <%= averageRating %> / 5</h3>
-                    <% } else { %>
-                        <h3>Brak</h3>
-                    <% } %>
-                </div>
             </div>
             
-            
-            <form class="cartForm" id="addToCartForm" action="/product/addToCart" method="post">
-                <input type="hidden" name="id" value="<%= id %>">
-                <% if (cart.includes(id)) {%>
-                    <input type="button" class="button primary" value="W koszyku" disabled/>
-                <% } else {%>
-                    <input type="submit" class="button primary" value="Dodaj do koszyka"/>
-                <% } %>
-                <a class="button secondary" href="/cart">Idź do koszyka</a>
-            </form>
+            <% if (locals.product) { %>
+                <form class="cartForm" id="addToCartForm" action="/product/addToCart" method="post">
+                    <input type="hidden" name="id" value="<%= product.id %>">
+                    <% if (cart.includes(product.id)) { %>
+                        <input type="button" class="button primary" value="W koszyku" disabled/>
+                    <% } else { %>
+                        <input type="submit" class="button primary" value="Dodaj do koszyka"/>
+                    <% } %>
+                    <a class="button secondary" href="/cart">Idź do koszyka</a>
+                </form>
+            <% } %>
             
             
 

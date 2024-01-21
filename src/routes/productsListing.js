@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
         taskNumbers.add(product.taskNumber);
     }
 
-    const { listNumber, taskNumber, courseName, orderPrice, searchString, owned } = req.query;
+    const { listNumber, taskNumber, courseName, orderPrice, searchString, productState } = req.query;
     
     const parsedListNumber = parseInt(listNumber);
     const parsedTaskNumber = parseInt(taskNumber);
@@ -56,10 +56,15 @@ router.get('/', async (req, res) => {
     }
 
     if(user !== 'guest'){
-        filteredProducts = filteredProducts.filter(product => !user.addedProducts.includes(product._id));
-        if(owned === 'true'){
+        if(productState === 'sell' && user.seller === true){
+            filteredProducts = filteredProducts.filter(product => user.addedProducts.includes(product._id));
+        } else {
+            filteredProducts = filteredProducts.filter(product => !user.addedProducts.includes(product._id));
+        }
+
+        if(productState === 'owned'){
             filteredProducts = filteredProducts.filter(product => user.orders.includes(product._id));
-        } else if(owned === 'false'){
+        } else if(productState === 'not-owned'){
             filteredProducts = filteredProducts.filter(product => !user.orders.includes(product._id));
         }
     }

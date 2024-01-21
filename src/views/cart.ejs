@@ -17,7 +17,7 @@
         <a href="/"><div class="logo">FajrantInator.pl</div></a>
         
         <div class="cart-div">
-            <a href="<%= (accountType === 'guest') ? 'login' : 'logout' %> "><div class="button primary"><%= (accountType === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
+            <a href="<%= (accountType === 'guest') ? 'login?redirectURL=cart' : 'logout' %> "><div class="button primary"><%= (accountType === 'guest') ? 'Zaloguj się' : 'Wyloguj się' %></div></a>
         </div>
     </div>
     <div class="container">

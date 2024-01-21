@@ -101,6 +101,8 @@ async function populateDatabase() {
         }
     ]);
 
+    const productsIDs = await products.find({}).select('_id');
+
     // -------------- USERS ---------------
     await users.insertMany([
         {
@@ -108,6 +110,7 @@ async function populateDatabase() {
             password: hashPassword('admin'),
             email: 'em@i.l',
             type: 'admin',
+            addedProducts: productsIDs
         },
         {
             username: 'krzys',
